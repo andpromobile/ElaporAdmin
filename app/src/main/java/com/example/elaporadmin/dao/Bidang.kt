@@ -1,8 +1,8 @@
 package com.example.elaporadmin.dao
 
 class Bidang(
-    val BidangId:Int,
+    val BidangID:Int,
     val NamaBidang:String?,
-    val Seksi:String?
+    val seksi:String?
 ) {
 }

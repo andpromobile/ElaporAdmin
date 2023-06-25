@@ -1,11 +1,13 @@
 package com.example.elaporadmin.retrofit
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
 
-    val BASE_URL = ""
+    val BASE_URL = "http://192.168.1.4/elapor/"
     val endPoint:ApiEndPoint
 
         get() {
@@ -15,5 +17,15 @@ object ApiService {
                 .build()
 
             return retrofit.create(ApiEndPoint::class.java)
+        }
+
+    private val client: OkHttpClient
+        get() {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+            return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build()
         }
 }

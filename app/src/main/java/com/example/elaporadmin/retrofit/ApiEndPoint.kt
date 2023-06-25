@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ApiEndPoint {
 
-    @GET("bidang")
+    @GET("bidang.php")
     fun getBidang(): Call<List<Bidang>>
 }

@@ -3,7 +3,6 @@ package com.example.elaporadmin
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,34 +55,40 @@ class BidangActivity : AppCompatActivity() {
 
     fun getDataBidang(){
         ApiService.endPoint.getBidang()
-            .enqueue(object :Callback<List<Bidang>>{
-                override fun onResponse(
-                    call: Call<List<Bidang>>?,
-                    response: Response<List<Bidang>>?
-                ) {
-                    if (response != null) {
+            .enqueue(
+                object : Callback<List<Bidang>> {
+                    override fun onResponse(
+                        call: Call<List<Bidang>>,
+                        response: Response<List<Bidang>>,
+                    ) {
+                        if (response != null) {
 
-                        for(result in response.body()!!)
-                        {
-                            Log.d("tes", "ini hasilnya: ${result.BidangID}")
-                            Log.d("tes", "ini hasilnya: ${result.NamaBidang}")
-                            Log.d("tes", "ini hasilnya: ${result.seksi}")
+                            for (result in response.body()!!) {
+                                Log.d("tes", "ini hasilnya: ${result.BidangID}")
+                                Log.d("tes", "ini hasilnya: ${result.NamaBidang}")
+                                Log.d("tes", "ini hasilnya: ${result.seksi}")
+                            }
+                            listBidangAdapter = ListBidangAdapter(
+                                response.body() as ArrayList<Bidang>,
+                                object : OnAdapterListener {
+                                    override fun onClick(bidang: Bidang) {
+                                        val intent = Intent(
+                                            this@BidangActivity,
+                                            BidangFormActivity::class.java,
+                                        )
+                                        startActivity(intent)
+                                    }
+                                },
+                            )
+                            rvBidang.adapter = listBidangAdapter
                         }
-                        listBidangAdapter = ListBidangAdapter(response.body() as ArrayList<Bidang>,
-                            object : OnAdapterListener {
-                                override fun onClick(bidang: Bidang) {
-                                    val intent = Intent(this@BidangActivity, BidangFormActivity::class.java)
-                                    startActivity(intent)
-                                }
-                            })
-                        rvBidang.adapter = listBidangAdapter
                     }
-                }
 
-                override fun onFailure(call: Call<List<Bidang>>?, t: Throwable?) {
-                    Log.d("tes", t.toString())
-                }
+                    override fun onFailure(call: Call<List<Bidang>>, t: Throwable) {
+                        Log.d("tes", t.toString())
+                    }
 
-            })
+                },
+            )
     }
 }

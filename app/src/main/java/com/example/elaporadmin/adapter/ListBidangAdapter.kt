@@ -35,7 +35,7 @@ class ListBidangAdapter(val listBidang:ArrayList<Bidang>, val listener:OnAdapter
     override fun onBindViewHolder(holder: ListBidangHolder, position: Int) {
         var bidang = listBidang[position]
 
-        holder.namaBidang.text = bidang.NamaBidang
+        holder.namaBidang.text = bidang.namabidang
         holder.seksi.text = bidang.seksi
 
         holder.editBidang.setOnClickListener{

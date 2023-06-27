@@ -62,12 +62,6 @@ class BidangActivity : AppCompatActivity() {
                         response: Response<List<Bidang>>,
                     ) {
                         if (response != null) {
-
-                            for (result in response.body()!!) {
-                                Log.d("tes", "ini hasilnya: ${result.BidangID}")
-                                Log.d("tes", "ini hasilnya: ${result.NamaBidang}")
-                                Log.d("tes", "ini hasilnya: ${result.seksi}")
-                            }
                             listBidangAdapter = ListBidangAdapter(
                                 response.body() as ArrayList<Bidang>,
                                 object : OnAdapterListener {

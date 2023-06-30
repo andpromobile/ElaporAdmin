@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foregroundTint="@color/white"
-    tools:context=".BidangActivity">
+    tools:context=".PerangkatDesaActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listBidang"
+                android:id="@+id/listPerangkatDesa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:dividerHeight="0dp"
@@ -26,10 +25,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="5"
-                tools:listitem="@layout/list_bidang" />
+                tools:listitem="@layout/list_perangkat_desa" />
 
             <TextView
-                android:id="@+id/noBidang"
+                android:id="@+id/noPerangkatDesa"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/listBidang"
+                app:layout_constraintTop_toBottomOf="@+id/listPerangkatDesa"
                 tools:ignore="HardcodedText" />
 
 
@@ -52,7 +51,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabBidang"
+        android:id="@+id/fabPerangkatDesa"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginEnd="16dp"
@@ -64,6 +63,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ImageContrastCheck" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

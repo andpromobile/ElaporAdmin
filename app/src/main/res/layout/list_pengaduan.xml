@@ -11,32 +11,32 @@
 
 
     <TextView
-        android:id="@+id/namaKelurahan"
+        android:id="@+id/judulPengaduan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nama Kelurahan"
+        android:hint="Judul Pengaduan"
         android:padding="10dp"
-        android:layout_toStartOf="@+id/editKelurahan"
+        android:layout_toStartOf="@+id/editPengaduan"
         android:textColorHint="#78909C"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/namaKecamatan"
+        android:id="@+id/isiPengaduan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_below="@id/namaKelurahan"
-        android:layout_toStartOf="@+id/editKelurahan"
-        android:hint="Nama Kecamatan"
+        android:layout_below="@id/judulPengaduan"
+        android:layout_toStartOf="@+id/editPengaduan"
+        android:hint="Isi Pengaduan"
         android:padding="10dp"
         android:textColorHint="#757575"
         android:textSize="16sp"
         tools:ignore="HardcodedText" />
 
     <ImageButton
-        android:id="@+id/editKelurahan"
+        android:id="@+id/editPengaduan"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
@@ -46,11 +46,11 @@
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/hapusKelurahan"
+        android:id="@+id/hapusPengaduan"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_below="@+id/editKelurahan"
-        android:layout_toEndOf="@+id/namaKecamatan"
+        android:layout_below="@+id/editPengaduan"
+        android:layout_toEndOf="@+id/isiPengaduan"
         android:background="@color/white"
         app:srcCompat="@drawable/baseline_delete_24"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />

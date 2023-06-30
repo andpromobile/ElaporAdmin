@@ -16,6 +16,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PengaduanFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PengaduanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerangkatDesaFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerangkatDesaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PegawaiFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PegawaiActivity"
+            android:exported="false" />
+        <activity
             android:name=".LokasiFormActivity"
             android:exported="false" />
         <activity

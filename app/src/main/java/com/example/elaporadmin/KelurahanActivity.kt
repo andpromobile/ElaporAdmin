@@ -2,9 +2,9 @@ package com.example.elaporadmin
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -72,7 +72,9 @@ class KelurahanActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Kelurahan>>, t: Throwable) {
-                Log.d("tes", t.toString())
+                Toast.makeText(applicationContext,
+                    "Koneksi ke Server Gagal!!!",
+                    Toast.LENGTH_SHORT).show()
             }
 
         })

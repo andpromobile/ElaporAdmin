@@ -16,7 +16,9 @@ import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Bidang
 
 
-class ListBidangAdapter(val listBidang:ArrayList<Bidang>, val listener:OnAdapterListener): RecyclerView.Adapter<ListBidangAdapter.ListBidangHolder>() {
+class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
+                        val listener:OnAdapterListener):
+    RecyclerView.Adapter<ListBidangAdapter.ListBidangHolder>() {
     inner class ListBidangHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         var namaBidang: TextView = itemView.findViewById(R.id.namaBidang)

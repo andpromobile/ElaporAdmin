@@ -1,15 +1,10 @@
 package com.example.elaporadmin
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,14 +13,7 @@ import com.example.elaporadmin.adapter.ListBidangAdapter
 import com.example.elaporadmin.adapter.ListBidangAdapter.OnAdapterListener
 import com.example.elaporadmin.dao.Bidang
 import com.example.elaporadmin.databinding.ActivityBidangBinding
-import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class BidangActivity : AppCompatActivity() {
@@ -56,29 +44,29 @@ class BidangActivity : AppCompatActivity() {
         bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
         bidangViewModel.getBidang()
         bidangViewModel.observeBidangLiveData().observe(
-            this,
-            Observer { bidangList ->
-                listBidangAdapter = ListBidangAdapter(
-                    bidangList as ArrayList<Bidang>,
-                    object : OnAdapterListener {
-                        override fun onClick(bidang: Bidang) {
-                            val intent = Intent(
-                                this@BidangActivity,
-                                BidangFormActivity::class.java,
-                            )
-                            startActivity(intent)
-                        }
-                    },
-                )
+            this
+        ) { bidangList ->
+            listBidangAdapter = ListBidangAdapter(
+                bidangList as ArrayList<Bidang>,
+                object : OnAdapterListener {
+                    override fun onClick(bidang: Bidang) {
+                        val intent = Intent(
+                            this@BidangActivity,
+                            BidangFormActivity::class.java,
+                        )
+                        startActivity(intent)
+                    }
+                },
+            )
 
-                rvBidang.adapter = listBidangAdapter
+            rvBidang.adapter = listBidangAdapter
 
-                if (listBidangAdapter.itemCount <= 0){
-                    rvBidang.visibility = View.GONE
-                    tvNoBidang.visibility = View.VISIBLE
-                }
+            if (listBidangAdapter.itemCount <= 0) {
+                rvBidang.visibility = View.GONE
+                tvNoBidang.visibility = View.VISIBLE
+            }
 
-            })
+        }
 
 
     }

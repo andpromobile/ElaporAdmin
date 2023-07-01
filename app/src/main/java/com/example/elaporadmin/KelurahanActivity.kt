@@ -4,22 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.elaporadmin.ViewModel.BidangViewModel
 import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.adapter.ListKelurahanAdapter
 import com.example.elaporadmin.dao.Kelurahan
 import com.example.elaporadmin.databinding.ActivityKelurahanBinding
-import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class KelurahanActivity : AppCompatActivity() {
     private lateinit var binding:ActivityKelurahanBinding
@@ -54,12 +47,12 @@ class KelurahanActivity : AppCompatActivity() {
         kelurahanViewModel.apply {
             getKelurahan()
             observeKelurahanLiveData().observe(
-                this@KelurahanActivity,
-                Observer{kelurahanList ->
+                this@KelurahanActivity
+            ) { kelurahanList ->
                 listKelurahanAdapter = ListKelurahanAdapter(
                     kelurahanList as ArrayList<Kelurahan>,
                     object : ListKelurahanAdapter.OnAdapterListener {
-                        override fun onClick(kelurahan:Kelurahan) {
+                        override fun onClick(kelurahan: Kelurahan) {
                             val intent = Intent(
                                 this@KelurahanActivity,
                                 KelurahanFormActivity::class.java,
@@ -70,11 +63,11 @@ class KelurahanActivity : AppCompatActivity() {
                 )
                 rvKelurahan.adapter = listKelurahanAdapter
 
-                if (listKelurahanAdapter.itemCount <= 0){
+                if (listKelurahanAdapter.itemCount <= 0) {
                     rvKelurahan.visibility = View.GONE
                     tvNoKelurahan.visibility = View.VISIBLE
                 }
-            })
+            }
         }
 
 

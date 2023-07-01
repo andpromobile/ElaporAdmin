@@ -6,8 +6,12 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.elaporadmin.ViewModel.BidangViewModel
+import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.adapter.ListKelurahanAdapter
 import com.example.elaporadmin.dao.Kelurahan
 import com.example.elaporadmin.databinding.ActivityKelurahanBinding
@@ -23,36 +27,37 @@ class KelurahanActivity : AppCompatActivity() {
     private lateinit var rvKelurahan:RecyclerView
     private lateinit var fabKelurahan:FloatingActionButton
     private lateinit var tvNoKelurahan:TextView
+    private lateinit var kelurahanViewModel: KelurahanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityKelurahanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        inisialiasi()
-        getDataKelurahan()
+        initLayout()
         toFormKelurahan()
 
     }
 
-    private fun toFormKelurahan() {
-        fabKelurahan = binding.fabKelurahan
+    private fun initLayout() {
+        tvNoKelurahan = binding.noKelurahan
 
-        fabKelurahan.setOnClickListener {
-            val intent = Intent(this@KelurahanActivity, KelurahanFormActivity::class.java)
-            startActivity(intent)
+        rvKelurahan = binding.listKelurahan
+
+        rvKelurahan.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(applicationContext)
         }
-    }
 
-    private fun getDataKelurahan() {
-        ApiService.endPoint.getKelurahan().enqueue(object : Callback<List<Kelurahan>>{
-            override fun onResponse(
-                call: Call<List<Kelurahan>>,
-                response: Response<List<Kelurahan>>
-            ) {
 
+        kelurahanViewModel = ViewModelProvider(this)[KelurahanViewModel::class.java]
+        kelurahanViewModel.apply {
+            getKelurahan()
+            observeKelurahanLiveData().observe(
+                this@KelurahanActivity,
+                Observer{kelurahanList ->
                 listKelurahanAdapter = ListKelurahanAdapter(
-                    response.body() as ArrayList<Kelurahan>,
+                    kelurahanList as ArrayList<Kelurahan>,
                     object : ListKelurahanAdapter.OnAdapterListener {
                         override fun onClick(kelurahan:Kelurahan) {
                             val intent = Intent(
@@ -69,22 +74,19 @@ class KelurahanActivity : AppCompatActivity() {
                     rvKelurahan.visibility = View.GONE
                     tvNoKelurahan.visibility = View.VISIBLE
                 }
-            }
+            })
+        }
 
-            override fun onFailure(call: Call<List<Kelurahan>>, t: Throwable) {
-                Toast.makeText(applicationContext,
-                    "Koneksi ke Server Gagal!!!",
-                    Toast.LENGTH_SHORT).show()
-            }
 
-        })
     }
 
-    private fun inisialiasi() {
-        tvNoKelurahan = binding.noKelurahan
+    private fun toFormKelurahan() {
+        fabKelurahan = binding.fabKelurahan
 
-        rvKelurahan = binding.listKelurahan
-        rvKelurahan.setHasFixedSize(true)
-        rvKelurahan.layoutManager = LinearLayoutManager(this)
+        fabKelurahan.setOnClickListener {
+            val intent = Intent(this@KelurahanActivity, KelurahanFormActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 }

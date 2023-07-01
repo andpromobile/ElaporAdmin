@@ -7,7 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
 
-    val BASE_URL = "http://192.168.1.4/elapor/"
+//    http://192.168.1.11/
+//    http://192.168.1.4
+    val BASE_URL = "http://192.168.1.11/elapor/"
     val endPoint:ApiEndPoint
 
         get() {

@@ -37,8 +37,8 @@ class BidangActivity : AppCompatActivity() {
     private fun initLayout() {
         rvBidang = binding.listBidang
         rvBidang.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(applicationContext)
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(applicationContext)
         }
 
         bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
@@ -80,7 +80,8 @@ class BidangActivity : AppCompatActivity() {
         fabBidang = binding.fabBidang
 
         fabBidang.setOnClickListener {
-            val intent = Intent(this@BidangActivity,
+            val intent = Intent(
+                this@BidangActivity,
                 BidangFormActivity::class.java)
             startActivity(intent)
         }

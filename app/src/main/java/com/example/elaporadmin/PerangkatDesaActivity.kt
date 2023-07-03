@@ -76,7 +76,10 @@ class PerangkatDesaActivity : AppCompatActivity() {
         fabPerangkatDesa = binding.fabPerangkatDesa
 
         fabPerangkatDesa.setOnClickListener {
-            val intent = Intent(this@PerangkatDesaActivity, PerangkatDesaFormActivity::class.java)
+            val intent = Intent(
+                this@PerangkatDesaActivity,
+                PerangkatDesaFormActivity::class.java
+            )
             startActivity(intent)
         }
     }

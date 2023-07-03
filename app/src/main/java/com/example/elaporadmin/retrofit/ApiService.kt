@@ -9,7 +9,7 @@ object ApiService {
 
 //    http://192.168.1.11/
 //    http://192.168.1.4
-    val BASE_URL = "http://192.168.1.11/elapor/"
+const val BASE_URL = "http://192.168.1.7/elapor/"
     val endPoint:ApiEndPoint
 
         get() {

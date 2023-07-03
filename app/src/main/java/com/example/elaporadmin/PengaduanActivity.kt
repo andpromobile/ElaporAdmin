@@ -4,18 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.elaporadmin.ViewModel.PengaduanViewModel
 import com.example.elaporadmin.adapter.ListPengaduanAdapter
 import com.example.elaporadmin.dao.Pengaduan
 import com.example.elaporadmin.databinding.ActivityPengaduanBinding
-import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class PengaduanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPengaduanBinding
@@ -23,6 +20,7 @@ class PengaduanActivity : AppCompatActivity() {
     private lateinit var rvPengaduan: RecyclerView
     private lateinit var fabPengaduan: FloatingActionButton
     private lateinit var tvNoPengaduan: TextView
+    private lateinit var pengaduanViewModel: PengaduanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,46 +28,48 @@ class PengaduanActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        inisialiasi()
-        getDataPengaduan()
+        initLayout()
         toFormPengaduan()
     }
 
-    private fun getDataPengaduan() {
-        ApiService.endPoint.getPengaduan().enqueue(
-            object :Callback<List<Pengaduan>>{
-                override fun onResponse(
-                    call: Call<List<Pengaduan>>,
-                    response: Response<List<Pengaduan>>
-                ) {
-                    listPengaduanAdapter = ListPengaduanAdapter(
-                        response.body() as ArrayList<Pengaduan>,
-                        object : ListPengaduanAdapter.OnAdapterListener {
-                            override fun onClick(pengaduan: Pengaduan) {
-                                val intent = Intent(
-                                    this@PengaduanActivity,
-                                    PengaduanFormActivity::class.java,
-                                )
-                                startActivity(intent)
-                            }
-                        },
-                    )
-                    rvPengaduan.adapter = listPengaduanAdapter
+    private fun initLayout() {
+        rvPengaduan.apply {
+            binding.listPengaduan
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(applicationContext)
+        }
 
-                    if (listPengaduanAdapter.itemCount <= 0){
-                        rvPengaduan.visibility = View.GONE
-                        tvNoPengaduan.visibility = View.VISIBLE
+        pengaduanViewModel = ViewModelProvider(this)[PengaduanViewModel::class.java]
+        pengaduanViewModel.getPengaduan()
+        pengaduanViewModel.observePengaduanLiveData().observe(
+            this
+        ){pengaduanList->
+            listPengaduanAdapter = ListPengaduanAdapter(
+                pengaduanList as ArrayList<Pengaduan>,
+                object :ListPengaduanAdapter.OnAdapterListener{
+                    override fun onClick(pengaduan: Pengaduan) {
+                        val intent = Intent(
+                            this@PengaduanActivity,
+                            PengaduanFormActivity::class.java
+                        )
+                        startActivity(intent)
                     }
-                }
 
-                override fun onFailure(call: Call<List<Pengaduan>>, t: Throwable) {
-                    Toast.makeText(applicationContext,
-                        "Koneksi ke Server Gagal!!!",
-                        Toast.LENGTH_SHORT).show()
                 }
+            )
 
+            rvPengaduan.adapter = listPengaduanAdapter
+
+            if (listPengaduanAdapter.itemCount <= 0){
+                rvPengaduan.visibility = View.GONE
+                tvNoPengaduan.visibility = View.VISIBLE
             }
-        )
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initLayout()
     }
 
     private fun toFormPengaduan() {
@@ -81,12 +81,4 @@ class PengaduanActivity : AppCompatActivity() {
         }
     }
 
-    private fun inisialiasi() {
-        tvNoPengaduan = binding.noPengaduan
-
-        rvPengaduan = binding.listPengaduan
-        rvPengaduan.setHasFixedSize(true)
-        rvPengaduan.layoutManager = LinearLayoutManager(this)
-
-    }
 }

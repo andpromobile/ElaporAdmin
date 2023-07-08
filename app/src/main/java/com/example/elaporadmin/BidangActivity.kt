@@ -49,12 +49,23 @@ class BidangActivity : AppCompatActivity() {
             listBidangAdapter = ListBidangAdapter(
                 bidangList as ArrayList<Bidang>,
                 object : OnAdapterListener {
-                    override fun onClick(bidang: Bidang) {
+                    override fun onUpdate(bidang: Bidang) {
                         val intent = Intent(
                             this@BidangActivity,
                             BidangFormActivity::class.java,
                         )
+
+                        with(intent) {
+                            putExtra("ID",bidang.id)
+                            putExtra("NAMABIDANG",bidang.namabidang)
+                            putExtra("SEKSI", bidang.seksi)
+                            putExtra("MODE","EDIT")
+                        }
                         startActivity(intent)
+                    }
+
+                    override fun onDelete(bidang: Bidang) {
+
                     }
                 },
             )
@@ -83,6 +94,8 @@ class BidangActivity : AppCompatActivity() {
             val intent = Intent(
                 this@BidangActivity,
                 BidangFormActivity::class.java)
+
+            intent.putExtra("MODE","INSERT")
             startActivity(intent)
         }
     }

@@ -12,7 +12,7 @@ import retrofit2.Response
 
 class BidangViewModel: ViewModel() {
     private var bidangLiveData = MutableLiveData<List<Bidang>>()
-
+    private var pesanLiveData = MutableLiveData<String>()
     fun getBidang() {
         ApiService.endPoint.getBidang()
             .enqueue(object  : Callback<List<Bidang>> {
@@ -33,7 +33,69 @@ class BidangViewModel: ViewModel() {
         })
     }
 
+    fun insertBidang(namabidang:String, seksi:String){
+        ApiService.endPoint.insertBidang(
+            namabidang, seksi
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.pesan
+
+//                        Log.d("HASIL LIVE DATA",pesanLiveData.value.toString())
+
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+
+            })
+    }
+
+    fun updateBidang(id:Int, namabidang:String, seksi: String){
+        ApiService.endPoint.updateBidang(
+            id, namabidang, seksi
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.pesan
+
+//                        Log.d("HASIL LIVE DATA",pesanLiveData.value.toString())
+
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+
+            })
+    }
+
+    fun deleteBidang(){
+
+    }
+
     fun observeBidangLiveData() : LiveData<List<Bidang>> {
         return bidangLiveData
+    }
+
+    fun observePesanLiveData():LiveData<String>{
+        return pesanLiveData
     }
 }

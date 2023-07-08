@@ -15,6 +15,7 @@ class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
     RecyclerView.Adapter<ListBidangAdapter.ListBidangHolder>() {
     inner class ListBidangHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
+        var id = 0
         var namaBidang: TextView = itemView.findViewById(R.id.namaBidang)
         var seksi:TextView = itemView.findViewById(R.id.seksi)
         var editBidang:ImageButton = itemView.findViewById(R.id.editBidang)
@@ -39,11 +40,16 @@ class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
     ) {
         val bidang = listBidang[position]
 
+        holder.id = bidang.id
         holder.namaBidang.text = bidang.namabidang
         holder.seksi.text = bidang.seksi
 
         holder.editBidang.setOnClickListener{
-            listener.onClick(bidang)
+            listener.onUpdate(bidang)
+        }
+
+        holder.hapusBidang.setOnClickListener{
+            listener.onDelete(bidang)
         }
     }
 
@@ -54,6 +60,8 @@ class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
 //    }
 
     interface OnAdapterListener{
-        fun onClick(bidang:Bidang)
+        fun onUpdate(bidang:Bidang)
+
+        fun onDelete(bidang: Bidang)
     }
 }

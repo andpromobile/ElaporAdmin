@@ -66,6 +66,8 @@ class BidangActivity : AppCompatActivity() {
 
                     override fun onDelete(bidang: Bidang) {
 
+                        bidangViewModel.deleteBidang(bidang.id)
+
                     }
                 },
             )

@@ -87,8 +87,23 @@ class BidangViewModel: ViewModel() {
             })
     }
 
-    fun deleteBidang(){
+    fun deleteBidang(id:Int){
 
+        ApiService.endPoint.deleteBidang(
+            id
+        ).enqueue(object:Callback<SubmitModel>{
+            override fun onResponse(call: Call<SubmitModel>, response: Response<SubmitModel>) {
+                if (response.isSuccessful){
+                    pesanLiveData.value = response.body()!!.pesan
+
+                }
+            }
+
+            override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                pesanLiveData.value = t.toString()
+            }
+
+        })
     }
 
     fun observeBidangLiveData() : LiveData<List<Bidang>> {

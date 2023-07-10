@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.elaporadmin.dao.Bidang
+import com.example.elaporadmin.dao.ResponseBidang
 import com.example.elaporadmin.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,19 +16,25 @@ class BidangViewModel: ViewModel() {
     private var pesanLiveData = MutableLiveData<String>()
     fun getBidang() {
         ApiService.endPoint.getBidang()
-            .enqueue(object  : Callback<List<Bidang>> {
+            .enqueue(object  : Callback<ResponseBidang> {
             override fun onResponse(
-                call: Call<List<Bidang>>,
-                response: Response<List<Bidang>>,
+                call: Call<ResponseBidang>,
+                response: Response<ResponseBidang>,
             ) {
                 if (response.body()!=null){
-                    bidangLiveData.value = response.body()!!
+                    bidangLiveData.value = response.body()!!.data
+
+                    for (i in response.body()!!.data){
+                        Log.d("TES", i.id.toString())
+                        Log.d("TES", i.namabidang.toString())
+                        Log.d("TES", i.seksi.toString())
+                    }
                 }
                 else{
                     return
                 }
             }
-            override fun onFailure(call: Call<List<Bidang>>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBidang>, t: Throwable) {
                 Log.d("TAG",t.message.toString())
             }
         })

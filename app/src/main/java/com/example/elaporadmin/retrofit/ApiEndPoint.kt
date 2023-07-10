@@ -7,6 +7,7 @@ import com.example.elaporadmin.dao.Lokasi
 import com.example.elaporadmin.dao.Pegawai
 import com.example.elaporadmin.dao.Pengaduan
 import com.example.elaporadmin.dao.Perangkatdesa
+import com.example.elaporadmin.dao.ResponseBidang
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
@@ -17,7 +18,7 @@ import retrofit2.http.POST
 interface ApiEndPoint {
 
     @GET("bidang.php")
-    fun getBidang(): Call<List<Bidang>>
+    fun getBidang(): Call<ResponseBidang>
 
     @FormUrlEncoded
     @POST("bidang-insert.php")

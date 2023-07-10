@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.elaporadmin.dao.Pegawai
+import com.example.elaporadmin.dao.ResponsePegawai
 import com.example.elaporadmin.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,15 +16,15 @@ class PegawaiViewModel:ViewModel() {
 
     fun getPegawai(){
         ApiService.endPoint.getPegawai()
-            .enqueue(object: Callback<List<Pegawai>> {
+            .enqueue(object: Callback<ResponsePegawai> {
                 override fun onResponse(
-                    call: Call<List<Pegawai>>,
-                    response: Response<List<Pegawai>>
+                    call: Call<ResponsePegawai>,
+                    response: Response<ResponsePegawai>
                 ) {
-                    pegawaiLiveData.value = response.body()!!
+                    pegawaiLiveData.value = response.body()!!.data
                 }
 
-                override fun onFailure(call: Call<List<Pegawai>>, t: Throwable) {
+                override fun onFailure(call: Call<ResponsePegawai>, t: Throwable) {
                     Log.d("TAG", t.message.toString())
                 }
 

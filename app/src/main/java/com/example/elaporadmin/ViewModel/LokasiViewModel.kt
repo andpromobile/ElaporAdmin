@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.elaporadmin.dao.Lokasi
+import com.example.elaporadmin.dao.ResponseLokasi
 import com.example.elaporadmin.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,15 +16,15 @@ class LokasiViewModel: ViewModel() {
 
     fun getLokasi(){
         ApiService.endPoint.getLokasi()
-            .enqueue(object: Callback<List<Lokasi>> {
+            .enqueue(object: Callback<ResponseLokasi> {
                 override fun onResponse(
-                    call: Call<List<Lokasi>>,
-                    response: Response<List<Lokasi>>
+                    call: Call<ResponseLokasi>,
+                    response: Response<ResponseLokasi>
                 ) {
-                    lokasiLiveData.value = response.body()!!
+                    lokasiLiveData.value = response.body()!!.data
                 }
 
-                override fun onFailure(call: Call<List<Lokasi>>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {
                     Log.d("TAG",t.message.toString())
                 }
 

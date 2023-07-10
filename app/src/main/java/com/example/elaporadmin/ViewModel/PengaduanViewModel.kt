@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.elaporadmin.dao.Pengaduan
+import com.example.elaporadmin.dao.ResponsePengaduan
 import com.example.elaporadmin.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,15 +16,15 @@ class PengaduanViewModel:ViewModel() {
 
     fun getPengaduan(){
         ApiService.endPoint.getPengaduan()
-            .enqueue(object :Callback<List<Pengaduan>>{
+            .enqueue(object :Callback<ResponsePengaduan>{
                 override fun onResponse(
-                    call: Call<List<Pengaduan>>,
-                    response: Response<List<Pengaduan>>
+                    call: Call<ResponsePengaduan>,
+                    response: Response<ResponsePengaduan>
                 ) {
-                    pengaduanLiveData.value = response.body()!!
+                    pengaduanLiveData.value = response.body()!!.data
                 }
 
-                override fun onFailure(call: Call<List<Pengaduan>>, t: Throwable) {
+                override fun onFailure(call: Call<ResponsePengaduan>, t: Throwable) {
                     Log.d("TAG", t.message.toString())
                 }
 

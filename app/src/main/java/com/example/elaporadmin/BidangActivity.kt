@@ -1,9 +1,14 @@
 package com.example.elaporadmin
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,9 +70,34 @@ class BidangActivity : AppCompatActivity() {
                     }
 
                     override fun onDelete(bidang: Bidang) {
+                        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+                        val dialog = Dialog(this@BidangActivity)
 
-                        bidangViewModel.deleteBidang(bidang.id)
+                        with(dialog){
+                            setContentView(dialogBinding)
+                            setCancelable(true)
+                            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            show()
+                        }
 
+                        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
+
+                        yesButton.setOnClickListener{
+                            dialog.dismiss()
+                        }
+
+//                        bidangViewModel.deleteBidang(bidang.id)
+//
+//                        bidangViewModel.observePesanLiveData().observe(this@BidangActivity)
+//                        {
+//                            Toast.makeText(
+//                                applicationContext,
+//                                it.toString(),
+//                                Toast.LENGTH_LONG,
+//                            ).show()
+//                        }
+//
+//                        initLayout()
                     }
                 },
             )

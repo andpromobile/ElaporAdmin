@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class BidangViewModel: ViewModel() {
     private var bidangLiveData = MutableLiveData<List<Bidang>>()
-    private var pesanLiveData = MutableLiveData<String>()
+    private val pesanLiveData = MutableLiveData<String>()
     fun getBidang() {
         ApiService.endPoint.getBidang()
             .enqueue(object  : Callback<ResponseBidang> {
@@ -23,12 +23,6 @@ class BidangViewModel: ViewModel() {
             ) {
                 if (response.body()!=null){
                     bidangLiveData.value = response.body()!!.data
-
-                    for (i in bidangLiveData.value as ArrayList<Bidang>){
-                        Log.d("TES", i.id.toString())
-                        Log.d("TES", i.namabidang.toString())
-                        Log.d("TES", i.seksi.toString())
-                    }
                 }
                 else{
                     return
@@ -49,9 +43,8 @@ class BidangViewModel: ViewModel() {
                     call: Call<SubmitModel>,
                     response: Response<SubmitModel>
                 ) {
-                    if (response.isSuccessful){
-                        pesanLiveData.value = response.body()!!.pesan
-
+                   if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
                     }
                 }
 
@@ -61,7 +54,6 @@ class BidangViewModel: ViewModel() {
                 ) {
                     pesanLiveData.value = t.toString()
                 }
-
             })
     }
 
@@ -75,10 +67,7 @@ class BidangViewModel: ViewModel() {
                     response: Response<SubmitModel>
                 ) {
                     if (response.isSuccessful){
-                        pesanLiveData.value = response.body()!!.pesan
-
-//                        Log.d("HASIL LIVE DATA",pesanLiveData.value.toString())
-
+                        pesanLiveData.value = response.body()!!.message
                     }
                 }
 
@@ -88,7 +77,6 @@ class BidangViewModel: ViewModel() {
                 ) {
                     pesanLiveData.value = t.toString()
                 }
-
             })
     }
 
@@ -97,10 +85,12 @@ class BidangViewModel: ViewModel() {
         ApiService.endPoint.deleteBidang(
             id
         ).enqueue(object:Callback<SubmitModel>{
-            override fun onResponse(call: Call<SubmitModel>, response: Response<SubmitModel>) {
+            override fun onResponse(
+                call: Call<SubmitModel>,
+                response: Response<SubmitModel>
+            ) {
                 if (response.isSuccessful){
-                    pesanLiveData.value = response.body()!!.pesan
-
+                    pesanLiveData.value = response.body()!!.message
                 }
             }
 

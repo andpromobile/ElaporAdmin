@@ -1,7 +1,6 @@
 package com.example.elaporadmin
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -36,13 +35,15 @@ class BidangFormActivity : AppCompatActivity() {
                 tvNamaBidang.text.toString(),
                 tvSeksi.text.toString())
 
-
+            bidangViewModel.observePesanLiveData().observe(
+                this,
+            ) {
                 Toast.makeText(
                     applicationContext,
-                    "Berhasil Update Data",
-                    Toast.LENGTH_LONG
+                    it.toString(),
+                    Toast.LENGTH_LONG,
                 ).show()
-
+            }
 
             finish()
         }else{
@@ -62,13 +63,14 @@ class BidangFormActivity : AppCompatActivity() {
                 tvNamaBidang.text.toString(),
                 tvSeksi.text.toString())
 
-
+            bidangViewModel.observePesanLiveData().observe(this
+            ) {
                 Toast.makeText(
                     applicationContext,
-                    "Berhasil Simpan Data",
+                    it.toString(),
                     Toast.LENGTH_LONG
                 ).show()
-
+            }
 
             finish()
         }else{
@@ -78,7 +80,6 @@ class BidangFormActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-
     }
 
     private fun cekInput():Boolean {
@@ -104,7 +105,6 @@ class BidangFormActivity : AppCompatActivity() {
                 this.id = intent.getIntExtra("ID",0)
                 tvNamaBidang.setText(intent.getStringExtra("NAMABIDANG"))
                 tvSeksi.setText(intent.getStringExtra("SEKSI"))
-
             }
         }
 
@@ -113,10 +113,6 @@ class BidangFormActivity : AppCompatActivity() {
                 insertData()
             else
                 updateData()
-
         }
-
     }
-
-
 }

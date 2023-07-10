@@ -24,7 +24,7 @@ class BidangViewModel: ViewModel() {
                 if (response.body()!=null){
                     bidangLiveData.value = response.body()!!.data
 
-                    for (i in response.body()!!.data){
+                    for (i in bidangLiveData.value as ArrayList<Bidang>){
                         Log.d("TES", i.id.toString())
                         Log.d("TES", i.namabidang.toString())
                         Log.d("TES", i.seksi.toString())
@@ -51,8 +51,6 @@ class BidangViewModel: ViewModel() {
                 ) {
                     if (response.isSuccessful){
                         pesanLiveData.value = response.body()!!.pesan
-
-//                        Log.d("HASIL LIVE DATA",pesanLiveData.value.toString())
 
                     }
                 }

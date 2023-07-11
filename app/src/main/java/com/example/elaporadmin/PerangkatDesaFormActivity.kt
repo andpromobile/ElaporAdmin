@@ -14,6 +14,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private lateinit var tvNamaPd:EditText
     private lateinit var tvKelurahanIdPd:EditText
     private lateinit var btnFormBinding:Button
+
     private val perangkatDesaViewModel:PerangkatDesaViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""

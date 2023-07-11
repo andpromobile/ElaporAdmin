@@ -13,6 +13,7 @@ import retrofit2.Response
 
 class PerangkatDesaViewModel:ViewModel() {
     private var perangkatDesaLiveData = MutableLiveData<List<Perangkatdesa>>()
+    private val pesanLiveData = MutableLiveData<String>()
 
     fun getPerangkatDesa(){
         ApiService.endPoint.getPerangkatDesa()
@@ -31,7 +32,78 @@ class PerangkatDesaViewModel:ViewModel() {
             })
     }
 
+    fun insertPerangkatDesa(namapd:String, kelurahan_id:Int){
+        ApiService.endPoint.insertPerangkatDesa(
+            namapd, kelurahan_id
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun updatePerangkatDesa(id:Int, namapd:String, kelurahan_id: Int){
+        ApiService.endPoint.updatePerangkatDesa(
+            id, namapd, kelurahan_id
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun deletePerangkatDesa(id:Int){
+
+        ApiService.endPoint.deletePerangkatDesa(
+            id
+        ).enqueue(object:Callback<SubmitModel>{
+            override fun onResponse(
+                call: Call<SubmitModel>,
+                response: Response<SubmitModel>
+            ) {
+                if (response.isSuccessful){
+                    pesanLiveData.value = response.body()!!.message
+                }
+            }
+
+            override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                pesanLiveData.value = t.toString()
+            }
+
+        })
+    }
+
     fun observePerangkatDesaLiveData():LiveData<List<Perangkatdesa>>{
         return perangkatDesaLiveData
+    }
+
+    fun observePesanLiveData():LiveData<String>{
+        return pesanLiveData
     }
 }

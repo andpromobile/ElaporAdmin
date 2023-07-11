@@ -40,6 +40,8 @@ class BidangActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+        tvNoBidang = binding.noBidang
+
         rvBidang = binding.listBidang
         rvBidang.apply {
             this.setHasFixedSize(true)
@@ -55,49 +57,11 @@ class BidangActivity : AppCompatActivity() {
                 bidangList as ArrayList<Bidang>,
                 object : OnAdapterListener {
                     override fun onUpdate(bidang: Bidang) {
-                        val intent = Intent(
-                            this@BidangActivity,
-                            BidangFormActivity::class.java,
-                        )
-
-                        with(intent) {
-                            putExtra("ID",bidang.id)
-                            putExtra("NAMABIDANG",bidang.namabidang)
-                            putExtra("SEKSI", bidang.seksi)
-                            putExtra("MODE","EDIT")
-                        }
-                        startActivity(intent)
+                        updateData(bidang)
                     }
 
                     override fun onDelete(bidang: Bidang) {
-                        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-                        val dialog = Dialog(this@BidangActivity)
-
-                        with(dialog){
-                            setContentView(dialogBinding)
-                            setCancelable(true)
-                            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                            show()
-                        }
-
-                        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-
-                        yesButton.setOnClickListener{
-                            dialog.dismiss()
-                        }
-
-//                        bidangViewModel.deleteBidang(bidang.id)
-//
-//                        bidangViewModel.observePesanLiveData().observe(this@BidangActivity)
-//                        {
-//                            Toast.makeText(
-//                                applicationContext,
-//                                it.toString(),
-//                                Toast.LENGTH_LONG,
-//                            ).show()
-//                        }
-//
-//                        initLayout()
+                        hapusData(bidang)
                     }
                 },
             )
@@ -108,10 +72,7 @@ class BidangActivity : AppCompatActivity() {
                 rvBidang.visibility = View.GONE
                 tvNoBidang.visibility = View.VISIBLE
             }
-
         }
-
-
     }
 
     override fun onStart() {
@@ -129,6 +90,58 @@ class BidangActivity : AppCompatActivity() {
 
             intent.putExtra("MODE","INSERT")
             startActivity(intent)
+        }
+    }
+
+    private fun updateData(bidang: Bidang){
+        val intent = Intent(
+            this@BidangActivity,
+            BidangFormActivity::class.java,
+        )
+
+        with(intent) {
+            putExtra("ID",bidang.id)
+            putExtra("NAMABIDANG",bidang.namabidang)
+            putExtra("SEKSI", bidang.seksi)
+            putExtra("MODE","EDIT")
+        }
+        startActivity(intent)
+    }
+
+    private fun hapusData(bidang: Bidang){
+        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+        val dialog = Dialog(this@BidangActivity)
+
+        with(dialog){
+            setContentView(dialogBinding)
+            setCancelable(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+        }
+
+        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
+        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
+
+        cancelButton.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        yesButton.setOnClickListener{
+            bidangViewModel.deleteBidang(bidang.id)
+
+            bidangViewModel.observePesanLiveData().observe(
+                this@BidangActivity
+            )
+            {
+                dialog.dismiss()
+                initLayout()
+
+                Toast.makeText(
+                    applicationContext,
+                    it.toString(),
+                    Toast.LENGTH_LONG,
+                ).show()
+            }
         }
     }
 

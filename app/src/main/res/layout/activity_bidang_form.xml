@@ -7,29 +7,6 @@
     android:background="#4DC9EEF0"
     tools:context=".BidangFormActivity">
 
-
-<!--    <EditText-->
-<!--        android:id="@+id/frmBidangId"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="56dp"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="48dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:layout_marginBottom="24dp"-->
-<!--        android:background="@color/white"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Bidang Id"-->
-<!--        android:importantForAutofill="no"-->
-<!--        android:inputType="number"-->
-<!--        android:padding="10dp"-->
-<!--        android:textColorHint="#A1887F"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/frmNamaBidang"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="HardcodedText" />-->
-
     <EditText
         android:id="@+id/frmNamaBidang"
         android:layout_width="0dp"
@@ -76,7 +53,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFormBidang"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/heightButtonSave"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
@@ -84,7 +61,7 @@
         android:backgroundTint="@color/teal"
         android:text="SIMPAN DATA"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="@dimen/textSizeButtonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frmSeksi"

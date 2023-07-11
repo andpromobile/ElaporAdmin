@@ -1,9 +1,14 @@
 package com.example.elaporadmin
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +41,6 @@ class KelurahanActivity : AppCompatActivity() {
         tvNoKelurahan = binding.noKelurahan
 
         rvKelurahan = binding.listKelurahan
-
         rvKelurahan.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(applicationContext)
@@ -52,12 +56,12 @@ class KelurahanActivity : AppCompatActivity() {
                 listKelurahanAdapter = ListKelurahanAdapter(
                     kelurahanList as ArrayList<Kelurahan>,
                     object : ListKelurahanAdapter.OnAdapterListener {
-                        override fun onClick(kelurahan: Kelurahan) {
-                            val intent = Intent(
-                                this@KelurahanActivity,
-                                KelurahanFormActivity::class.java,
-                            )
-                            startActivity(intent)
+                        override fun onUpdate(kelurahan: Kelurahan) {
+                           updateData(kelurahan)
+                        }
+
+                        override fun onDelete(kelurahan: Kelurahan) {
+                            hapusData(kelurahan)
                         }
                     },
                 )
@@ -69,16 +73,75 @@ class KelurahanActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
+    override fun onStart() {
+        super.onStart()
+        initLayout()
+    }
     private fun toFormKelurahan() {
         fabKelurahan = binding.fabKelurahan
 
         fabKelurahan.setOnClickListener {
-            val intent = Intent(this@KelurahanActivity, KelurahanFormActivity::class.java)
+            val intent = Intent(
+                this@KelurahanActivity,
+                KelurahanFormActivity::class.java)
+
+            intent.putExtra("MODE", "INSERT")
             startActivity(intent)
+        }
+    }
+
+    private fun updateData(kelurahan: Kelurahan){
+        val intent = Intent(
+            this@KelurahanActivity,
+            KelurahanFormActivity::class.java,
+        )
+
+        with(intent) {
+            putExtra("ID",kelurahan.id)
+            putExtra("NAMAKELURAHAN",kelurahan.namakelurahan)
+            putExtra("NAMAKECAMATAN", kelurahan.namakecamatan)
+            putExtra("MODE","EDIT")
+        }
+
+        startActivity(intent)
+    }
+
+    private fun hapusData(kelurahan: Kelurahan){
+        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+        val dialog = Dialog(this@KelurahanActivity)
+
+        with(dialog){
+            setContentView(dialogBinding)
+            setCancelable(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+        }
+
+        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
+        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
+
+        cancelButton.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        yesButton.setOnClickListener{
+            kelurahanViewModel.deleteKelurahan(kelurahan.id)
+
+            kelurahanViewModel.observePesanLiveData().observe(
+                this@KelurahanActivity
+            )
+            {
+                dialog.dismiss()
+                initLayout()
+
+                Toast.makeText(
+                    applicationContext,
+                    it.toString(),
+                    Toast.LENGTH_LONG,
+                ).show()
+            }
         }
     }
 

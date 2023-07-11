@@ -13,6 +13,7 @@ import retrofit2.Response
 
 class KelurahanViewModel:ViewModel() {
     private var kelurahanLiveData = MutableLiveData<List<Kelurahan>>()
+    private val pesanLiveData = MutableLiveData<String>()
 
     fun getKelurahan() {
         ApiService.endPoint.getKelurahan()
@@ -34,7 +35,78 @@ class KelurahanViewModel:ViewModel() {
             })
     }
 
+    fun insertKelurahan(namakelurahan:String, namakecamatan:String){
+        ApiService.endPoint.insertKelurahan(
+            namakelurahan, namakecamatan
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun updateKelurahan(id:Int, namakelurahan:String, namakecamatan: String){
+        ApiService.endPoint.updateKelurahan(
+            id, namakelurahan, namakecamatan
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun deleteKelurahan(id:Int){
+
+        ApiService.endPoint.deleteKelurahan(
+            id
+        ).enqueue(object:Callback<SubmitModel>{
+            override fun onResponse(
+                call: Call<SubmitModel>,
+                response: Response<SubmitModel>
+            ) {
+                if (response.isSuccessful){
+                    pesanLiveData.value = response.body()!!.message
+                }
+            }
+
+            override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                pesanLiveData.value = t.toString()
+            }
+
+        })
+    }
+
     fun observeKelurahanLiveData() : LiveData<List<Kelurahan>> {
         return kelurahanLiveData
+    }
+
+    fun observePesanLiveData():LiveData<String>{
+        return pesanLiveData
     }
 }

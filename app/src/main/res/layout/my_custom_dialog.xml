@@ -37,7 +37,8 @@
                 android:src="@drawable/baseline_info_24"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/alert_message"
@@ -51,19 +52,20 @@
                 android:layout_margin="10dp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="10dp"
                 android:layout_gravity="center">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/alert_cancel"
                     android:padding="16dp"
-                    android:background="@color/teal"
+                    android:background="#F5F5F5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textAllCaps="true"
@@ -73,7 +75,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/alert_yes"
                     android:padding="16dp"
-                    android:background="@color/teal"
+                    android:background="#EF6262"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -81,6 +83,7 @@
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textAllCaps="true"
+                    android:layout_weight="1"
                     android:text="Ya, Hapus Data"/>
 
             </LinearLayout>

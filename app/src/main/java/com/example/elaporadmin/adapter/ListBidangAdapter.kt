@@ -10,8 +10,9 @@ import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Bidang
 
 
-class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
-                        val listener:OnAdapterListener):
+class ListBidangAdapter(
+    private val listBidang:ArrayList<Bidang>,
+    private val listener:OnAdapterListener):
     RecyclerView.Adapter<ListBidangAdapter.ListBidangHolder>() {
     inner class ListBidangHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -52,12 +53,6 @@ class ListBidangAdapter(val listBidang:ArrayList<Bidang>,
             listener.onDelete(bidang)
         }
     }
-
-//    fun setData(data: ArrayList<Bidang>){
-//        listBidang.clear()
-//        listBidang.addAll( data )
-//        notifyDataSetChanged()
-//    }
 
     interface OnAdapterListener{
         fun onUpdate(bidang:Bidang)

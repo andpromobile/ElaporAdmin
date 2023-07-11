@@ -43,6 +43,27 @@ interface ApiEndPoint {
     @GET("kelurahan.php")
     fun getKelurahan(): Call<ResponseKelurahan>
 
+    @FormUrlEncoded
+    @POST("kelurahan-insert.php")
+    fun insertKelurahan(
+        @Field("namakelurahan") namakelurahan:String,
+        @Field("namakecamatan") namakecamatan:String,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("kelurahan-update.php")
+    fun updateKelurahan(
+        @Field("id") id:Int,
+        @Field("namakelurahan") namakelurahan:String,
+        @Field("namakecamatan") namakecamatan:String,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("kelurahan-delete.php")
+    fun deleteKelurahan(
+        @Field("id") id:Int,
+    ): Call<SubmitModel>
+
     @GET("lokasi.php")
     fun getLokasi(): Call<ResponseLokasi>
 
@@ -54,4 +75,25 @@ interface ApiEndPoint {
 
     @GET("perangkatdesa.php")
     fun getPerangkatDesa(): Call<ResponsePerangkatdesa>
+
+    @FormUrlEncoded
+    @POST("perangkatdesa-insert.php")
+    fun insertPerangkatDesa(
+        @Field("namapd") namapd:String,
+        @Field("kelurahan_id") kelurahan_id:Int,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("perangkatdesa-update.php")
+    fun updatePerangkatDesa(
+        @Field("id") id:Int,
+        @Field("namapd") namapd:String,
+        @Field("kelurahan_id") kelurahan_id:Int,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("perangkatdesa-delete.php")
+    fun deletePerangkatDesa(
+        @Field("id") id:Int,
+    ): Call<SubmitModel>
 }

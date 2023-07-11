@@ -14,6 +14,7 @@ import retrofit2.Response
 class BidangViewModel: ViewModel() {
     private var bidangLiveData = MutableLiveData<List<Bidang>>()
     private val pesanLiveData = MutableLiveData<String>()
+
     fun getBidang() {
         ApiService.endPoint.getBidang()
             .enqueue(object  : Callback<ResponseBidang> {

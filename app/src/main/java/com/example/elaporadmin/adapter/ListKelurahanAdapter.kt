@@ -13,6 +13,7 @@ class ListKelurahanAdapter(val listKelurahan:ArrayList<Kelurahan>,
                            val listener:OnAdapterListener): RecyclerView.Adapter<ListKelurahanAdapter.ListKelurahanHolder>() {
     inner class ListKelurahanHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
+        var id = 0
         var namakelurahan: TextView = itemView.findViewById(R.id.namaKelurahan)
         var namakecamatan: TextView = itemView.findViewById(R.id.namaKecamatan)
         var editKelurahan: ImageButton = itemView.findViewById(R.id.editKelurahan)
@@ -29,16 +30,22 @@ class ListKelurahanAdapter(val listKelurahan:ArrayList<Kelurahan>,
     override fun onBindViewHolder(holder: ListKelurahanHolder, position: Int) {
         val kelurahan = listKelurahan[position]
 
+        holder.id = kelurahan.id
         holder.namakelurahan.text = kelurahan.namakelurahan
         holder.namakecamatan.text = kelurahan.namakecamatan
 
         holder.editKelurahan.setOnClickListener{
-            listener.onClick(kelurahan)
+            listener.onUpdate(kelurahan)
+        }
+
+        holder.hapusKelurahan.setOnClickListener {
+            listener.onDelete(kelurahan)
         }
     }
 
 
     interface OnAdapterListener{
-        fun onClick(kelurahan: Kelurahan)
+        fun onUpdate(kelurahan: Kelurahan)
+        fun onDelete(kelurahan: Kelurahan)
     }
 }

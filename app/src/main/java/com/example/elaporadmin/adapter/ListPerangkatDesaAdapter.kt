@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Perangkatdesa
 
-class ListPerangkatDesaAdapter(val listPerangkatDesa:ArrayList<Perangkatdesa>,
-                                val listener:OnAdapterListener):
+class ListPerangkatDesaAdapter(
+    private val listPerangkatDesa:ArrayList<Perangkatdesa>,
+    private val listener:OnAdapterListener):
     RecyclerView.Adapter<ListPerangkatDesaAdapter.ListPerangkatDesaHolder>(){
 
     inner class ListPerangkatDesaHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+        var id = 0
         var namaPerangkatDesa:TextView = itemView.findViewById(R.id.namaPerangkatDesa)
         var perangkatDesaKelurahanId:TextView = itemView.findViewById(R.id.perangkatDesaKelurahanId)
         var editPerangkatDesa:ImageButton = itemView.findViewById(R.id.editPerangkatDesa)
@@ -31,15 +33,21 @@ class ListPerangkatDesaAdapter(val listPerangkatDesa:ArrayList<Perangkatdesa>,
     override fun onBindViewHolder(holder: ListPerangkatDesaHolder, position: Int) {
         val perangkatDesa = listPerangkatDesa[position]
 
+        holder.id = perangkatDesa.id
         holder.namaPerangkatDesa.text = perangkatDesa.namapd
         holder.perangkatDesaKelurahanId.text = perangkatDesa.kelurahan_id.toString()
 
         holder.editPerangkatDesa.setOnClickListener {
-            listener.onClick(perangkatDesa)
+            listener.onUpdate(perangkatDesa)
+        }
+
+        holder.hapusPerangkatdesa.setOnClickListener {
+            listener.onDelete(perangkatDesa)
         }
     }
 
     interface OnAdapterListener{
-        fun onClick(perangkatDesa:Perangkatdesa)
+        fun onUpdate(perangkatDesa:Perangkatdesa)
+        fun onDelete(perangkatDesa: Perangkatdesa)
     }
 }

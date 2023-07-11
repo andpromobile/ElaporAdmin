@@ -87,6 +87,7 @@ class PerangkatDesaActivity : AppCompatActivity() {
                 this@PerangkatDesaActivity,
                 PerangkatDesaFormActivity::class.java
             )
+            intent.putExtra("MODE","INSERT")
             startActivity(intent)
         }
     }

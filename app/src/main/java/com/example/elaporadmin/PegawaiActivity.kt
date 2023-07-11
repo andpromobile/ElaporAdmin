@@ -1,8 +1,12 @@
 package com.example.elaporadmin
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elaporadmin.ViewModel.PegawaiViewModel
 import com.example.elaporadmin.adapter.ListLokasiAdapter
 import com.example.elaporadmin.adapter.ListPegawaiAdapter
+import com.example.elaporadmin.dao.Bidang
 import com.example.elaporadmin.dao.Lokasi
 import com.example.elaporadmin.dao.Pegawai
 import com.example.elaporadmin.databinding.ActivityPegawaiBinding
@@ -39,6 +44,8 @@ class PegawaiActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+        tvNoPegawai = binding.noPegawai
+
         rvPegawai.apply {
             binding.listPegawai
             setHasFixedSize(true)
@@ -53,13 +60,12 @@ class PegawaiActivity : AppCompatActivity() {
             listPegawaiAdapter = ListPegawaiAdapter(
                 pegawaiList as ArrayList<Pegawai>,
                 object : ListPegawaiAdapter.OnAdapterListener{
-                    override fun onClick(pegawai: Pegawai) {
-                        val intent = Intent(
-                            this@PegawaiActivity,
-                            PegawaiFormActivity::class.java
-                        )
+                    override fun onUpdate(pegawai: Pegawai) {
+                        updateData(pegawai)
+                    }
 
-                        startActivity(intent)
+                    override fun onDelete(pegawai: Pegawai) {
+                        hapusData(pegawai)
                     }
 
                 }
@@ -84,8 +90,66 @@ class PegawaiActivity : AppCompatActivity() {
         fabPegawai = binding.fabPegawai
 
         fabPegawai.setOnClickListener {
-            val intent = Intent(this@PegawaiActivity, PegawaiFormActivity::class.java)
+            val intent = Intent(
+                this@PegawaiActivity,
+                PegawaiFormActivity::class.java)
+
+            intent.putExtra("MODE","INSERT")
             startActivity(intent)
+        }
+    }
+
+    private fun updateData(pegawai: Pegawai){
+        val intent = Intent(
+            this@PegawaiActivity,
+            PegawaiFormActivity::class.java
+        )
+
+        with(intent) {
+            putExtra("NIP",pegawai.NIP)
+            putExtra("NAMAPEGAWAI",pegawai.namapegawai)
+            putExtra("JABATAN", pegawai.jabatan)
+            putExtra("BIDANG_ID", pegawai.bidang_id)
+            putExtra("MODE","EDIT")
+        }
+
+        startActivity(intent)
+    }
+
+    private fun hapusData(pegawai: Pegawai){
+        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+        val dialog = Dialog(this@PegawaiActivity)
+
+        with(dialog){
+            setContentView(dialogBinding)
+            setCancelable(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+        }
+
+        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
+        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
+
+        cancelButton.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        yesButton.setOnClickListener{
+            pegawaiViewModel.deletePegawai(pegawai.NIP)
+
+            pegawaiViewModel.observePesanLiveData().observe(
+                this@PegawaiActivity
+            )
+            {
+                dialog.dismiss()
+                initLayout()
+
+                Toast.makeText(
+                    applicationContext,
+                    it.toString(),
+                    Toast.LENGTH_LONG,
+                ).show()
+            }
         }
     }
 

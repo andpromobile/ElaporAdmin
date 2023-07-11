@@ -70,6 +70,30 @@ interface ApiEndPoint {
     @GET("pegawai.php")
     fun getPegawai(): Call<ResponsePegawai>
 
+    @FormUrlEncoded
+    @POST("pegawai-insert.php")
+    fun insertPegawai(
+        @Field("NIP") nip:String,
+        @Field("namapegawai") namapegawai:String,
+        @Field("jabatan") jabatan:String,
+        @Field("bidang_id") bidang_id:Int,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("pegawai-update.php")
+    fun updatePegawai(
+        @Field("NIP") nip:String,
+        @Field("namapegawai") namapegawai:String,
+        @Field("jabatan") jabatan:String,
+        @Field("bidang_id") bidang_id:Int,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("pegawai-delete.php")
+    fun deletePegawai(
+        @Field("NIP") nip:String,
+    ): Call<SubmitModel>
+
     @GET("pengaduan.php")
     fun getPengaduan(): Call<ResponsePengaduan>
 

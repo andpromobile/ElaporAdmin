@@ -3,7 +3,7 @@ package com.example.elaporadmin.dao
 import java.sql.Timestamp
 
 class Pegawai (
-    var NIP:Int? = 0,
+    var NIP:String = "",
     var namapegawai: String? = null,
     var jabatan: String? = null,
     var bidang_id:Int? = 0,

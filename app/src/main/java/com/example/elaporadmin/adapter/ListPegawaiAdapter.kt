@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Pegawai
 
-class ListPegawaiAdapter(val listPegawai:ArrayList<Pegawai>,
-                         val listener:OnAdapterListener):
+class ListPegawaiAdapter(
+    private val listPegawai:ArrayList<Pegawai>,
+    private val listener:OnAdapterListener):
     RecyclerView.Adapter<ListPegawaiAdapter.ListPegawaiHolder>(){
     inner class ListPegawaiHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        var pegawaiNip:TextView = itemView.findViewById(R.id.pegawaiNIP)
-        var pegawaiNama:TextView = itemView.findViewById(R.id.pegawaiNama)
+        var pegawaiNip:TextView = itemView.findViewById(R.id.frmNIP)
+        var pegawaiNama:TextView = itemView.findViewById(R.id.frmNamaPegawai)
+        var pegawaiJabatan:TextView = itemView.findViewById(R.id.frmJabatan)
+        var pegawaiBidangId:TextView = itemView.findViewById(R.id.frmBidangIdPegawai)
+
         var editPegawai: ImageButton = itemView.findViewById(R.id.editPegawai)
         var hapusPegawai: ImageButton = itemView.findViewById(R.id.hapusPegawai)
     }
@@ -30,15 +34,22 @@ class ListPegawaiAdapter(val listPegawai:ArrayList<Pegawai>,
     override fun onBindViewHolder(holder: ListPegawaiHolder, position: Int) {
        val pegawai = listPegawai[position]
 
-        holder.pegawaiNip.text = pegawai.NIP.toString()
+        holder.pegawaiNip.text = pegawai.NIP
         holder.pegawaiNama.text = pegawai.namapegawai
+        holder.pegawaiJabatan.text = pegawai.jabatan
+        holder.pegawaiBidangId.text = pegawai.bidang_id.toString()
 
         holder.editPegawai.setOnClickListener{
-            listener.onClick(pegawai)
+            listener.onUpdate(pegawai)
+        }
+
+        holder.hapusPegawai.setOnClickListener {
+            listener.onDelete(pegawai)
         }
     }
 
     interface OnAdapterListener{
-        fun onClick(pegawai:Pegawai)
+        fun onUpdate(pegawai:Pegawai)
+        fun onDelete(pegawai: Pegawai)
     }
 }

@@ -13,6 +13,7 @@ import retrofit2.Response
 
 class PegawaiViewModel:ViewModel() {
     private var pegawaiLiveData = MutableLiveData<List<Pegawai>>()
+    private val pesanLiveData = MutableLiveData<String>()
 
     fun getPegawai(){
         ApiService.endPoint.getPegawai()
@@ -31,8 +32,79 @@ class PegawaiViewModel:ViewModel() {
             })
     }
 
+    fun insertPegawai(NIP:String, namapegawai:String, jabatan:String, bidang_id:Int){
+        ApiService.endPoint.insertPegawai(
+            NIP, namapegawai, jabatan, bidang_id
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun updatePegawai(NIP:String, namapegawai:String, jabatan:String, bidang_id:Int){
+        ApiService.endPoint.updatePegawai(
+            NIP, namapegawai, jabatan, bidang_id
+        )
+            .enqueue(object: Callback<SubmitModel>{
+                override fun onResponse(
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful){
+                        pesanLiveData.value = response.body()!!.message
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<SubmitModel>,
+                    t: Throwable
+                ) {
+                    pesanLiveData.value = t.toString()
+                }
+            })
+    }
+
+    fun deletePegawai(nip:String){
+
+        ApiService.endPoint.deletePegawai(
+            nip
+        ).enqueue(object:Callback<SubmitModel>{
+            override fun onResponse(
+                call: Call<SubmitModel>,
+                response: Response<SubmitModel>
+            ) {
+                if (response.isSuccessful){
+                    pesanLiveData.value = response.body()!!.message
+                }
+            }
+
+            override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                pesanLiveData.value = t.toString()
+            }
+
+        })
+    }
+
     fun observePegawaiLiveData():LiveData<List<Pegawai>>{
         return pegawaiLiveData
+    }
+
+    fun observePesanLiveData():LiveData<String>{
+        return pesanLiveData
     }
 
 }

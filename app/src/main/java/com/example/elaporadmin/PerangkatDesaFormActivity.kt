@@ -1,11 +1,17 @@
 package com.example.elaporadmin
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.ViewModel.PerangkatDesaViewModel
 import com.example.elaporadmin.databinding.ActivityPerangkatDesaFormBinding
 
@@ -13,6 +19,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerangkatDesaFormBinding
     private lateinit var tvNamaPd:EditText
     private lateinit var tvKelurahanIdPd:EditText
+    private lateinit var spinner: Spinner
     private lateinit var btnFormBinding:Button
 
     private val perangkatDesaViewModel:PerangkatDesaViewModel by viewModels()
@@ -41,7 +48,35 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private fun setKomponen() {
         tvNamaPd = binding.frmNamapd
         tvKelurahanIdPd = binding.frmKelurahanIdPd
+        spinner = binding.spinner
         btnFormBinding = binding.btnFormPd
+
+        val kelurahanViewModel = ViewModelProvider(this)[KelurahanViewModel::class.java]
+
+            kelurahanViewModel.getKelurahan()
+            kelurahanViewModel.observeKelurahanLiveData().observe(
+                this@PerangkatDesaFormActivity
+            ){ kelurahanList ->
+                val fp:MutableList<String?> = ArrayList()
+                for (i in kelurahanList){
+                    fp.add(i.namakelurahan)
+                }
+
+                val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, fp)
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = arrayAdapter
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (parent.getItemAtPosition(position) == "Choose Football players from lis") {
+                        }
+                        else {
+                            val item = parent.getItemAtPosition(position).toString()
+                            Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
+        }
 
         if (!intent.extras?.isEmpty!!){
 

@@ -39,8 +39,10 @@ class PerangkatDesaActivity : AppCompatActivity() {
     private fun initLayout() {
         tvNoPerangkatDesa = binding.noPerangkatDesa
 
+        rvPerangkatdesa = binding.listPerangkatDesa
+
         rvPerangkatdesa.apply {
-            binding.listPerangkatDesa
+
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(applicationContext)
         }

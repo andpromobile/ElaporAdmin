@@ -39,7 +39,7 @@
         android:background="@color/white"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Seksi"
+        android:hint="Kelurahan"
         android:importantForAutofill="no"
         android:inputType="text"
         android:padding="10dp"

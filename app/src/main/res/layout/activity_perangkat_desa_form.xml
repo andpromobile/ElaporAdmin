@@ -8,63 +8,90 @@
     android:background="#4DC9EEF0"
     tools:context=".PerangkatDesaFormActivity">
 
-    <EditText
-        android:id="@+id/frmNamapd"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal"
+        app:titleTextColor="#FFFFFF"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:title="Perangkat Desa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="Nama"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/frmKelurahanIdPd"
+        android:hint="Nama Perangkat Desa"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarPD"
+        tools:ignore="HardcodedText">
 
-    <EditText
-        android:id="@+id/frmKelurahanIdPd"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frmNamapd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:id="@+id/layoutKelurahanIdPD"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:gravity="start|top"
+        android:layout_marginTop="24dp"
+        android:hint="Pilih Kelurahan"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPD"
+        tools:ignore="HardcodedText">
+
+        <AutoCompleteTextView
+            android:id="@+id/frmKelurahanIdPd"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="LabelFor,DuplicateClickableBoundsCheck,DuplicateSpeakableTextCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutSpinnerPD"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
         android:hint="Kelurahan"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frmNamapd"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutKelurahanIdPD"
+        tools:ignore="HardcodedText">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frmKelurahanIdPd"
-        />
+        <Spinner
+            android:id="@+id/spinnerPD"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            tools:ignore="LabelFor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFormPd"
@@ -76,11 +103,16 @@
         android:background="@color/teal"
         android:backgroundTint="@color/teal"
         android:text="SIMPAN DATA"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/textSizeButtonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/layoutSpinnerPD"
         tools:ignore="HardcodedText" />
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

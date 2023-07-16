@@ -63,6 +63,9 @@ class PengaduanActivity : AppCompatActivity() {
             if (listPengaduanAdapter.itemCount <= 0){
                 rvPengaduan.visibility = View.GONE
                 tvNoPengaduan.visibility = View.VISIBLE
+            }else{
+                rvPengaduan.visibility = View.VISIBLE
+                tvNoPengaduan.visibility = View.GONE
             }
         }
     }

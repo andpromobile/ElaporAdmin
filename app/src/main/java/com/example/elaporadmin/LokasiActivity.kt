@@ -63,6 +63,9 @@ class LokasiActivity : AppCompatActivity() {
             if (listLokasiAdapter.itemCount <= 0){
                 rvLokasi.visibility = View.GONE
                 tvNoLokasi.visibility = View.VISIBLE
+            }else{
+                rvLokasi.visibility = View.VISIBLE
+                tvNoLokasi.visibility = View.GONE
             }
         }
 

@@ -71,6 +71,9 @@ class BidangActivity : AppCompatActivity() {
             if (listBidangAdapter.itemCount <= 0) {
                 rvBidang.visibility = View.GONE
                 tvNoBidang.visibility = View.VISIBLE
+            }else{
+                rvBidang.visibility = View.VISIBLE
+                tvNoBidang.visibility = View.GONE
             }
         }
     }

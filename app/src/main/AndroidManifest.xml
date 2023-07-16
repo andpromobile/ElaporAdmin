@@ -47,7 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".BidangFormActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:parentActivityName=".BidangActivity"/>
         <activity
             android:name=".BidangActivity"
             android:exported="false" />

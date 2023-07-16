@@ -70,6 +70,9 @@ class KelurahanActivity : AppCompatActivity() {
                 if (listKelurahanAdapter.itemCount <= 0) {
                     rvKelurahan.visibility = View.GONE
                     tvNoKelurahan.visibility = View.VISIBLE
+                }else{
+                    rvKelurahan.visibility = View.VISIBLE
+                    tvNoKelurahan.visibility = View.GONE
                 }
             }
         }

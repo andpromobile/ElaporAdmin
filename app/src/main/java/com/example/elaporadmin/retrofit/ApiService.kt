@@ -7,13 +7,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
-    var gson = GsonBuilder()
+    private var gson = GsonBuilder()
         .setLenient()
         .create()
 
-//    http://192.168.1.11/
-//    http://192.168.1.4
-    const val BASE_URL = "http://192.168.100.170/elapor/"
+    private const val BASE_URL = "http://192.168.1.10/elapor/"
     val endPoint:ApiEndPoint
 
         get() {

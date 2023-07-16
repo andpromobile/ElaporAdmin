@@ -46,8 +46,8 @@ class PegawaiActivity : AppCompatActivity() {
     private fun initLayout() {
         tvNoPegawai = binding.noPegawai
 
+        rvPegawai = binding.listPegawai
         rvPegawai.apply {
-            binding.listPegawai
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(applicationContext)
         }
@@ -76,6 +76,9 @@ class PegawaiActivity : AppCompatActivity() {
             if(listPegawaiAdapter.itemCount <= 0){
                 rvPegawai.visibility = View.GONE
                 tvNoPegawai.visibility = View.VISIBLE
+            }else{
+                rvPegawai.visibility = View.VISIBLE
+                tvNoPegawai.visibility = View.GONE
             }
 
         }

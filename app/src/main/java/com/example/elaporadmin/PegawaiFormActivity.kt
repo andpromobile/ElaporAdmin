@@ -1,11 +1,19 @@
 package com.example.elaporadmin
 
+import android.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.elaporadmin.ViewModel.BidangViewModel
+import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.ViewModel.PegawaiViewModel
 import com.example.elaporadmin.databinding.ActivityPegawaiFormBinding
 
@@ -14,7 +22,7 @@ class PegawaiFormActivity : AppCompatActivity() {
     private lateinit var frmNIP:EditText
     private lateinit var frmNamaPegawai:EditText
     private lateinit var frmJabatan:EditText
-    private lateinit var frmBidangIdPegawai:EditText
+    private lateinit var frmBidangIdPegawai:AutoCompleteTextView
     private lateinit var btnFormPegawai: Button
     private val pegawaiViewModel:PegawaiViewModel by viewModels()
     private var mode:String = ""
@@ -46,6 +54,35 @@ class PegawaiFormActivity : AppCompatActivity() {
         frmJabatan = binding.frmJabatan
         frmBidangIdPegawai = binding.frmBidangIdPegawai
         btnFormPegawai = binding.btnFormPegawai
+
+        val bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
+
+        bidangViewModel.getBidang()
+        bidangViewModel.observeBidangLiveData().observe(
+            this@PegawaiFormActivity
+        ){ bidangList ->
+            val fp:MutableList<String?> = ArrayList()
+            for (i in bidangList){
+                fp.add(i.namabidang+" - "+i.seksi)
+            }
+
+            val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, R.layout.simple_list_item_1, fp)
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            frmBidangIdPegawai.setAdapter(arrayAdapter)
+
+            frmBidangIdPegawai.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    if (parent.getItemAtPosition(position) == "Daftar Bidang") {
+                    }
+                    else {
+//                            val item = parent.getItemAtPosition(position).toString()
+//                            Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+        }
 
         if (!intent.extras?.isEmpty!!){
 

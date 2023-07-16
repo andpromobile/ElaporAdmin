@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnBidang: Button
     private lateinit var btnKelurahan:Button
     private lateinit var btnPerangkatDesa:Button
+    private lateinit var btnPegawai:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +21,21 @@ class MainActivity : AppCompatActivity() {
         loadBidang()
         loadKelurahan()
         loadPerangkatDesa()
+        loadPegawai()
 
+    }
+
+    private fun loadPegawai() {
+        btnPegawai = binding.toPegawai
+
+        btnPegawai.setOnClickListener {
+            val intent = Intent(
+                this@MainActivity,
+                PegawaiActivity::class.java
+            )
+
+            startActivity(intent)
+        }
     }
 
     private fun loadPerangkatDesa() {

@@ -71,6 +71,9 @@ class PerangkatDesaActivity : AppCompatActivity() {
             if (listPerangkatDesaAdapter.itemCount <= 0){
                 rvPerangkatdesa.visibility = View.GONE
                 tvNoPerangkatDesa.visibility = View.VISIBLE
+            }else{
+                rvPerangkatdesa.visibility = View.VISIBLE
+                tvNoPerangkatDesa.visibility = View.GONE
             }
 
         }

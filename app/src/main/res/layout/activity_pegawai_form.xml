@@ -8,92 +8,166 @@
     android:background="#4DC9EEF0"
     tools:context=".PegawaiFormActivity">
 
-    <EditText
-        android:id="@+id/frmNIP"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="NIP"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/frmNamaPegawai"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPegawai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/teal"
+        android:elevation="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutNIP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:title="Pegawai"
+        app:titleTextColor="#FFFFFF" />
 
-    <EditText
-        android:id="@+id/frmNamaPegawai"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutNIP"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutNamaPegawai"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarPegawai">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frmNIP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="NIP"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="#A1887F"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@id/layoutNamaPegawai"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Nama Pegawai"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frmNIP"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutNIP">
 
-    <EditText
-        android:id="@+id/frmJabatan"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="Jabatan"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/frmBidangIdPegawai"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frmNamaPegawai"
-        tools:ignore="HardcodedText" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frmNamaPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-    <EditText
-        android:id="@+id/frmBidangIdPegawai"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Nama Pegawai"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="#A1887F"
+            android:textSize="20sp"
+
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutJabatan"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Bidang ID"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#A1887F"
-        android:textSize="20sp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBidangIdPegawai"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frmJabatan"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/layoutNamaPegawai">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frmJabatan"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:hint="Jabatan"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="#A1887F"
+            android:textSize="20sp"
+
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:id="@id/layoutBidangIdPegawai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutJabatan">
+
+        <AutoCompleteTextView
+            android:id="@+id/frmBidangIdPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Bidang ID"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColorHint="#A1887F"
+            android:textSize="20sp"
+
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerPegawai"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:padding="10dp"-->
+<!--        android:textColorHint="#A1887F"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/frmBidangIdPegawai"-->
+<!--        />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFormPegawai"
@@ -105,12 +179,12 @@
         android:background="@color/teal"
         android:backgroundTint="@color/teal"
         android:text="SIMPAN DATA"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/textSizeButtonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frmBidangIdPegawai"
+        app:layout_constraintTop_toBottomOf="@+id/layoutBidangIdPegawai"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,14 +69,17 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
                 tvKelurahanIdPd.setAdapter(arrayAdapter)
 
 
+
+
                 spinner.adapter = arrayAdapter
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                         if (parent.getItemAtPosition(position) == "Daftar Kelurahan") {
                         }
                         else {
-//                            val item = parent.getItemAtPosition(position).toString()
-//                            Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
+                            val item = parent.getItemAtPosition(position).toString()
+                            Toast.makeText(parent.context, "Selected: $item with $id", Toast.LENGTH_SHORT).show()
+
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {}

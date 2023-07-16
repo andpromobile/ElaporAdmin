@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="84dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:layout_marginTop="48dp"-->
+<!--        app:cardElevation="20dp"-->
+<!--        app:cardBackgroundColor="#ffffff"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageView-->
+
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="DATA BIDANG"/>-->
+<!--        </RelativeLayout>-->
+
+<!--    </com.google.android.material.card.MaterialCardView>-->
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/toBidang"
         android:layout_width="0dp"
@@ -16,6 +44,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Bidang"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +59,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Kelurahan"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toBidang"
@@ -44,6 +74,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Lokasi"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toKelurahan"
@@ -58,6 +89,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Pegawai"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toLokasi"
@@ -72,6 +104,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Pengaduan"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toPegawai"
@@ -86,6 +119,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/teal"
         android:text="Data Perangkat Desa"
+        android:textColor="#EDE7F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toPengaduan"

@@ -3,9 +3,9 @@ package com.example.elaporadmin
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.BidangViewModel
 import com.example.elaporadmin.databinding.ActivityBidangFormBinding
 
@@ -17,6 +17,7 @@ class BidangFormActivity : AppCompatActivity() {
     private val bidangViewModel:BidangViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""
+    private var flag:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,16 @@ class BidangFormActivity : AppCompatActivity() {
 
         setKomponen()
         cekInput()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (flag == true){
+            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setContentText("Berhasil")
+                .show()
+        }
     }
 
     private fun updateData() {
@@ -38,20 +49,17 @@ class BidangFormActivity : AppCompatActivity() {
             bidangViewModel.observePesanLiveData().observe(
                 this,
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setContentText(it.toString())
+                    .show()
             }
 
             finish()
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 
@@ -65,20 +73,21 @@ class BidangFormActivity : AppCompatActivity() {
 
             bidangViewModel.observePesanLiveData().observe(this
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    applicationContext,
+//                    it.toString(),
+//                    Toast.LENGTH_LONG
+//                ).show()
+
+               flag = true
             }
 
             finish()
+
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 

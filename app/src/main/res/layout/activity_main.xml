@@ -2,127 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/light_teal"
+    android:background="@color/teal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="84dp"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:layout_marginTop="48dp"-->
-<!--        app:cardElevation="20dp"-->
-<!--        app:cardBackgroundColor="#ffffff"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-<!--            <ImageView-->
-
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="DATA BIDANG"/>-->
-<!--        </RelativeLayout>-->
-
-<!--    </com.google.android.material.card.MaterialCardView>-->
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toBidang"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Bidang"
-        android:textColor="#EDE7F6"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="159dp"
+        android:layout_height="218dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:srcCompat="@drawable/logo" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toKelurahan"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Kelurahan"
-        android:textColor="#EDE7F6"
+        android:layout_marginTop="36dp"
+        android:text="Dinas Pekerjaan Umum dan Penataan Ruang\nKabupaten Hulu Sungai Tengah"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toBidang"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toLokasi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Lokasi"
-        android:textColor="#EDE7F6"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_rounded_top"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toKelurahan"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0"
+        android:gravity="center"
+        android:padding="10dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toPegawai"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Pegawai"
-        android:textColor="#EDE7F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toLokasi"
-        tools:ignore="HardcodedText" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:background="@drawable/button_background"
+            android:text="LOGIN"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toPengaduan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Pengaduan"
-        android:textColor="#EDE7F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toPegawai"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/toPerangkatDesa"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/teal"
-        android:text="Data Perangkat Desa"
-        android:textColor="#EDE7F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toPengaduan"
-        tools:ignore="HardcodedText" />
-
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

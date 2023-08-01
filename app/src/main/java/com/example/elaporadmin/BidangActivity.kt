@@ -1,24 +1,22 @@
 package com.example.elaporadmin
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.BidangViewModel
 import com.example.elaporadmin.adapter.ListBidangAdapter
 import com.example.elaporadmin.adapter.ListBidangAdapter.OnAdapterListener
 import com.example.elaporadmin.dao.Bidang
 import com.example.elaporadmin.databinding.ActivityBidangBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Timer
 
 
 class BidangActivity : AppCompatActivity() {
@@ -28,6 +26,9 @@ class BidangActivity : AppCompatActivity() {
     private lateinit var fabBidang:FloatingActionButton
     private lateinit var tvNoBidang: TextView
     private lateinit var bidangViewModel:BidangViewModel
+    private var count:Int = 0
+    private lateinit var timer: Timer
+    private lateinit var dialog: SweetAlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,40 +113,58 @@ class BidangActivity : AppCompatActivity() {
     }
 
     private fun hapusData(bidang: Bidang){
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-        val dialog = Dialog(this@BidangActivity)
 
-        with(dialog){
-            setContentView(dialogBinding)
-            setCancelable(true)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            show()
-        }
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Hapus?")
+            .setContentText("Yakin Ingin Menghapus Data Ini!")
+            .setConfirmButton("Iya", {
+                bidangViewModel.deleteBidang(bidang.id)
+                it.dismissWithAnimation()
 
-        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setContentText("Data Berhasil Dihapus")
+                    .show()
+            })
+            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
+            .setCancelButton("Tidak", {
+                it.dismissWithAnimation()
+            })
+            .show()
 
-        cancelButton.setOnClickListener{
-            dialog.dismiss()
-        }
-
-        yesButton.setOnClickListener{
-            bidangViewModel.deleteBidang(bidang.id)
-
-            bidangViewModel.observePesanLiveData().observe(
-                this@BidangActivity
-            )
-            {
-                dialog.dismiss()
-                initLayout()
-
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
-        }
+//        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+//        val dialog = Dialog(this@BidangActivity)
+//
+//        with(dialog){
+//            setContentView(dialogBinding)
+//            setCancelable(true)
+//            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//            show()
+//        }
+//
+//        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
+//        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
+//
+//        cancelButton.setOnClickListener{
+//            dialog.dismiss()
+//        }
+//
+//        yesButton.setOnClickListener{
+//            bidangViewModel.deleteBidang(bidang.id)
+//
+//            bidangViewModel.observePesanLiveData().observe(
+//                this@BidangActivity
+//            )
+//            {
+//                dialog.dismiss()
+//                initLayout()
+//
+//                Toast.makeText(
+//                    applicationContext,
+//                    it.toString(),
+//                    Toast.LENGTH_LONG,
+//                ).show()
+//            }
+//        }
     }
 
 }

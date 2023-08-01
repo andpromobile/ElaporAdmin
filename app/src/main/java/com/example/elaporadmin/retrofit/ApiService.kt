@@ -11,7 +11,7 @@ object ApiService {
         .setLenient()
         .create()
 
-    private const val BASE_URL = "http://192.168.1.10/elapor/"
+    private const val BASE_URL = "http://192.168.100.117/elapor/"
     val endPoint:ApiEndPoint
 
         get() {

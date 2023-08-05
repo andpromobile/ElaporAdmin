@@ -15,7 +15,7 @@ import retrofit2.http.POST
 
 interface ApiEndPoint {
 
-    @GET("bidang.php")
+    @GET("dtxbidang")
     fun getBidang(): Call<ResponseBidang>
 
     @FormUrlEncoded

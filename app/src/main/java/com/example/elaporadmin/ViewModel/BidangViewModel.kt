@@ -22,12 +22,24 @@ class BidangViewModel: ViewModel() {
                 call: Call<ResponseBidang>,
                 response: Response<ResponseBidang>,
             ) {
+
+//                for (dt in response.body()!!.data) {
+//                    Log.d("BIDANG", dt.id.toString())
+//                    Log.d("BIDANG", dt.seksi.toString())
+//                    Log.d("BIDANG", dt.namabidang.toString())
+//                }
+//                Log.d("BIDANG",response.toString()))
                 if (response.body()!=null){
                     bidangLiveData.value = response.body()!!.data
+
+                    Log.d("HASIL BIDANG",bidangLiveData.value.toString())
                 }
                 else{
-                    return
+//                    Log.d("HASIL BIDANG",bidangLiveData.value.toString())
+//                    return
                 }
+
+//                Log.d("HASIL BIDANG","TES AJA")
             }
             override fun onFailure(call: Call<ResponseBidang>, t: Throwable) {
                 Log.d("TAG",t.message.toString())

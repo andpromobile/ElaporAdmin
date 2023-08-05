@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DATA MASTER"
+                android:textColor="@color/teal"
                 android:textStyle="italic|bold"
                 android:textSize="20sp"
                 android:gravity="center"/>
@@ -69,7 +70,7 @@
                     android:id="@+id/toBidang"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="20dp"
                     android:layout_gravity="fill"
                     android:layout_margin="12dp"
                     android:padding="12dp"
@@ -79,6 +80,7 @@
                     android:layout_column="0">
 
                     <LinearLayout
+                        android:background="@drawable/bg_rounded"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -93,6 +95,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="BIDANG" />
                     </LinearLayout>
 
@@ -103,7 +106,7 @@
                     android:id="@+id/toKelurahan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="20dp"
                     android:layout_gravity="fill"
                     android:layout_margin="12dp"
                     android:padding="12dp"
@@ -113,6 +116,7 @@
                     android:layout_column="1">
 
                     <LinearLayout
+                        android:background="@drawable/bg_rounded"
                         android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -128,6 +132,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="KELURAHAN" />
                     </LinearLayout>
 
@@ -138,7 +143,7 @@
                     android:id="@+id/toLokasi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="20dp"
                     android:layout_gravity="fill"
                     android:layout_margin="12dp"
                     android:padding="12dp"
@@ -148,6 +153,7 @@
                     android:layout_column="2">
 
                     <LinearLayout
+                        android:background="@drawable/bg_rounded"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -163,6 +169,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="LOKASI" />
                     </LinearLayout>
 
@@ -173,7 +180,7 @@
                     android:id="@+id/toPegawai"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="20dp"
                     android:layout_gravity="fill"
                     android:layout_margin="12dp"
                     android:padding="12dp"
@@ -183,6 +190,7 @@
                     android:layout_column="0">
 
                     <LinearLayout
+                        android:background="@drawable/bg_rounded"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -198,6 +206,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="PEGAWAI" />
                     </LinearLayout>
 
@@ -208,7 +217,7 @@
                     android:id="@+id/toPerangkatDesa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="20dp"
                     android:layout_gravity="fill"
                     android:layout_margin="12dp"
                     android:padding="12dp"
@@ -218,6 +227,7 @@
                     android:layout_column="1">
 
                     <LinearLayout
+                        android:background="@drawable/bg_rounded"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -234,6 +244,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:text="PERANGKAT\n DESA" />
                     </LinearLayout>
 
@@ -245,6 +256,7 @@
             <TextView
                 android:layout_marginTop="24dp"
                 android:id="@+id/section5"
+                android:textColor="@color/teal"
                 android:layout_below="@+id/section4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,11 +270,20 @@
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/section5"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="150dp">
+                <LinearLayout
+                    android:orientation="vertical"
+
+                    android:background="@color/medium_teal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:textColor="@color/teal"
                 android:layout_marginTop="24dp"
                 android:id="@+id/section7"
                 android:layout_below="@+id/section6"
@@ -278,7 +299,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/section7"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="500dp">
+
+                <com.anychart.AnyChartView
+                    android:id="@+id/any_chart_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
 
             </androidx.cardview.widget.CardView>
         </RelativeLayout>

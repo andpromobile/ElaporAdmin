@@ -52,9 +52,9 @@
             android:background="@drawable/button_background"
             android:text="LOGIN"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_width="match_parent"
-            android:layout_height="56dp"/>
+            android:layout_height="48dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

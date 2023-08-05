@@ -19,7 +19,7 @@ interface ApiEndPoint {
     fun getBidang(): Call<ResponseBidang>
 
     @FormUrlEncoded
-    @POST("bidang-insert.php")
+    @POST("dtxbidang/store")
     fun insertBidang(
         @Field("namabidang") namabidang:String,
         @Field("seksi") seksi:String,

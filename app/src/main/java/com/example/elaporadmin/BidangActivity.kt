@@ -41,6 +41,9 @@ class BidangActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+//        dialog =  SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+//        dialog.show()
+
         tvNoBidang = binding.noBidang
 
         rvBidang = binding.listBidang
@@ -76,6 +79,8 @@ class BidangActivity : AppCompatActivity() {
                 rvBidang.visibility = View.VISIBLE
                 tvNoBidang.visibility = View.GONE
             }
+
+
         }
     }
 
@@ -131,40 +136,6 @@ class BidangActivity : AppCompatActivity() {
             })
             .show()
 
-//        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-//        val dialog = Dialog(this@BidangActivity)
-//
-//        with(dialog){
-//            setContentView(dialogBinding)
-//            setCancelable(true)
-//            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//            show()
-//        }
-//
-//        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-//        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
-//
-//        cancelButton.setOnClickListener{
-//            dialog.dismiss()
-//        }
-//
-//        yesButton.setOnClickListener{
-//            bidangViewModel.deleteBidang(bidang.id)
-//
-//            bidangViewModel.observePesanLiveData().observe(
-//                this@BidangActivity
-//            )
-//            {
-//                dialog.dismiss()
-//                initLayout()
-//
-//                Toast.makeText(
-//                    applicationContext,
-//                    it.toString(),
-//                    Toast.LENGTH_LONG,
-//                ).show()
-//            }
-//        }
     }
 
 }

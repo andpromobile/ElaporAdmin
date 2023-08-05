@@ -1,5 +1,6 @@
 package com.example.elaporadmin
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -73,16 +74,17 @@ class BidangFormActivity : AppCompatActivity() {
 
             bidangViewModel.observePesanLiveData().observe(this
             ) {
-//                Toast.makeText(
-//                    applicationContext,
-//                    it.toString(),
-//                    Toast.LENGTH_LONG
-//                ).show()
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DISIMPAN")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-               flag = true
+                        finish()
+                    })
+                    .show()
+
             }
-
-            finish()
 
         }else{
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)

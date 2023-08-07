@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#4DC9EEF0"
+    android:background="@color/light_teal"
     tools:context=".PerangkatDesaFormActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -24,10 +24,11 @@
         android:id="@+id/layoutPD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:hint="Nama Perangkat Desa"
+        android:textColorHint="@color/medium_teal"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/teal"
         app:boxBackgroundColor="#FFFFFF"
@@ -68,30 +69,30 @@
             tools:ignore="LabelFor,DuplicateClickableBoundsCheck,DuplicateSpeakableTextCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutSpinnerPD"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp"
-        android:hint="Kelurahan"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/teal"
-        app:boxBackgroundColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutKelurahanIdPD"
-        tools:ignore="HardcodedText">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/layoutSpinnerPD"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:hint="Kelurahan"-->
+<!--        app:boxBackgroundMode="outline"-->
+<!--        app:boxStrokeColor="@color/teal"-->
+<!--        app:boxBackgroundColor="#FFFFFF"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/layoutKelurahanIdPD"-->
+<!--        tools:ignore="HardcodedText">-->
 
-        <Spinner
-            android:id="@+id/spinnerPD"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+<!--        <Spinner-->
+<!--            android:id="@+id/spinnerPD"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
 
-            tools:ignore="LabelFor" />
+<!--            tools:ignore="LabelFor" />-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFormPd"
@@ -100,14 +101,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/teal"
+        android:background="@drawable/button_background"
         android:backgroundTint="@color/teal"
         android:text="SIMPAN DATA"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/textSizeButtonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutSpinnerPD"
+        app:layout_constraintTop_toBottomOf="@+id/layoutKelurahanIdPD"
         tools:ignore="HardcodedText" />
 
 

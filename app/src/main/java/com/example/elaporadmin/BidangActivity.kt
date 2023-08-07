@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,6 @@ import com.example.elaporadmin.adapter.ListBidangAdapter.OnAdapterListener
 import com.example.elaporadmin.dao.Bidang
 import com.example.elaporadmin.databinding.ActivityBidangBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.Timer
 
 
 class BidangActivity : AppCompatActivity() {
@@ -26,9 +26,7 @@ class BidangActivity : AppCompatActivity() {
     private lateinit var fabBidang:FloatingActionButton
     private lateinit var tvNoBidang: TextView
     private lateinit var bidangViewModel:BidangViewModel
-    private var count:Int = 0
-    private lateinit var timer: Timer
-    private lateinit var dialog: SweetAlertDialog
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +39,7 @@ class BidangActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
-//        dialog =  SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-//        dialog.show()
+        progressBar = binding.progressBar
 
         tvNoBidang = binding.noBidang
 
@@ -73,13 +70,14 @@ class BidangActivity : AppCompatActivity() {
             rvBidang.adapter = listBidangAdapter
 
             if (listBidangAdapter.itemCount <= 0) {
+
                 rvBidang.visibility = View.GONE
                 tvNoBidang.visibility = View.VISIBLE
             }else{
                 rvBidang.visibility = View.VISIBLE
                 tvNoBidang.visibility = View.GONE
             }
-
+            showLoading(false)
 
         }
     }
@@ -136,6 +134,13 @@ class BidangActivity : AppCompatActivity() {
             })
             .show()
 
+    }
+
+    private fun showLoading(loading:Boolean){
+        when(loading){
+            true -> progressBar.visibility = View.VISIBLE
+            false -> progressBar.visibility = View.GONE
+        }
     }
 
 }

@@ -23,12 +23,6 @@ class BidangViewModel: ViewModel() {
                 response: Response<ResponseBidang>,
             ) {
 
-//                for (dt in response.body()!!.data) {
-//                    Log.d("BIDANG", dt.id.toString())
-//                    Log.d("BIDANG", dt.seksi.toString())
-//                    Log.d("BIDANG", dt.namabidang.toString())
-//                }
-//                Log.d("BIDANG",response.toString()))
                 if (response.body()!=null){
                     bidangLiveData.value = response.body()!!.data
 

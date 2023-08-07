@@ -3,9 +3,9 @@ package com.example.elaporadmin
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.databinding.ActivityKelurahanFormBinding
 
@@ -14,6 +14,7 @@ class KelurahanFormActivity : AppCompatActivity() {
     private lateinit var tvNamaKelurahan:EditText
     private lateinit var tvNamaKecamatan:EditText
     private lateinit var btnFormBinding:Button
+    private lateinit var toolbarKelurahan:androidx.appcompat.widget.Toolbar
     private val kelurahanViewModel:KelurahanViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""
@@ -38,20 +39,20 @@ class KelurahanFormActivity : AppCompatActivity() {
             kelurahanViewModel.observePesanLiveData().observe(
                 this,
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DIUBAH")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-            finish()
+                        finish()
+                    })
+                    .show()
+            }
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 
@@ -64,20 +65,20 @@ class KelurahanFormActivity : AppCompatActivity() {
 
             kelurahanViewModel.observePesanLiveData().observe(this
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DISIMPAN")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-            finish()
+                        finish()
+                    })
+                    .show()
+            }
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 
@@ -92,6 +93,11 @@ class KelurahanFormActivity : AppCompatActivity() {
     }
 
     private fun setKomponen() {
+        toolbarKelurahan = binding.toolbarKelurahan
+        setSupportActionBar(toolbarKelurahan)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         tvNamaKelurahan = binding.frmNamaKelurahan
         tvNamaKecamatan = binding.frmNamaKecamatan
         btnFormBinding = binding.btnFormKelurahan

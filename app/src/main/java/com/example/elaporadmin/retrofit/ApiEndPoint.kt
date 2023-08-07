@@ -8,10 +8,13 @@ import com.example.elaporadmin.dao.ResponsePegawai
 import com.example.elaporadmin.dao.ResponsePengaduan
 import com.example.elaporadmin.dao.ResponsePerangkatdesa
 import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiEndPoint {
 
@@ -26,52 +29,52 @@ interface ApiEndPoint {
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("bidang-update.php")
+    @POST("dtxbidang/update/{id}")
     fun updateBidang(
-        @Field("id") id:Int,
+        @Path("id") id:Int,
         @Field("namabidang") namabidang:String,
         @Field("seksi") seksi:String,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("bidang-delete.php")
+    @POST("dtxbidang/delete/{id}")
     fun deleteBidang(
-        @Field("id") id:Int,
+        @Path("id") id:Int,
     ): Call<SubmitModel>
 
 
-    @GET("kelurahan.php")
+    @GET("dtxkelurahan")
     fun getKelurahan(): Call<ResponseKelurahan>
 
     @FormUrlEncoded
-    @POST("kelurahan-insert.php")
+    @POST("dtxkelurahan/store")
     fun insertKelurahan(
         @Field("namakelurahan") namakelurahan:String,
         @Field("namakecamatan") namakecamatan:String,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("kelurahan-update.php")
+    @POST("dtxkelurahan/update/{id}")
     fun updateKelurahan(
-        @Field("id") id:Int,
+        @Path("id") id:Int,
         @Field("namakelurahan") namakelurahan:String,
         @Field("namakecamatan") namakecamatan:String,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("kelurahan-delete.php")
+    @POST("dtxkelurahan/delete/{id}")
     fun deleteKelurahan(
         @Field("id") id:Int,
     ): Call<SubmitModel>
 
-    @GET("lokasi.php")
+    @GET("dtxlokasi")
     fun getLokasi(): Call<ResponseLokasi>
 
-    @GET("pegawai.php")
+    @GET("dtxpegawai")
     fun getPegawai(): Call<ResponsePegawai>
 
     @FormUrlEncoded
-    @POST("pegawai-insert.php")
+    @POST("dtxpegawai/store")
     fun insertPegawai(
         @Field("NIP") nip:String,
         @Field("namapegawai") namapegawai:String,
@@ -80,44 +83,44 @@ interface ApiEndPoint {
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("pegawai-update.php")
+    @POST("dtxpegawai/update/{NIP}")
     fun updatePegawai(
-        @Field("NIP") nip:String,
+        @Path("NIP") nip:String,
         @Field("namapegawai") namapegawai:String,
         @Field("jabatan") jabatan:String,
         @Field("bidang_id") bidang_id:Int,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("pegawai-delete.php")
+    @POST("dtxpegawai/delete/{id}")
     fun deletePegawai(
-        @Field("NIP") nip:String,
+        @Path("NIP") nip:String,
     ): Call<SubmitModel>
 
-    @GET("pengaduan.php")
+    @GET("dtxpengaduan")
     fun getPengaduan(): Call<ResponsePengaduan>
 
-    @GET("perangkatdesa.php")
+    @GET("dtxperangkatdesa")
     fun getPerangkatDesa(): Call<ResponsePerangkatdesa>
 
     @FormUrlEncoded
-    @POST("perangkatdesa-insert.php")
+    @POST("dtxperangkatdesa/store")
     fun insertPerangkatDesa(
         @Field("namapd") namapd:String,
         @Field("kelurahan_id") kelurahan_id:Int,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("perangkatdesa-update.php")
+    @POST("dtxperangkatdesa/update/{id}")
     fun updatePerangkatDesa(
-        @Field("id") id:Int,
+        @Path("id") id:Int,
         @Field("namapd") namapd:String,
         @Field("kelurahan_id") kelurahan_id:Int,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("perangkatdesa-delete.php")
+    @POST("dtxperangkatdesa/delete/{id}")
     fun deletePerangkatDesa(
-        @Field("id") id:Int,
+        @Path("id") id:Int,
     ): Call<SubmitModel>
 }

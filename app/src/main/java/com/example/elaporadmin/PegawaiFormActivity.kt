@@ -1,7 +1,6 @@
 package com.example.elaporadmin
 
 import android.R
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,11 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.BidangViewModel
-import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.ViewModel.PegawaiViewModel
 import com.example.elaporadmin.databinding.ActivityPegawaiFormBinding
 
@@ -24,6 +23,7 @@ class PegawaiFormActivity : AppCompatActivity() {
     private lateinit var frmJabatan:EditText
     private lateinit var frmBidangIdPegawai:AutoCompleteTextView
     private lateinit var btnFormPegawai: Button
+    private lateinit var toolbarPegawai: androidx.appcompat.widget.Toolbar
     private val pegawaiViewModel:PegawaiViewModel by viewModels()
     private var mode:String = ""
 
@@ -49,6 +49,11 @@ class PegawaiFormActivity : AppCompatActivity() {
     }
 
     private fun setKomponen() {
+        toolbarPegawai = binding.toolbarPegawai
+        setSupportActionBar(toolbarPegawai)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         frmNIP = binding.frmNIP
         frmNamaPegawai = binding.frmNamaPegawai
         frmJabatan = binding.frmJabatan
@@ -116,20 +121,20 @@ class PegawaiFormActivity : AppCompatActivity() {
 
             pegawaiViewModel.observePesanLiveData().observe(this
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DISIMPAN")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-            finish()
+                        finish()
+                    })
+                    .show()
+            }
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+           SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+               .setContentText("Input Tidak Boleh Kosong!!!")
+               .show()
         }
     }
 
@@ -146,20 +151,20 @@ class PegawaiFormActivity : AppCompatActivity() {
             pegawaiViewModel.observePesanLiveData().observe(
                 this,
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DIUBAH")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-            finish()
+                        finish()
+                    })
+                    .show()
+            }
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 }

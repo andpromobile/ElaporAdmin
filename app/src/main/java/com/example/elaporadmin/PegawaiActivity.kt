@@ -1,30 +1,21 @@
 package com.example.elaporadmin
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.PegawaiViewModel
-import com.example.elaporadmin.adapter.ListLokasiAdapter
 import com.example.elaporadmin.adapter.ListPegawaiAdapter
-import com.example.elaporadmin.dao.Bidang
-import com.example.elaporadmin.dao.Lokasi
 import com.example.elaporadmin.dao.Pegawai
 import com.example.elaporadmin.databinding.ActivityPegawaiBinding
-import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class PegawaiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPegawaiBinding
@@ -33,17 +24,20 @@ class PegawaiActivity : AppCompatActivity() {
     private lateinit var fabPegawai: FloatingActionButton
     private lateinit var tvNoPegawai: TextView
     private lateinit var pegawaiViewModel: PegawaiViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPegawaiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initLayout()
+//        initLayout()
         toFormPegawai()
     }
 
     private fun initLayout() {
+        progressBar = binding.progressBar
+
         tvNoPegawai = binding.noPegawai
 
         rvPegawai = binding.listPegawai
@@ -80,6 +74,7 @@ class PegawaiActivity : AppCompatActivity() {
                 rvPegawai.visibility = View.VISIBLE
                 tvNoPegawai.visibility = View.GONE
             }
+            showLoading(false)
 
         }
     }
@@ -120,39 +115,28 @@ class PegawaiActivity : AppCompatActivity() {
     }
 
     private fun hapusData(pegawai: Pegawai){
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-        val dialog = Dialog(this@PegawaiActivity)
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Hapus?")
+            .setContentText("Yakin Ingin Menghapus Data Ini!")
+            .setConfirmButton("Iya", {
+                pegawaiViewModel.deletePegawai(pegawai.NIP)
+                it.dismissWithAnimation()
 
-        with(dialog){
-            setContentView(dialogBinding)
-            setCancelable(true)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            show()
-        }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setContentText("Data Berhasil Dihapus")
+                    .show()
+            })
+            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
+            .setCancelButton("Tidak", {
+                it.dismissWithAnimation()
+            })
+            .show()
+    }
 
-        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
-
-        cancelButton.setOnClickListener{
-            dialog.dismiss()
-        }
-
-        yesButton.setOnClickListener{
-            pegawaiViewModel.deletePegawai(pegawai.NIP)
-
-            pegawaiViewModel.observePesanLiveData().observe(
-                this@PegawaiActivity
-            )
-            {
-                dialog.dismiss()
-                initLayout()
-
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
+    private fun showLoading(loading:Boolean){
+        when(loading){
+            true -> progressBar.visibility = View.VISIBLE
+            false -> progressBar.visibility = View.GONE
         }
     }
 

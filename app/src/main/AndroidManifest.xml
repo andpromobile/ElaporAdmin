@@ -11,10 +11,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/elaporadmin"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/elaporadmin"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElaporAdmin"
         android:usesCleartextTraffic="true"
@@ -27,31 +27,36 @@
             android:exported="false" />
         <activity
             android:name=".PengaduanFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PengaduanActivity"/>
         <activity
             android:name=".PengaduanActivity"
             android:exported="false" />
         <activity
             android:name=".PerangkatDesaFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PerangkatDesaActivity"/>
         <activity
             android:name=".PerangkatDesaActivity"
             android:exported="false" />
         <activity
             android:name=".PegawaiFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PegawaiActivity"/>
         <activity
             android:name=".PegawaiActivity"
             android:exported="false" />
         <activity
             android:name=".LokasiFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LokasiActivity"/>
         <activity
             android:name=".LokasiActivity"
             android:exported="false" />
         <activity
             android:name=".KelurahanFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".KelurahanActivity"/>
         <activity
             android:name=".KelurahanActivity"
             android:exported="false" />
@@ -61,7 +66,7 @@
             android:parentActivityName=".BidangActivity" />
         <activity
             android:name=".BidangActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

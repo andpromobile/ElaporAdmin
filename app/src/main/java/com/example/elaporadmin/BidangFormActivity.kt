@@ -1,6 +1,5 @@
 package com.example.elaporadmin
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -15,6 +14,7 @@ class BidangFormActivity : AppCompatActivity() {
     private lateinit var tvNamaBidang:EditText
     private lateinit var tvSeksi:EditText
     private lateinit var btnFormBinding: Button
+    private lateinit var toolbarBidang: androidx.appcompat.widget.Toolbar
     private val bidangViewModel:BidangViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""
@@ -51,11 +51,15 @@ class BidangFormActivity : AppCompatActivity() {
                 this,
             ) {
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setContentText(it.toString())
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DIUBAH")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
+
+                        finish()
+                    })
                     .show()
             }
-
-            finish()
         }else{
 
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
@@ -104,6 +108,11 @@ class BidangFormActivity : AppCompatActivity() {
     }
 
     private fun setKomponen() {
+        toolbarBidang = binding.toolbarBidang
+        setSupportActionBar(toolbarBidang)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         tvNamaBidang = binding.frmNamaBidang
         tvSeksi = binding.frmSeksi
         btnFormBinding = binding.btnFormBidang

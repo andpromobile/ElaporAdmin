@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/light_teal"
     tools:context=".BidangFormActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -29,9 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         app:boxBackgroundMode="outline"
+        android:textColorHint="@color/medium_teal"
         app:boxStrokeColor="@color/teal"
         app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/layoutSeksi"
@@ -49,7 +50,8 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="10dp"
-            android:textColorHint="#A1887F"
+            android:textColor="@color/teal"
+            android:textColorHint="@color/medium_teal"
             android:textSize="20sp"
 
             tools:ignore="HardcodedText" />
@@ -63,6 +65,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:textColorHint="@color/medium_teal"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/teal"
         app:boxBackgroundColor="#FFFFFF"
@@ -81,9 +84,9 @@
             android:inputType="textMultiLine"
             android:lines="5"
             android:padding="10dp"
-            android:textColorHint="#A1887F"
+            android:textColorHint="@color/medium_teal"
             android:textSize="20sp"
-
+            android:textColor="@color/teal"
             tools:ignore="HardcodedText" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +95,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFormBidang"
         android:layout_width="0dp"
-        android:layout_height="@dimen/heightButtonSave"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"

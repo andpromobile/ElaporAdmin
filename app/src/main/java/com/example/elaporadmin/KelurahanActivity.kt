@@ -1,18 +1,16 @@
 package com.example.elaporadmin
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.adapter.ListKelurahanAdapter
 import com.example.elaporadmin.dao.Kelurahan
@@ -26,6 +24,7 @@ class KelurahanActivity : AppCompatActivity() {
     private lateinit var fabKelurahan:FloatingActionButton
     private lateinit var tvNoKelurahan:TextView
     private lateinit var kelurahanViewModel: KelurahanViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +37,7 @@ class KelurahanActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+        progressBar = binding.progressBar
         tvNoKelurahan = binding.noKelurahan
 
         rvKelurahan = binding.listKelurahan
@@ -74,6 +74,7 @@ class KelurahanActivity : AppCompatActivity() {
                     rvKelurahan.visibility = View.VISIBLE
                     tvNoKelurahan.visibility = View.GONE
                 }
+                showLoading(false)
             }
         }
     }
@@ -112,39 +113,28 @@ class KelurahanActivity : AppCompatActivity() {
     }
 
     private fun hapusData(kelurahan: Kelurahan){
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-        val dialog = Dialog(this@KelurahanActivity)
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Hapus?")
+            .setContentText("Yakin Ingin Menghapus Data Ini!")
+            .setConfirmButton("Iya", {
+                kelurahanViewModel.deleteKelurahan(kelurahan.id)
+                it.dismissWithAnimation()
 
-        with(dialog){
-            setContentView(dialogBinding)
-            setCancelable(true)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            show()
-        }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setContentText("Data Berhasil Dihapus")
+                    .show()
+            })
+            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
+            .setCancelButton("Tidak", {
+                it.dismissWithAnimation()
+            })
+            .show()
+    }
 
-        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
-
-        cancelButton.setOnClickListener{
-            dialog.dismiss()
-        }
-
-        yesButton.setOnClickListener{
-            kelurahanViewModel.deleteKelurahan(kelurahan.id)
-
-            kelurahanViewModel.observePesanLiveData().observe(
-                this@KelurahanActivity
-            )
-            {
-                dialog.dismiss()
-                initLayout()
-
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
+    private fun showLoading(loading:Boolean){
+        when(loading){
+            true -> progressBar.visibility = View.VISIBLE
+            false -> progressBar.visibility = View.GONE
         }
     }
 

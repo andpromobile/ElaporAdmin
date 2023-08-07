@@ -14,10 +14,10 @@ class ListPegawaiAdapter(
     private val listener:OnAdapterListener):
     RecyclerView.Adapter<ListPegawaiAdapter.ListPegawaiHolder>(){
     inner class ListPegawaiHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        var pegawaiNip:TextView = itemView.findViewById(R.id.frmNIP)
-        var pegawaiNama:TextView = itemView.findViewById(R.id.frmNamaPegawai)
-        var pegawaiJabatan:TextView = itemView.findViewById(R.id.frmJabatan)
-        var pegawaiBidangId:TextView = itemView.findViewById(R.id.frmBidangIdPegawai)
+        var pegawaiNip:TextView = itemView.findViewById(R.id.pegawaiNIP)
+        var pegawaiNama:TextView = itemView.findViewById(R.id.pegawaiNama)
+//        var pegawaiJabatan:TextView = itemView.findViewById(R.id.frmJabatan)
+//        var pegawaiBidangId:TextView = itemView.findViewById(R.id.frmBidangIdPegawai)
 
         var editPegawai: ImageButton = itemView.findViewById(R.id.editPegawai)
         var hapusPegawai: ImageButton = itemView.findViewById(R.id.hapusPegawai)
@@ -36,8 +36,8 @@ class ListPegawaiAdapter(
 
         holder.pegawaiNip.text = pegawai.NIP
         holder.pegawaiNama.text = pegawai.namapegawai
-        holder.pegawaiJabatan.text = pegawai.jabatan
-        holder.pegawaiBidangId.text = pegawai.bidang_id.toString()
+//        holder.pegawaiJabatan.text = pegawai.jabatan
+//        holder.pegawaiBidangId.text = pegawai.bidang_id.toString()
 
         holder.editPegawai.setOnClickListener{
             listener.onUpdate(pegawai)

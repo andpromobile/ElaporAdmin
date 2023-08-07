@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.KelurahanViewModel
 import com.example.elaporadmin.ViewModel.PerangkatDesaViewModel
 import com.example.elaporadmin.databinding.ActivityPerangkatDesaFormBinding
@@ -22,7 +23,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private lateinit var tvKelurahanIdPd:AutoCompleteTextView
     private lateinit var spinner:Spinner
     private lateinit var btnFormBinding:Button
-
+    private lateinit var toolbarPD: androidx.appcompat.widget.Toolbar
     private val perangkatDesaViewModel:PerangkatDesaViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""
@@ -47,9 +48,14 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     }
 
     private fun setKomponen() {
+        toolbarPD = binding.toolbarPD
+        setSupportActionBar(toolbarPD)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         tvNamaPd = binding.frmNamapd
         tvKelurahanIdPd = binding.frmKelurahanIdPd
-        spinner = binding.spinnerPD
+//        spinner = binding.spinnerPD
         btnFormBinding = binding.btnFormPd
 
         val kelurahanViewModel = ViewModelProvider(this)[KelurahanViewModel::class.java]
@@ -115,20 +121,20 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
 
             perangkatDesaViewModel.observePesanLiveData().observe(this
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DISIMPAN")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
 
-            finish()
+                        finish()
+                    })
+                    .show()
+            }
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 
@@ -143,20 +149,21 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             perangkatDesaViewModel.observePesanLiveData().observe(
                 this,
             ) {
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Sukses")
+                    .setContentText("DATA BERHASIL DIUBAH")
+                    .setConfirmButton("Iya", {
+                        it.dismissWithAnimation()
+
+                        finish()
+                    })
+                    .show()
             }
 
-            finish()
         }else{
-            Toast.makeText(
-                applicationContext,
-                "Input Tidak Boleh Kosong!!!",
-                Toast.LENGTH_LONG
-            ).show()
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Input Tidak Boleh Kosong!!!")
+                .show()
         }
     }
 }

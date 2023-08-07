@@ -1,18 +1,16 @@
 package com.example.elaporadmin
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.ViewModel.PerangkatDesaViewModel
 import com.example.elaporadmin.adapter.ListPerangkatDesaAdapter
 import com.example.elaporadmin.dao.Perangkatdesa
@@ -26,6 +24,7 @@ class PerangkatDesaActivity : AppCompatActivity() {
     private lateinit var fabPerangkatDesa: FloatingActionButton
     private lateinit var tvNoPerangkatDesa: TextView
     private lateinit var perangkatDesaViewModel: PerangkatDesaViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +36,8 @@ class PerangkatDesaActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+        progressBar = binding.progressBar
+
         tvNoPerangkatDesa = binding.noPerangkatDesa
 
         rvPerangkatdesa = binding.listPerangkatDesa
@@ -75,7 +76,7 @@ class PerangkatDesaActivity : AppCompatActivity() {
                 rvPerangkatdesa.visibility = View.VISIBLE
                 tvNoPerangkatDesa.visibility = View.GONE
             }
-
+            showLoading(false)
         }
     }
 
@@ -114,39 +115,28 @@ class PerangkatDesaActivity : AppCompatActivity() {
     }
 
     private fun hapusData(perangkatdesa: Perangkatdesa){
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-        val dialog = Dialog(this@PerangkatDesaActivity)
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Hapus?")
+            .setContentText("Yakin Ingin Menghapus Data Ini!")
+            .setConfirmButton("Iya", {
+                perangkatDesaViewModel.deletePerangkatDesa(perangkatdesa.id)
+                it.dismissWithAnimation()
 
-        with(dialog){
-            setContentView(dialogBinding)
-            setCancelable(true)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            show()
-        }
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setContentText("Data Berhasil Dihapus")
+                    .show()
+            })
+            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
+            .setCancelButton("Tidak", {
+                it.dismissWithAnimation()
+            })
+            .show()
+    }
 
-        val yesButton = dialogBinding.findViewById<Button>(R.id.alert_yes)
-        val cancelButton = dialogBinding.findViewById<Button>(R.id.alert_cancel)
-
-        cancelButton.setOnClickListener{
-            dialog.dismiss()
-        }
-
-        yesButton.setOnClickListener{
-            perangkatDesaViewModel.deletePerangkatDesa(perangkatdesa.id)
-
-            perangkatDesaViewModel.observePesanLiveData().observe(
-                this@PerangkatDesaActivity
-            )
-            {
-                dialog.dismiss()
-                initLayout()
-
-                Toast.makeText(
-                    applicationContext,
-                    it.toString(),
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
+    private fun showLoading(loading:Boolean){
+        when(loading){
+            true -> progressBar.visibility = View.VISIBLE
+            false -> progressBar.visibility = View.GONE
         }
     }
 

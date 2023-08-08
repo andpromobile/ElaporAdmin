@@ -118,20 +118,25 @@ class BidangActivity : AppCompatActivity() {
     private fun hapusData(bidang: Bidang){
 
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-            .setTitleText("Hapus?")
-            .setContentText("Yakin Ingin Menghapus Data Ini!")
-            .setConfirmButton("Iya", {
+            .setTitleText("HAPUS?")
+            .setContentText("Yakin Ingin Menghapus Data !")
+            .setConfirmButton("blue", null)
+            .setConfirmButtonBackgroundColor(Color.BLUE)
+            .setConfirmButton("Iya") {
                 bidangViewModel.deleteBidang(bidang.id)
                 it.dismissWithAnimation()
+
+                listBidangAdapter.notifyDataSetChanged()
 
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
-            })
-            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak", {
+            }
+            .setCancelButton("red", null)
+            .setCancelButtonBackgroundColor(Color.RED)
+            .setCancelButton("Tidak") {
                 it.dismissWithAnimation()
-            })
+            }
             .show()
 
     }

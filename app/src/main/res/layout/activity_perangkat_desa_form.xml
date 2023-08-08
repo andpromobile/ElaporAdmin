@@ -12,13 +12,40 @@
         android:id="@+id/toolbarPD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:background="@color/teal"
         app:titleTextColor="#FFFFFF"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
         app:title="Perangkat Desa"
+        android:elevation="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutNik"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutNik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="NIK"
+        android:textColorHint="@color/medium_teal"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarPD"
+        tools:ignore="HardcodedText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nik"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutPD"
@@ -34,7 +61,7 @@
         app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarPD"
+        app:layout_constraintTop_toBottomOf="@id/layoutNik"
         tools:ignore="HardcodedText">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -66,9 +93,74 @@
             android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColorHint="@color/light_teal"
+            android:textColor="@color/medium_teal"
             tools:ignore="LabelFor,DuplicateClickableBoundsCheck,DuplicateSpeakableTextCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEmailPd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/layoutPasswordPd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutKelurahanIdPD">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailPd"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:hint="Email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColorHint="@color/medium_teal"
+            android:textSize="20sp"
+            android:textColor="@color/teal"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPasswordPd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/teal"
+        app:boxBackgroundColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btnFormPd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmailPd">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordPd"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:hint="Password"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="@color/medium_teal"
+            android:textSize="20sp"
+            android:textColor="@color/teal"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 <!--    <com.google.android.material.textfield.TextInputLayout-->
 <!--        android:id="@+id/layoutSpinnerPD"-->
 <!--        android:layout_width="match_parent"-->
@@ -108,7 +200,7 @@
         android:textSize="@dimen/textSizeButtonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutKelurahanIdPD"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPasswordPd"
         tools:ignore="HardcodedText" />
 
 

@@ -31,7 +31,7 @@ class PegawaiActivity : AppCompatActivity() {
         binding = ActivityPegawaiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        initLayout()
+        initLayout()
         toFormPegawai()
     }
 

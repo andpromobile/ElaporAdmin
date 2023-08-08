@@ -19,14 +19,17 @@ import com.example.elaporadmin.databinding.ActivityPerangkatDesaFormBinding
 
 class PerangkatDesaFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerangkatDesaFormBinding
+    private lateinit var nik:EditText
     private lateinit var tvNamaPd:EditText
     private lateinit var tvKelurahanIdPd:AutoCompleteTextView
-    private lateinit var spinner:Spinner
+    private lateinit var emailPd:EditText
+    private lateinit var passwordPd:EditText
     private lateinit var btnFormBinding:Button
     private lateinit var toolbarPD: androidx.appcompat.widget.Toolbar
     private val perangkatDesaViewModel:PerangkatDesaViewModel by viewModels()
     private var id:Int = 0
     private var mode:String = ""
+    private var kelurahanIdPd:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +43,11 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private fun cekInput():Boolean {
         var cek = false
         if (
+            (nik.text.toString() != "") &&
             (tvNamaPd.text.toString() != "") &&
-            (tvKelurahanIdPd.text.toString() != "")
+            (tvKelurahanIdPd.text.toString() != "")&&
+            (emailPd.text.toString() != "") &&
+            (passwordPd.text.toString() != "")
         ) cek = true
 
         return cek
@@ -53,9 +59,11 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        nik = binding.nik
         tvNamaPd = binding.frmNamapd
         tvKelurahanIdPd = binding.frmKelurahanIdPd
-//        spinner = binding.spinnerPD
+        emailPd = binding.emailPd
+        passwordPd = binding.passwordPd
         btnFormBinding = binding.btnFormPd
 
         val kelurahanViewModel = ViewModelProvider(this)[KelurahanViewModel::class.java]
@@ -65,8 +73,10 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         this@PerangkatDesaFormActivity
         ){ kelurahanList ->
                 val fp:MutableList<String?> = ArrayList()
+                val listId:MutableList<String?> = ArrayList()
                 for (i in kelurahanList){
                     fp.add(i.namakelurahan+" - "+i.namakecamatan)
+                    listId.add(i.id.toString())
                 }
 
                 val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, fp)
@@ -74,22 +84,10 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
 
                 tvKelurahanIdPd.setAdapter(arrayAdapter)
 
-
-
-
-                spinner.adapter = arrayAdapter
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                        if (parent.getItemAtPosition(position) == "Daftar Kelurahan") {
-                        }
-                        else {
-                            val item = parent.getItemAtPosition(position).toString()
-                            Toast.makeText(parent.context, "Selected: $item with $id", Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                tvKelurahanIdPd.setOnItemClickListener { _, _, position, _ ->
+                    kelurahanIdPd = listId.get(position)!!.toInt()
                 }
+
         }
 
         if (!intent.extras?.isEmpty!!){
@@ -97,7 +95,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             mode = intent.getStringExtra("MODE").toString()
 
             if (mode == "EDIT"){
-                this.id = intent.getIntExtra("ID",0)
+                nik.setText(intent.getStringExtra("ID"))
                 tvNamaPd.setText(intent.getStringExtra("NAMAPD"))
                 tvKelurahanIdPd.setText(intent.getStringExtra("KELURAHAN_ID"))
             }
@@ -115,8 +113,12 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         if (cekInput()){
 
             perangkatDesaViewModel.insertPerangkatDesa(
+                nik.text.toInt(),
                 tvNamaPd.text.toString(),
                 tvKelurahanIdPd.text.toString().toInt(),
+                this.kelurahanIdPd,
+                emailPd.text.toString(),
+                passwordPd.text.toString()
             )
 
             perangkatDesaViewModel.observePesanLiveData().observe(this
@@ -142,9 +144,13 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         if (cekInput()){
 
             perangkatDesaViewModel.updatePerangkatDesa(
-                this.id,
+                nik.text.toInt(),
                 tvNamaPd.text.toString(),
-                tvKelurahanIdPd.text.toString().toInt())
+                tvKelurahanIdPd.text.toString().toInt(),
+                this.kelurahanIdPd,
+                emailPd.text.toString(),
+                passwordPd.text.toString()
+            )
 
             perangkatDesaViewModel.observePesanLiveData().observe(
                 this,

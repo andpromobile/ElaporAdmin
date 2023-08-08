@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -22,10 +23,13 @@ class PegawaiFormActivity : AppCompatActivity() {
     private lateinit var frmNamaPegawai:EditText
     private lateinit var frmJabatan:EditText
     private lateinit var frmBidangIdPegawai:AutoCompleteTextView
+    private lateinit var frmEmailPegawai:EditText
+    private lateinit var frmPasswordPegawai:EditText
     private lateinit var btnFormPegawai: Button
     private lateinit var toolbarPegawai: androidx.appcompat.widget.Toolbar
     private val pegawaiViewModel:PegawaiViewModel by viewModels()
     private var mode:String = ""
+    private var bidangId:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +46,9 @@ class PegawaiFormActivity : AppCompatActivity() {
             (frmNIP.text.toString() != "") &&
             (frmNamaPegawai.text.toString() != "") &&
             (frmJabatan.text.toString() != "") &&
-            (frmBidangIdPegawai.text.toString() != "")
+            (frmBidangIdPegawai.text.toString() != "") &&
+            (frmEmailPegawai.text.toString() != "") &&
+            (frmPasswordPegawai.text.toString() != "")
         ) cek = true
 
         return cek
@@ -58,6 +64,8 @@ class PegawaiFormActivity : AppCompatActivity() {
         frmNamaPegawai = binding.frmNamaPegawai
         frmJabatan = binding.frmJabatan
         frmBidangIdPegawai = binding.frmBidangIdPegawai
+        frmEmailPegawai = binding.frmEmailPegawai
+        frmPasswordPegawai = binding.frmPasswordPegawai
         btnFormPegawai = binding.btnFormPegawai
 
         val bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
@@ -67,26 +75,24 @@ class PegawaiFormActivity : AppCompatActivity() {
             this@PegawaiFormActivity
         ){ bidangList ->
             val fp:MutableList<String?> = ArrayList()
+            val listId:MutableList<String?> = ArrayList()
+
             for (i in bidangList){
                 fp.add(i.namabidang+" - "+i.seksi)
+                listId.add(i.id.toString())
             }
 
             val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, R.layout.simple_list_item_1, fp)
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            arrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
 
             frmBidangIdPegawai.setAdapter(arrayAdapter)
 
-            frmBidangIdPegawai.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                    if (parent.getItemAtPosition(position) == "Daftar Bidang") {
-                    }
-                    else {
-//                            val item = parent.getItemAtPosition(position).toString()
-//                            Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            frmBidangIdPegawai.setOnItemClickListener { _, _, position, _ ->
+                bidangId = listId.get(position)!!.toInt()
+
             }
+
+
         }
 
         if (!intent.extras?.isEmpty!!){
@@ -116,7 +122,9 @@ class PegawaiFormActivity : AppCompatActivity() {
                 frmNIP.text.toString(),
                 frmNamaPegawai.text.toString(),
                 frmJabatan.text.toString(),
-                frmBidangIdPegawai.text.toString().toInt()
+                this.bidangId,
+                frmEmailPegawai.text.toString(),
+                frmPasswordPegawai.text.toString(),
             )
 
             pegawaiViewModel.observePesanLiveData().observe(this
@@ -145,7 +153,9 @@ class PegawaiFormActivity : AppCompatActivity() {
                 frmNIP.text.toString(),
                 frmNamaPegawai.text.toString(),
                 frmJabatan.text.toString(),
-                frmBidangIdPegawai.text.toString().toInt()
+                this.bidangId,
+                frmEmailPegawai.text.toString(),
+                frmPasswordPegawai.text.toString(),
             )
 
             pegawaiViewModel.observePesanLiveData().observe(

@@ -96,6 +96,7 @@ class BidangViewModel: ViewModel() {
                 call: Call<SubmitModel>,
                 response: Response<SubmitModel>
             ) {
+                Log.d("ERROR", "ERROR JER")
                 if (response.isSuccessful){
                     pesanLiveData.value = response.body()!!.message
                 }
@@ -103,6 +104,8 @@ class BidangViewModel: ViewModel() {
 
             override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
                 pesanLiveData.value = t.toString()
+
+                Log.d("error", t.toString())
             }
 
         })

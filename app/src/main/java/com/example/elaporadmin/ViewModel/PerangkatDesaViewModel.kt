@@ -32,9 +32,9 @@ class PerangkatDesaViewModel:ViewModel() {
             })
     }
 
-    fun insertPerangkatDesa(namapd:String, kelurahan_id:Int){
+    fun insertPerangkatDesa(nik:String, namapd:String, kelurahan_id:Int,email: String, password: String){
         ApiService.endPoint.insertPerangkatDesa(
-            namapd, kelurahan_id
+            nik, namapd, kelurahan_id, email, password
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(
@@ -55,9 +55,9 @@ class PerangkatDesaViewModel:ViewModel() {
             })
     }
 
-    fun updatePerangkatDesa(id:Int, namapd:String, kelurahan_id: Int){
+    fun updatePerangkatDesa(nik:String, namapd:String, kelurahan_id:Int,email: String, password: String){
         ApiService.endPoint.updatePerangkatDesa(
-            id, namapd, kelurahan_id
+            nik, namapd, kelurahan_id, email, password
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(
@@ -78,10 +78,10 @@ class PerangkatDesaViewModel:ViewModel() {
             })
     }
 
-    fun deletePerangkatDesa(id:Int){
+    fun deletePerangkatDesa(nik: String){
 
         ApiService.endPoint.deletePerangkatDesa(
-            id
+            nik
         ).enqueue(object:Callback<SubmitModel>{
             override fun onResponse(
                 call: Call<SubmitModel>,

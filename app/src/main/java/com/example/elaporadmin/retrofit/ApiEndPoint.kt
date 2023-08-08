@@ -94,7 +94,7 @@ interface ApiEndPoint {
         @Field("password") password:String,
     ): Call<SubmitModel>
 
-    @DELETE("dtxpegawai/delete/{id}")
+    @DELETE("dtxpegawai/delete/{NIP}")
     fun deletePegawai(
         @Path("NIP") nip:String,
     ): Call<SubmitModel>
@@ -108,21 +108,26 @@ interface ApiEndPoint {
     @FormUrlEncoded
     @POST("dtxperangkatdesa/store")
     fun insertPerangkatDesa(
+        @Field("nik") nik:String,
         @Field("namapd") namapd:String,
         @Field("kelurahan_id") kelurahan_id:Int,
+        @Field("email") email:String,
+        @Field("password") password:String,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
-    @POST("dtxperangkatdesa/update/{id}")
+    @POST("dtxperangkatdesa/update/{nik}")
     fun updatePerangkatDesa(
-        @Path("id") id:Int,
+        @Path("nik") nik: String,
         @Field("namapd") namapd:String,
         @Field("kelurahan_id") kelurahan_id:Int,
+        @Field("email") email:String,
+        @Field("password") password:String,
     ): Call<SubmitModel>
 
-    @FormUrlEncoded
-    @POST("dtxperangkatdesa/delete/{id}")
+
+    @DELETE("dtxperangkatdesa/delete/{nik}")
     fun deletePerangkatDesa(
-        @Path("id") id:Int,
+        @Path("nik") nik:String,
     ): Call<SubmitModel>
 }

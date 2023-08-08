@@ -105,7 +105,7 @@ class PerangkatDesaActivity : AppCompatActivity() {
         )
 
         with(intent) {
-            putExtra("ID",perangkatdesa.id)
+            putExtra("ID",perangkatdesa.nik)
             putExtra("NAMAPD",perangkatdesa.namapd)
             putExtra("KELURAHAN_ID", perangkatdesa.kelurahan_id)
             putExtra("MODE","EDIT")
@@ -119,7 +119,7 @@ class PerangkatDesaActivity : AppCompatActivity() {
             .setTitleText("Hapus?")
             .setContentText("Yakin Ingin Menghapus Data Ini!")
             .setConfirmButton("Iya", {
-                perangkatDesaViewModel.deletePerangkatDesa(perangkatdesa.id)
+                perangkatDesaViewModel.deletePerangkatDesa(perangkatdesa.nik)
                 it.dismissWithAnimation()
 
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)

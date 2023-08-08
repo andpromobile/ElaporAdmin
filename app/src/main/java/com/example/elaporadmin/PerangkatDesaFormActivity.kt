@@ -113,9 +113,8 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         if (cekInput()){
 
             perangkatDesaViewModel.insertPerangkatDesa(
-                nik.text.toInt(),
+                nik.text.toString(),
                 tvNamaPd.text.toString(),
-                tvKelurahanIdPd.text.toString().toInt(),
                 this.kelurahanIdPd,
                 emailPd.text.toString(),
                 passwordPd.text.toString()
@@ -144,9 +143,8 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         if (cekInput()){
 
             perangkatDesaViewModel.updatePerangkatDesa(
-                nik.text.toInt(),
+                nik.text.toString(),
                 tvNamaPd.text.toString(),
-                tvKelurahanIdPd.text.toString().toInt(),
                 this.kelurahanIdPd,
                 emailPd.text.toString(),
                 passwordPd.text.toString()

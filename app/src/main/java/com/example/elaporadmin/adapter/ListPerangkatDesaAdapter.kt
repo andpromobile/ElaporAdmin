@@ -15,7 +15,7 @@ class ListPerangkatDesaAdapter(
     RecyclerView.Adapter<ListPerangkatDesaAdapter.ListPerangkatDesaHolder>(){
 
     inner class ListPerangkatDesaHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        var id = 0
+        var nikPd:TextView = itemView.findViewById(R.id.nikPd)
         var namaPerangkatDesa:TextView = itemView.findViewById(R.id.namaPerangkatDesa)
         var perangkatDesaKelurahanId:TextView = itemView.findViewById(R.id.perangkatDesaKelurahanId)
         var editPerangkatDesa:ImageButton = itemView.findViewById(R.id.editPerangkatDesa)
@@ -33,7 +33,7 @@ class ListPerangkatDesaAdapter(
     override fun onBindViewHolder(holder: ListPerangkatDesaHolder, position: Int) {
         val perangkatDesa = listPerangkatDesa[position]
 
-        holder.id = perangkatDesa.id
+        holder.nikPd.text = perangkatDesa.nik
         holder.namaPerangkatDesa.text = perangkatDesa.namapd
         holder.perangkatDesaKelurahanId.text = perangkatDesa.kelurahan_id.toString()
 

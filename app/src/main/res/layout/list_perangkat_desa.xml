@@ -10,6 +10,17 @@
     android:padding="16dp"
     android:background="@color/cardview_light_background">
 
+    <TextView
+        android:id="@+id/nikPd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIK"
+        android:padding="10dp"
+        android:layout_toStartOf="@+id/editPerangkatDesa"
+        android:textColorHint="#78909C"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/namaPerangkatDesa"
@@ -17,6 +28,7 @@
         android:layout_height="wrap_content"
         android:hint="Nama Perangkat Desa"
         android:padding="10dp"
+        android:layout_below="@id/nikPd"
         android:layout_toStartOf="@+id/editPerangkatDesa"
         android:textColorHint="#78909C"
         android:textSize="16sp"

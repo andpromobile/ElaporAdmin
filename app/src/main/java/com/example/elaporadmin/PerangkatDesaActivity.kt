@@ -118,18 +118,18 @@ class PerangkatDesaActivity : AppCompatActivity() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("Hapus?")
             .setContentText("Yakin Ingin Menghapus Data Ini!")
-            .setConfirmButton("Iya", {
+            .setConfirmButton("Iya") {
                 perangkatDesaViewModel.deletePerangkatDesa(perangkatdesa.nik)
                 it.dismissWithAnimation()
 
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
-            })
+            }
             .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak", {
+            .setCancelButton("Tidak") {
                 it.dismissWithAnimation()
-            })
+            }
             .show()
     }
 

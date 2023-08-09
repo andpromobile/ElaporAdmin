@@ -1,17 +1,13 @@
 package com.example.elaporadmin
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.ListenersInterface
 import com.anychart.enums.Align
 import com.anychart.enums.LegendLayout
 import com.example.elaporadmin.databinding.ActivityDashboardBinding
@@ -20,6 +16,7 @@ import com.example.elaporadmin.databinding.ActivityDashboardBinding
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var btnBidang: CardView
+    private lateinit var btnLokasi: CardView
     private lateinit var btnKelurahan: CardView
     private lateinit var btnPerangkatDesa: CardView
     private lateinit var btnPegawai: CardView
@@ -36,6 +33,7 @@ class DashboardActivity : AppCompatActivity() {
         loadPerangkatDesa()
         loadPegawai()
         loadChart()
+        loadLokasi()
 //        loadPengaduan()
     }
 
@@ -92,6 +90,19 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(
                 this@DashboardActivity,
                 PegawaiActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+    }
+
+    private fun loadLokasi() {
+        btnLokasi = binding.toLokasi
+
+        btnLokasi.setOnClickListener {
+            val intent = Intent(
+                this@DashboardActivity,
+                LokasiActivity::class.java
             )
 
             startActivity(intent)

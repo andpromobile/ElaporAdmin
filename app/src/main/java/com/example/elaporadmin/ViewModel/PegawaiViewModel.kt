@@ -55,9 +55,20 @@ class PegawaiViewModel:ViewModel() {
             })
     }
 
-    fun updatePegawai(NIP:String, namapegawai:String, jabatan:String, bidang_id:Int, email: String, password: String){
+    fun updatePegawai(NIP:String,
+                      namapegawai:String,
+                      jabatan:String,
+                      bidang_id:Int,
+                      email: String,
+                      password: String){
+
         ApiService.endPoint.updatePegawai(
-            NIP, namapegawai, jabatan, bidang_id, email, password
+            NIP,
+            namapegawai,
+            jabatan,
+            bidang_id,
+            email,
+            password
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(

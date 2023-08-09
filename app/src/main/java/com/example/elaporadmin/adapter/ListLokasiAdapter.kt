@@ -9,7 +9,7 @@ import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Lokasi
 
 class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
-                        val listener:ListLokasiAdapter.OnAdapterListener):
+                        val listener: OnAdapterListener):
     RecyclerView.Adapter<ListLokasiAdapter.ListLokasiHolder>(){
 
     inner class ListLokasiHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
@@ -28,17 +28,22 @@ class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
     override fun getItemCount(): Int = listLokasi.size
 
     override fun onBindViewHolder(holder: ListLokasiAdapter.ListLokasiHolder, position: Int) {
-        var lokasi = listLokasi[position]
+        val lokasi = listLokasi[position]
 
         holder.bidang_id.text = lokasi.bidang_id.toString()
         holder.lokasi.text = lokasi.datalokasi
 
         holder.editLokasi.setOnClickListener{
-            listener.onClick(lokasi)
+            listener.onUpdate(lokasi)
+        }
+
+        holder.hapusLokasi.setOnClickListener{
+            listener.onDelete(lokasi)
         }
     }
 
     interface OnAdapterListener{
-        fun onClick(lokasi: Lokasi)
+        fun onUpdate(lokasi: Lokasi)
+        fun onDelete(lokasi: Lokasi)
     }
 }

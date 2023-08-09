@@ -34,7 +34,7 @@
         android:textColorHint="@color/medium_teal"
         app:boxStrokeColor="@color/teal"
         app:boxBackgroundColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/layoutSeksi"
+        app:layout_constraintBottom_toTopOf="@+id/layoutLat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarLokasi">
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:lines="5"
-            android:gravity="top|left"
+            android:gravity="top|start"
 
             android:ems="10"
             android:hint="Lokasi"
@@ -166,7 +166,7 @@
         app:srcCompat="@drawable/ic_camera_white" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFormBidang"
+        android:id="@+id/btnFormLokasi"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"

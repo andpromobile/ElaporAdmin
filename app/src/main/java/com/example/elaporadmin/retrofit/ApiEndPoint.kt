@@ -13,7 +13,6 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiEndPoint {
@@ -68,6 +67,30 @@ interface ApiEndPoint {
 
     @GET("dtxlokasi")
     fun getLokasi(): Call<ResponseLokasi>
+
+    @FormUrlEncoded
+    @POST("dtxlokasi/store")
+    fun insertLokasi(
+        @Field("datalokasi") datalokasi:String,
+        @Field("latitude") latitude:Int,
+        @Field("longitude") longitude:Int,
+        @Field("foto") foto:String,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("dtxlokasi/update/{id}")
+    fun updateLokasi(
+        @Path("id") id:Int,
+        @Field("datalokasi") datalokasi:String,
+        @Field("latitude") latitude:Int,
+        @Field("longitude") longitude:Int,
+        @Field("foto") foto:String,
+    ): Call<SubmitModel>
+
+    @DELETE("dtxlokasi/delete/{id}")
+    fun deleteLokasi(
+        @Path("id") id:Int,
+    ): Call<SubmitModel>
 
     @GET("dtxpegawai")
     fun getPegawai(): Call<ResponsePegawai>

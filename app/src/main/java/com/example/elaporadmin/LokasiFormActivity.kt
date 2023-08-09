@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -213,7 +214,8 @@ class LokasiFormActivity : AppCompatActivity() {
         // dari nilai Latitude dan Longitude
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 999) {
-//                binding.inputLokasi.setText(data?.getStringExtra("lokasi"))
+                frmLatitude.setText(data?.getStringExtra("latitude"))
+                frmLongitude.setText(data?.getStringExtra("longitude"))
             }
         }
 

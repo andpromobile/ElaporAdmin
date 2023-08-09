@@ -49,6 +49,8 @@ class MapsActivity : AppCompatActivity() {
         binding.pilihLokasi.setOnClickListener{
             intent = Intent()
             intent.putExtra("lokasi", this.addressLine)
+            intent.putExtra("latitude", this.lat.toString())
+            intent.putExtra("longitude", this.lng.toString())
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -124,6 +126,9 @@ class MapsActivity : AppCompatActivity() {
 
                             marker.snippet = addressLine
                             marker.position = GeoPoint(p)
+
+                            lat = p!!.latitude
+                            lng = p!!.longitude
 
                             binding.tvAddress.text = addressLine
                             binding.lat.text = "Latitude: $lat"

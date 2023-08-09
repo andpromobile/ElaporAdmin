@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,13 +45,14 @@ class LokasiActivity : AppCompatActivity() {
         rvLokasi = binding.listLokasi
 
         rvLokasi.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(applicationContext)
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(applicationContext)
         }
 
         lokasiViewModel = ViewModelProvider(this)[LokasiViewModel::class.java]
 
         lokasiViewModel.getLokasi()
+
         lokasiViewModel.observeLokasiLiveData().observe(
             this
         ){lokasiList->
@@ -58,14 +60,16 @@ class LokasiActivity : AppCompatActivity() {
                 lokasiList as ArrayList<Lokasi>,
                 object: OnAdapterListener {
                     override fun onUpdate(lokasi: Lokasi) {
+
                         updateData(lokasi)
                     }
 
                     override fun onDelete(lokasi: Lokasi) {
                         hapusData(lokasi)
                     }
-                }
+                },
             )
+
 
             rvLokasi.adapter = listLokasiAdapter
 
@@ -78,7 +82,6 @@ class LokasiActivity : AppCompatActivity() {
             }
             showLoading(false)
         }
-
     }
 
     override fun onStart() {
@@ -120,18 +123,18 @@ class LokasiActivity : AppCompatActivity() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("Hapus?")
             .setContentText("Yakin Ingin Menghapus Data Ini!")
-            .setConfirmButton("Iya", {
+            .setConfirmButton("Iya") {
                 lokasiViewModel.deleteLokasi(lokasi.id)
                 it.dismissWithAnimation()
 
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
-            })
+            }
             .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak", {
+            .setCancelButton("Tidak") {
                 it.dismissWithAnimation()
-            })
+            }
             .show()
     }
 

@@ -22,7 +22,12 @@ class LokasiViewModel: ViewModel() {
                     call: Call<ResponseLokasi>,
                     response: Response<ResponseLokasi>
                 ) {
-                    lokasiLiveData.value = response.body()!!.data
+
+                    if (response.body()!=null){
+                        lokasiLiveData.value = response.body()!!.data
+
+                        Log.d("HASIL BIDANG",lokasiLiveData.value.toString())
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {

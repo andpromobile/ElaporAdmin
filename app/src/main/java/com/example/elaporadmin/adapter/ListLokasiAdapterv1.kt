@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Lokasi
 
-class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
-                           val listener: OnAdapterListener):
-    RecyclerView.Adapter<ListLokasiAdapter.ListLokasiHolder>(){
+class ListLokasiAdapterv1:
+    RecyclerView.Adapter<ListLokasiAdapterv1.ListLokasiHolder>(){
+    private var listLokasi = ArrayList<Lokasi>()
 
     inner class ListLokasiHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
 
@@ -21,7 +21,7 @@ class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
         var hapusLokasi:ImageButton = itemView.findViewById(R.id.hapusLokasi)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListLokasiAdapter.ListLokasiHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListLokasiAdapterv1.ListLokasiHolder {
         val view:View = LayoutInflater.from(parent.context).inflate(R.layout.list_lokasi, parent, false)
         return ListLokasiHolder(view)
     }
@@ -37,11 +37,11 @@ class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
         holder.lokasi.text = lokasi.datalokasi
 
         holder.editLokasi.setOnClickListener{
-            listener.onUpdate(lokasi)
+//            listener.onUpdate(lokasi)
         }
 
         holder.hapusLokasi.setOnClickListener{
-            listener.onDelete(lokasi)
+//            listener.onDelete(lokasi)
         }
     }
 

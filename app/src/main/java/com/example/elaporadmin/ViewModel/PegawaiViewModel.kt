@@ -16,7 +16,7 @@ class PegawaiViewModel:ViewModel() {
     private val pesanLiveData = MutableLiveData<String>()
 
     fun getPegawai(){
-        ApiService.endPoint.getPegawai()
+        ApiService.api.getPegawai()
             .enqueue(object: Callback<ResponsePegawai> {
                 override fun onResponse(
                     call: Call<ResponsePegawai>,
@@ -33,7 +33,7 @@ class PegawaiViewModel:ViewModel() {
     }
 
     fun insertPegawai(NIP:String, namapegawai:String, jabatan:String, bidang_id:Int, email:String, password:String){
-        ApiService.endPoint.insertPegawai(
+        ApiService.api.insertPegawai(
             NIP, namapegawai, jabatan, bidang_id, email, password
         )
             .enqueue(object: Callback<SubmitModel>{
@@ -62,7 +62,7 @@ class PegawaiViewModel:ViewModel() {
                       email: String,
                       password: String){
 
-        ApiService.endPoint.updatePegawai(
+        ApiService.api.updatePegawai(
             NIP,
             namapegawai,
             jabatan,
@@ -91,7 +91,7 @@ class PegawaiViewModel:ViewModel() {
 
     fun deletePegawai(nip:String){
 
-        ApiService.endPoint.deletePegawai(
+        ApiService.api.deletePegawai(
             nip
         ).enqueue(object:Callback<SubmitModel>{
             override fun onResponse(

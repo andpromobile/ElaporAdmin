@@ -125,6 +125,7 @@ class PegawaiActivity : AppCompatActivity() {
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
+                onStart()
             })
             .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
             .setCancelButton("Tidak", {

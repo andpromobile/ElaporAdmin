@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.example.elaporadmin.dao.Lokasi
 import com.example.elaporadmin.dao.ResponseLokasi
 import com.example.elaporadmin.retrofit.ApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,25 +20,33 @@ class LokasiViewModel: ViewModel() {
     private val pesanLiveData = MutableLiveData<String>()
 
     fun getLokasi(){
-        ApiService.endPoint.getLokasi()
-            .enqueue(object: Callback<ResponseLokasi> {
-                override fun onResponse(
-                    call: Call<ResponseLokasi>,
-                    response: Response<ResponseLokasi>
-                ) {
-
-                    if (response.body()!=null){
-                        lokasiLiveData.value = response.body()!!.data
-
-                        Log.d("HASIL BIDANG",lokasiLiveData.value.toString())
-                    }
+        GlobalScope.launch (Dispatchers.IO){
+            val response = ApiService.api.getLokasi()
+            if (response.isSuccessful){
+                withContext(Dispatchers.Main){
+                    lokasiLiveData.value = response.body()!!.data
                 }
-
-                override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {
-                    Log.d("TAG",t.message.toString())
-                }
-
-            })
+            }
+        }
+//        ApiService.api.getLokasi()
+//            .enqueue(object: Callback<ResponseLokasi> {
+//                override fun onResponse(
+//                    call: Call<ResponseLokasi>,
+//                    response: Response<ResponseLokasi>
+//                ) {
+//
+//                    if (response.body()!=null){
+//                        lokasiLiveData.value = response.body()!!.data
+//
+//                        Log.d("HASIL LOKASI",lokasiLiveData.value.toString())
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {
+//                    Log.d("TAG ON Failure",t.message.toString())
+//                }
+//
+//            })
     }
 
     fun insertLokasi(
@@ -42,7 +54,7 @@ class LokasiViewModel: ViewModel() {
         latitude:Int,
         longitude:Int,
         foto: String    ){
-        ApiService.endPoint.insertLokasi(
+        ApiService.api.insertLokasi(
             datalokasi,
             latitude,
             longitude,
@@ -73,7 +85,7 @@ class LokasiViewModel: ViewModel() {
                       longitude:Int,
                       foto: String){
 
-        ApiService.endPoint.updateLokasi(
+        ApiService.api.updateLokasi(
             id,
             datalokasi,
             latitude,
@@ -101,7 +113,7 @@ class LokasiViewModel: ViewModel() {
 
     fun deleteLokasi(id:Int){
 
-        ApiService.endPoint.deleteLokasi(
+        ApiService.api.deleteLokasi(
             id
         ).enqueue(object:Callback<SubmitModel>{
             override fun onResponse(

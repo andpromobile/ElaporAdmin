@@ -15,7 +15,7 @@ class PengaduanViewModel:ViewModel() {
     private var pengaduanLiveData = MutableLiveData<List<Pengaduan>>()
 
     fun getPengaduan(){
-        ApiService.endPoint.getPengaduan()
+        ApiService.api.getPengaduan()
             .enqueue(object :Callback<ResponsePengaduan>{
                 override fun onResponse(
                     call: Call<ResponsePengaduan>,

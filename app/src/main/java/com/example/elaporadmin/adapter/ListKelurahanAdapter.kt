@@ -32,7 +32,7 @@ class ListKelurahanAdapter(val listKelurahan:ArrayList<Kelurahan>,
 
         holder.id = kelurahan.id
         holder.namakelurahan.text = kelurahan.namakelurahan
-        holder.namakecamatan.text = kelurahan.namakecamatan
+        holder.namakecamatan.text = kelurahan.kecamatan_id.toString()
 
         holder.editKelurahan.setOnClickListener{
             listener.onUpdate(kelurahan)

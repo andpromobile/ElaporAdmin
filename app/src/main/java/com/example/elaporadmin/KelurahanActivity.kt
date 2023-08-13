@@ -105,7 +105,7 @@ class KelurahanActivity : AppCompatActivity() {
         with(intent) {
             putExtra("ID",kelurahan.id)
             putExtra("NAMAKELURAHAN",kelurahan.namakelurahan)
-            putExtra("NAMAKECAMATAN", kelurahan.namakecamatan)
+            putExtra("NAMAKECAMATAN", kelurahan.kecamatan_id)
             putExtra("MODE","EDIT")
         }
 
@@ -116,14 +116,16 @@ class KelurahanActivity : AppCompatActivity() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("Hapus?")
             .setContentText("Yakin Ingin Menghapus Data Ini!")
-            .setConfirmButton("Iya", {
+            .setConfirmButton("Iya") {
                 kelurahanViewModel.deleteKelurahan(kelurahan.id)
                 it.dismissWithAnimation()
 
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
-            })
+
+                onStart()
+            }
             .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
             .setCancelButton("Tidak", {
                 it.dismissWithAnimation()

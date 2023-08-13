@@ -16,7 +16,7 @@ class KelurahanViewModel:ViewModel() {
     private val pesanLiveData = MutableLiveData<String>()
 
     fun getKelurahan() {
-        ApiService.endPoint.getKelurahan()
+        ApiService.api.getKelurahan()
             .enqueue(object  : Callback<ResponseKelurahan> {
                 override fun onResponse(
                     call: Call<ResponseKelurahan>,
@@ -36,7 +36,7 @@ class KelurahanViewModel:ViewModel() {
     }
 
     fun insertKelurahan(namakelurahan:String, namakecamatan:String){
-        ApiService.endPoint.insertKelurahan(
+        ApiService.api.insertKelurahan(
             namakelurahan, namakecamatan
         )
             .enqueue(object: Callback<SubmitModel>{
@@ -59,7 +59,7 @@ class KelurahanViewModel:ViewModel() {
     }
 
     fun updateKelurahan(id:Int, namakelurahan:String, namakecamatan: String){
-        ApiService.endPoint.updateKelurahan(
+        ApiService.api.updateKelurahan(
             id, namakelurahan, namakecamatan
         )
             .enqueue(object: Callback<SubmitModel>{
@@ -83,7 +83,7 @@ class KelurahanViewModel:ViewModel() {
 
     fun deleteKelurahan(id:Int){
 
-        ApiService.endPoint.deleteKelurahan(
+        ApiService.api.deleteKelurahan(
             id
         ).enqueue(object:Callback<SubmitModel>{
             override fun onResponse(

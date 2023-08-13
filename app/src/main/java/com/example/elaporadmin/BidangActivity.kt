@@ -3,8 +3,10 @@ package com.example.elaporadmin
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +19,7 @@ import com.example.elaporadmin.adapter.ListBidangAdapter.OnAdapterListener
 import com.example.elaporadmin.dao.Bidang
 import com.example.elaporadmin.databinding.ActivityBidangBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Locale
 
 
 class BidangActivity : AppCompatActivity() {
@@ -131,6 +134,8 @@ class BidangActivity : AppCompatActivity() {
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
+
+                onStart()
             }
             .setCancelButton("red", null)
             .setCancelButtonBackgroundColor(Color.RED)

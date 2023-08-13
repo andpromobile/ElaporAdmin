@@ -20,6 +20,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".KecamatanFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KecamatanActivity"
+            android:exported="false" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
@@ -28,35 +34,35 @@
         <activity
             android:name=".PengaduanFormActivity"
             android:exported="false"
-            android:parentActivityName=".PengaduanActivity"/>
+            android:parentActivityName=".PengaduanActivity" />
         <activity
             android:name=".PengaduanActivity"
             android:exported="false" />
         <activity
             android:name=".PerangkatDesaFormActivity"
             android:exported="false"
-            android:parentActivityName=".PerangkatDesaActivity"/>
+            android:parentActivityName=".PerangkatDesaActivity" />
         <activity
             android:name=".PerangkatDesaActivity"
             android:exported="false" />
         <activity
             android:name=".PegawaiFormActivity"
             android:exported="false"
-            android:parentActivityName=".PegawaiActivity"/>
+            android:parentActivityName=".PegawaiActivity" />
         <activity
             android:name=".PegawaiActivity"
             android:exported="false" />
         <activity
             android:name=".LokasiFormActivity"
             android:exported="false"
-            android:parentActivityName=".LokasiActivity"/>
+            android:parentActivityName=".LokasiActivity" />
         <activity
             android:name=".LokasiActivity"
             android:exported="false" />
         <activity
             android:name=".KelurahanFormActivity"
             android:exported="false"
-            android:parentActivityName=".KelurahanActivity"/>
+            android:parentActivityName=".KelurahanActivity" />
         <activity
             android:name=".KelurahanActivity"
             android:exported="false" />

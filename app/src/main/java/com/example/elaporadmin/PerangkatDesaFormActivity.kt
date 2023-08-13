@@ -97,7 +97,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             if (mode == "EDIT"){
                 nik.setText(intent.getStringExtra("ID"))
                 tvNamaPd.setText(intent.getStringExtra("NAMAPD"))
-                tvKelurahanIdPd.setText(intent.getStringExtra("KELURAHAN_ID"))
+//                tvKelurahanIdPd.setText(intent.getStringExtra("KELURAHAN_ID"))
             }
         }
 

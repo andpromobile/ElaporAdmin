@@ -2,12 +2,14 @@ package com.example.elaporadmin.retrofit
 
 import com.example.elaporadmin.ViewModel.SubmitModel
 import com.example.elaporadmin.dao.ResponseBidang
+import com.example.elaporadmin.dao.ResponseKecamatan
 import com.example.elaporadmin.dao.ResponseKelurahan
 import com.example.elaporadmin.dao.ResponseLokasi
 import com.example.elaporadmin.dao.ResponsePegawai
 import com.example.elaporadmin.dao.ResponsePengaduan
 import com.example.elaporadmin.dao.ResponsePerangkatdesa
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -18,7 +20,7 @@ import retrofit2.http.Path
 interface ApiEndPoint {
 
     @GET("dtxbidang")
-    fun getBidang(): Call<ResponseBidang>
+    suspend fun getBidang(): Response<ResponseBidang>
 
     @FormUrlEncoded
     @POST("dtxbidang/store")
@@ -41,6 +43,27 @@ interface ApiEndPoint {
         @Path("id") id:Int,
     ): Call<SubmitModel>
 
+
+    @GET("dtxkecamatan")
+    suspend fun getKecamatan(): Response<ResponseKecamatan>
+
+    @FormUrlEncoded
+    @POST("dtxkecamatan/store")
+    suspend fun insertKecamatan(
+        @Field("namakecamatan") namakecamatan:String
+    ): Response<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("dtxkecamatan/update/{id}")
+    fun updateKecamatan(
+        @Path("id") id:Int,
+        @Field("namakecamatan") namakecamatan:String,
+    ): Response<SubmitModel>
+
+    @DELETE("dtxkecamatan/delete/{id}")
+    suspend fun deleteKecamatan(
+        @Path("id") id:Int,
+    ): Response<SubmitModel>
 
     @GET("dtxkelurahan")
     fun getKelurahan(): Call<ResponseKelurahan>
@@ -66,7 +89,12 @@ interface ApiEndPoint {
     ): Call<SubmitModel>
 
     @GET("dtxlokasi")
-    fun getLokasi(): Call<ResponseLokasi>
+    suspend fun getLokasi(): Response<ResponseLokasi>
+
+    @GET("dtxlokasi/page/{id}")
+    fun getLokasiPage(
+        @Path("id") id:Int
+    ): Call<ResponseLokasi>
 
     @FormUrlEncoded
     @POST("dtxlokasi/store")

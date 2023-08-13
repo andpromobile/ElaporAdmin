@@ -18,6 +18,8 @@ import com.example.elaporadmin.adapter.ListLokasiAdapter.OnAdapterListener
 import com.example.elaporadmin.dao.Lokasi
 import com.example.elaporadmin.databinding.ActivityLokasiBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class LokasiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLokasiBinding
@@ -82,6 +84,8 @@ class LokasiActivity : AppCompatActivity() {
             }
             showLoading(false)
         }
+
+
     }
 
     override fun onStart() {

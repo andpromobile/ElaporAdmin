@@ -18,6 +18,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnBidang: CardView
     private lateinit var btnLokasi: CardView
     private lateinit var btnKelurahan: CardView
+    private lateinit var btnKecamatan: CardView
     private lateinit var btnPerangkatDesa: CardView
     private lateinit var btnPegawai: CardView
     private lateinit var anyChartView: AnyChartView
@@ -34,6 +35,7 @@ class DashboardActivity : AppCompatActivity() {
         loadPegawai()
         loadChart()
         loadLokasi()
+        loadKecamatan()
 //        loadPengaduan()
     }
 
@@ -123,6 +125,15 @@ class DashboardActivity : AppCompatActivity() {
 
         btnKelurahan.setOnClickListener{
             val intent = Intent(this@DashboardActivity, KelurahanActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun loadKecamatan() {
+        btnKecamatan = binding.toKecamatan
+
+        btnKecamatan.setOnClickListener{
+            val intent = Intent(this@DashboardActivity, KecamatanActivity::class.java)
             startActivity(intent)
         }
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="16dp"
+    android:padding="16dp"
+    android:background="@drawable/bg_rounded">
+
+
+    <TextView
+        android:id="@+id/namaKecamatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Kecamatan"
+        android:padding="10dp"
+        android:layout_alignParentEnd="true"
+        android:textColorHint="#78909C"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/editKecamatan"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/namaKecamatan"
+        android:layout_toStartOf="@id/hapusKecamatan"
+        android:background="@color/white"
+        android:foregroundTint="#FFFFFF"
+        app:srcCompat="@drawable/baseline_edit_24"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/hapusKecamatan"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/namaKecamatan"
+        android:layout_alignParentEnd="true"
+        android:background="@color/white"
+        app:srcCompat="@drawable/baseline_delete_24"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+</RelativeLayout>

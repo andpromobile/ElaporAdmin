@@ -1,6 +1,7 @@
 package com.example.elaporadmin
 
 import android.Manifest
+import android.R
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,13 +9,17 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.elaporadmin.ViewModel.BidangViewModel
 import com.example.elaporadmin.ViewModel.LokasiViewModel
 import com.example.elaporadmin.databinding.ActivityLokasiFormBinding
 
@@ -23,6 +28,7 @@ class LokasiFormActivity : AppCompatActivity() {
     private lateinit var frmLokasi:EditText
     private lateinit var frmLatitude:EditText
     private lateinit var frmLongitude:EditText
+    private lateinit var frmBidangIdLokasi:AutoCompleteTextView
     private lateinit var btnFormLokasi: Button
     private lateinit var toolbarLokasi:androidx.appcompat.widget.Toolbar
     private val lokasiViewModel:LokasiViewModel by viewModels()
@@ -36,7 +42,37 @@ class LokasiFormActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setPermissions()
+        setAutoComplete()
         inisialisasi()
+    }
+
+    private fun setAutoComplete() {
+        val bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
+
+        bidangViewModel.getBidang()
+        bidangViewModel.observeBidangLiveData().observe(
+            this@LokasiFormActivity
+        ){ bidangList ->
+            val fp:MutableList<String?> = ArrayList()
+            val listId:MutableList<String?> = ArrayList()
+
+            for (i in bidangList){
+                fp.add(i.namabidang+" - "+i.seksi)
+                listId.add(i.id.toString())
+            }
+
+            val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, R.layout.simple_list_item_1, fp)
+            arrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+
+            frmBidangIdLokasi.setAdapter(arrayAdapter)
+
+            frmBidangIdLokasi.setOnItemClickListener { _, _, position, _ ->
+                bidangId = listId[position]!!.toInt()
+
+            }
+
+
+        }
     }
 
     private fun cekInput():Boolean {
@@ -59,6 +95,7 @@ class LokasiFormActivity : AppCompatActivity() {
         frmLokasi = binding.frmLokasi
         frmLatitude = binding.frmLatitude
         frmLongitude = binding.frmLongitude
+        frmBidangIdLokasi = binding.frmBidangIdLokasi
         btnFormLokasi = binding.btnFormLokasi
 
 

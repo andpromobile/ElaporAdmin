@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +12,6 @@
         android:id="@+id/toolbarLokasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:background="@color/teal"
         android:clickable="true"
         android:elevation="24dp"
@@ -20,20 +20,52 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
         app:title="Lokasi"
-        app:titleTextColor="#ffffff" />
+        app:titleTextColor="#ffffff"
+        android:focusable="true" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarLokasi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_below="@id/toolbarLokasi">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:id="@+id/layoutBidangIdLokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/teal"
+                app:boxBackgroundColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/layoutDataLokasi">
+
+                <AutoCompleteTextView
+                    android:id="@+id/frmBidangIdLokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Bidang"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColorHint="@color/medium_teal"
+                    android:textSize="20sp"
+                    android:textColor="@color/teal"
+                    tools:ignore="HardcodedText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutDataLokasi"
@@ -46,10 +78,10 @@
                 android:textColorHint="@color/medium_teal"
                 app:boxStrokeColor="@color/teal"
                 app:boxBackgroundColor="#FFFFFF"
-                app:layout_constraintBottom_toTopOf="@+id/layoutLat"
+                app:layout_constraintBottom_toTopOf="@+id/layoutAlamat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/layoutBidangIdLokasi">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/frmLokasi"
@@ -60,6 +92,42 @@
 
                     android:ems="10"
                     android:hint="Lokasi"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textColor="@color/teal"
+                    android:textColorHint="@color/medium_teal"
+                    android:textSize="20sp"
+
+                    tools:ignore="HardcodedText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                app:boxBackgroundMode="outline"
+                android:textColorHint="@color/medium_teal"
+                app:boxStrokeColor="@color/teal"
+                app:boxBackgroundColor="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/layoutLat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutDataLokasi">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frmAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:lines="5"
+                    android:gravity="top|start"
+
+                    android:ems="10"
+                    android:hint="Alamat"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:padding="10dp"
@@ -85,7 +153,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/layoutLong"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layoutDataLokasi">
+                app:layout_constraintTop_toBottomOf="@id/layoutAlamat">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/frmLatitude"
@@ -182,6 +250,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginBottom="24dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_rounded"
@@ -198,4 +267,4 @@
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

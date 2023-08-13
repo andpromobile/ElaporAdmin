@@ -1,6 +1,7 @@
 package com.example.elaporadmin.retrofit
 
 import com.example.elaporadmin.ViewModel.SubmitModel
+import com.example.elaporadmin.dao.Login
 import com.example.elaporadmin.dao.ResponseBidang
 import com.example.elaporadmin.dao.ResponseKecamatan
 import com.example.elaporadmin.dao.ResponseKelurahan
@@ -181,4 +182,11 @@ interface ApiEndPoint {
     fun deletePerangkatDesa(
         @Path("nik") nik:String,
     ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("dtxuser/login")
+    suspend fun login(
+        @Field("email") email:String,
+        @Field("password") password:String
+    ):Response<Login>
 }

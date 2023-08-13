@@ -55,6 +55,14 @@ class PengaduanActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
 
+                    override fun onDetail(pengaduan: Pengaduan) {
+                        val kata = ""
+                    }
+
+                    override fun onVerifikasi(pengaduan: Pengaduan) {
+                        val kata = ""
+                    }
+
                 }
             )
 

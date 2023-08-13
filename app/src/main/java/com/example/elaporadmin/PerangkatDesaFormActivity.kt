@@ -1,14 +1,10 @@
 package com.example.elaporadmin
 
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -75,7 +71,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
                 val fp:MutableList<String?> = ArrayList()
                 val listId:MutableList<String?> = ArrayList()
                 for (i in kelurahanList){
-                    fp.add(i.namakelurahan+" - "+i.namakecamatan)
+                    fp.add(i.namakelurahan)
                     listId.add(i.id.toString())
                 }
 

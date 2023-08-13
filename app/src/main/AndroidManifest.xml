@@ -20,8 +20,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".KecamatanFormActivity"
+            android:name=".PegawaiDashboardActivity"
             android:exported="false" />
+        <activity
+            android:name=".KecamatanFormActivity"
+            android:exported="false"
+            android:parentActivityName=".KecamatanActivity" />
         <activity
             android:name=".KecamatanActivity"
             android:exported="false" />

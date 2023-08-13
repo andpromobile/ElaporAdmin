@@ -2,8 +2,10 @@ package com.example.elaporadmin
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
@@ -21,6 +23,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnKecamatan: CardView
     private lateinit var btnPerangkatDesa: CardView
     private lateinit var btnPegawai: CardView
+    private lateinit var btnLogOut:ImageButton
     private lateinit var anyChartView: AnyChartView
 //    private lateinit var btnPengaduan: Button
 
@@ -29,6 +32,7 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        logout()
         loadBidang()
         loadKelurahan()
         loadPerangkatDesa()
@@ -37,6 +41,13 @@ class DashboardActivity : AppCompatActivity() {
         loadLokasi()
         loadKecamatan()
 //        loadPengaduan()
+    }
+
+    private fun logout() {
+        btnLogOut = binding.btnLogOut
+        btnLogOut.setOnClickListener {
+            finish()
+        }
     }
 
 //    private fun loadPengaduan() {
@@ -145,5 +156,15 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this@DashboardActivity, BidangActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        SweetAlertDialog(applicationContext, SweetAlertDialog.WARNING_TYPE)
+            .setContentText("Apakah Anda Ingin Keluar Dari Aplikasi?")
+            .setConfirmButton("IYA") {
+
+            }
+            .show()
+
     }
 }

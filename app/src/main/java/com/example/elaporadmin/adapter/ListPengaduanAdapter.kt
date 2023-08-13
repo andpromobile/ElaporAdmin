@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.elaporadmin.R
 import com.example.elaporadmin.dao.Pengaduan
 
@@ -14,17 +15,17 @@ class ListPengaduanAdapter(
     val listener:OnAdapterListener):
 RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
     inner class ListPengaduanHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        var judulPengaduan:TextView = itemView.findViewById(R.id.judulPengaduan)
-        var isiPengaduan:TextView = itemView.findViewById(R.id.isiPengaduan)
-        var editPengaduan:ImageButton = itemView.findViewById(R.id.editPengaduan)
-        var hapusPengaduan:ImageButton = itemView.findViewById(R.id.hapusPengaduan)
+        var btnVerifikasi:ImageButton = itemView.findViewById(R.id.btnVerifikasiPengaduanPegawai)
+        var btnDetail:ImageButton = itemView.findViewById(R.id.detailPengaduanPegawai)
+        var lokasiPengaduan:TextView = itemView.findViewById(R.id.lokasiPengaduanPegawai)
+        var imageView:ImageButton = itemView.findViewById(R.id.ivPengaduanPegawai)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPengaduanHolder {
         val view:View = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.list_pengaduan,
+                R.layout.list_pengaduan1,
                 parent,
                 false
             )
@@ -40,15 +41,26 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
     ) {
         val pengaduan = listPengaduan[position]
 
-        holder.judulPengaduan.text = pengaduan.judulpengaduan
-        holder.isiPengaduan.text = pengaduan.isipengaduan
+        holder.lokasiPengaduan.text = pengaduan.judulpengaduan
 
-        holder.editPengaduan.setOnClickListener {
-            listener.onClick(pengaduan)
+        Glide
+            .with(holder.itemView.context)
+            .load("https://goo.gl/gEgYUd")
+            .into(holder.imageView)
+
+        holder.btnDetail.setOnClickListener {
+            listener.onDetail(pengaduan)
+        }
+
+        holder.btnVerifikasi.setOnClickListener {
+            listener.onVerifikasi(pengaduan)
         }
     }
 
     interface OnAdapterListener{
         fun onClick(pengaduan:Pengaduan)
+
+        fun onDetail(pengaduan: Pengaduan)
+        fun onVerifikasi(pengaduan:Pengaduan)
     }
 }

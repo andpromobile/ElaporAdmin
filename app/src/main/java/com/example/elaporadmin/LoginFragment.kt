@@ -7,8 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : BottomSheetDialogFragment() {
     private lateinit var txtUsername:TextInputEditText
@@ -28,12 +33,63 @@ class LoginFragment : BottomSheetDialogFragment() {
 
         btnLogin.setOnClickListener {
             if (!txtUsername.text.toString().isEmpty() && !txtPassword.text.toString().isEmpty()){
-                val intent = Intent(
-                    context,
-                    DashboardActivity::class.java
-                )
 
-                startActivity(intent)
+                var level: String
+                var status: Int
+
+                GlobalScope.launch(Dispatchers.IO){
+                    val response = ApiService.api.login(txtUsername.text.toString(), txtPassword.text.toString())
+
+                    withContext(Dispatchers.Main){
+                        if (response.isSuccessful){
+                            level = response.body()!!.level
+                            status = response.body()!!.status
+
+
+                            if (status == 500){
+                                SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                                    .setContentText("Anda Belum Terdaftar")
+                                    .show()
+                            }else if(status == 200){
+                                val nama = response.body()!!.nama
+                                val nik = response.body()!!.nik
+//                                var bidang_id = response.body()!!.bidang_id
+
+                                SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setContentText("Berhasil Login")
+                                    .setConfirmButton("OKE") {
+                                        it.dismissWithAnimation()
+
+                                        when(level){
+                                            "admin" ->{
+                                                val intent = Intent(context, DashboardActivity::class.java)
+                                                intent.putExtra("NAMA",nama)
+                                                intent.putExtra("NIK",nik.toString())
+//                                                intent.putExtra("BIDANGID",bidang_id.toString())
+                                                startActivity(intent)
+                                            }
+                                            "pegawai" ->{
+                                                val intent = Intent(context, PegawaiDashboardActivity::class.java)
+                                                intent.putExtra("NAMA",nama)
+                                                intent.putExtra("NIK",nik.toString())
+//                                                intent.putExtra("BIDANGID",bidang_id.toString())
+                                                startActivity(intent)
+                                            }
+                                            "perangkatdesa" ->{
+                                                val intent = Intent(context, DashboardActivity::class.java)
+                                                intent.putExtra("NAMA", nama)
+                                                intent.putExtra("NIK",nik.toString())
+//                                                intent.putExtra("BIDANGID",bidang_id.toString())
+                                                startActivity(intent)
+                                            }
+                                        }
+
+                                    }
+                                    .show()
+                            }
+                        }
+                    }
+                }
             }else{
                 SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                     .setContentText("Input Tidak Boleh Kosong!!!")

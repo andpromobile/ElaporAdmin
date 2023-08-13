@@ -32,7 +32,6 @@ class KecamatanFormActivity : AppCompatActivity() {
 
             kecamatanViewModel.updateKecamatan(
                 this.id,
-                tvNamaKecamatan.text.toString(),
                 tvNamaKecamatan.text.toString())
 
             kecamatanViewModel.observePesanLiveData().observe(
@@ -59,7 +58,6 @@ class KecamatanFormActivity : AppCompatActivity() {
         if (cekInput()){
 
             kecamatanViewModel.insertKecamatan(
-                tvNamaKecamatan.text.toString(),
                 tvNamaKecamatan.text.toString())
 
             kecamatanViewModel.observePesanLiveData().observe(this

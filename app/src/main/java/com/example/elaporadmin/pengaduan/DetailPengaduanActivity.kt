@@ -24,10 +24,10 @@ class DetailPengaduanActivity : AppCompatActivity() {
                 telp = intent.getStringExtra("TELP").toString()
                 judulpengaduan= intent.getStringExtra("JUDUL").toString()
                 isipengaduan= intent.getStringExtra("ISI").toString()
-                lokasi_id= intent.getIntExtra("LOKASI",0)
-                kecamatan_id= intent.getIntExtra("KECAMATAN",0)
-                kelurahan_id = intent.getIntExtra("KELURAHAN",0)
-                bidang_id = intent.getIntExtra("BIDANG",0)
+                datalokasi= intent.getStringExtra("LOKASI").toString()
+                namakecamatan= intent.getStringExtra("KECAMATAN").toString()
+                namakelurahan = intent.getStringExtra("KELURAHAN").toString()
+                namabidang = intent.getStringExtra("BIDANG").toString()
                 tanggalpengaduan = intent.getStringExtra("TANGGAL").toString()
                 status = intent.getStringExtra("STATUS").toString()
                 foto = intent.getStringExtra("FOTO")
@@ -63,10 +63,10 @@ class DetailPengaduanActivity : AppCompatActivity() {
             binding.telp.text = telp
             binding.judulpengaduan.text = judulpengaduan
             binding.isipengaduan.text = isipengaduan
-            binding.lokasiId.text = lokasi_id.toString()
-            binding.kecamatanId.text = kecamatan_id.toString()
-            binding.kelurahanId.text = kelurahan_id.toString()
-            binding.bidangId.text = bidang_id.toString()
+            binding.lokasiId.text = datalokasi
+            binding.kecamatanId.text = namakecamatan
+            binding.kelurahanId.text = namakelurahan
+            binding.bidangId.text = namabidang
 
             Glide
                 .with(this@DetailPengaduanActivity)

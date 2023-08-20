@@ -49,7 +49,7 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
         val pengaduan = listPengaduan[position]
 
         holder.judulPengaduan.text = pengaduan.judulpengaduan
-        holder.lokasiPengaduan.text = pengaduan.lokasi_id.toString()
+        holder.lokasiPengaduan.text = pengaduan.datalokasi
         holder.tanggalPengaduan.text = pengaduan.tanggalpengaduan
 
         var foto = pengaduan.foto

@@ -34,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:background="@drawable/bg_rounded_top"
@@ -47,6 +47,54 @@
         android:gravity="center"
         android:padding="10dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:text="LOGIN"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            android:gravity="center|top"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/medium_teal"
+            app:boxStrokeColor="@color/teal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableTint="@color/teal"
+                android:hint="USERNAME"
+                android:inputType="text"
+                android:textColor="@color/teal"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:textColorHint="@color/medium_teal"
+            app:boxStrokeColor="@color/teal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableTint="@color/teal"
+                android:hint="PASSWORD"
+                android:inputType="textPassword"
+                android:textColor="@color/teal"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:background="@drawable/button_background"
@@ -57,4 +105,13 @@
             android:layout_height="48dp"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

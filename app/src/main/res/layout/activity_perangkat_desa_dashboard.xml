@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".perangkatdesa.PerangkatDesaDashboardActivity">
+
+    <RelativeLayout
+        android:id="@+id/section1"
+        android:background="#1D75BD"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:src="@drawable/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_toEndOf="@+id/iv"
+            android:text="Selamat Datang,"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_toEndOf="@+id/iv"
+            tools:text="Perangkat Desa"/>
+
+        <ImageButton
+            android:id="@+id/btnLogOut"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="#1D75BD"
+            android:drawableTint="@color/white"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_logout_24"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/section1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_teal">
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_top"
+        app:menu="@menu/menu_perangkatdesa_dashboard"/>
+
+</RelativeLayout>

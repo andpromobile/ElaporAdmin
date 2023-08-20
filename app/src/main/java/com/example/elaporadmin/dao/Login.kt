@@ -5,5 +5,6 @@ class Login(
     val status: Int,
     val nama:String,
     val nik:Int,
-    val bidang_id:Int
+    val bidang_id:Int,
+    val kecamatan_id:Int,
 )

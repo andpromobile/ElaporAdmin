@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_teal"
-    tools:context=".KecamatanFormActivity">
+    tools:context=".kecamatan.KecamatanFormActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarKecamatan"

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PegawaiDashboardActivity">
+    tools:context=".pegawai.PegawaiDashboardActivity">
 
     <RelativeLayout
         android:id="@+id/section1"
@@ -53,100 +53,107 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_below="@+id/section1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navbar_bottom">
+        android:background="@color/light_teal">
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </FrameLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:baselineAligned="false"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar_bottom"
-        android:background="@drawable/bottom_bar_rounded"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_top"
+        app:menu="@menu/menu_pegawai_dashboard"/>
+<!--    <LinearLayout-->
+<!--        android:baselineAligned="false"-->
+<!--        android:id="@+id/navbar_bottom"-->
+<!--        android:background="@drawable/bottom_bar_rounded"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="10dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <LinearLayout
-            android:id="@+id/nav1"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/nav1"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center">-->
 
-            <ImageView
-                android:src="@drawable/report"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
+<!--            <ImageView-->
+<!--                android:src="@drawable/report"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"/>-->
 
-            <TextView
-                android:textAlignment="center"
-                android:text="PENGADUAN"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <TextView-->
+<!--                android:textAlignment="center"-->
+<!--                android:text="PENGADUAN"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="10sp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/nav2"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/nav2"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center">-->
 
-            <ImageView
-                android:src="@drawable/piechart"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
+<!--            <ImageView-->
+<!--                android:src="@drawable/piechart"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"/>-->
 
-            <TextView
-                android:textAlignment="center"
-                android:text="STATISTIK"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <TextView-->
+<!--                android:textAlignment="center"-->
+<!--                android:text="STATISTIK"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="10sp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/nav3"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/nav3"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center">-->
 
-            <ImageView
-                android:src="@drawable/seoreport"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
+<!--            <ImageView-->
+<!--                android:src="@drawable/seoreport"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"/>-->
 
-            <TextView
-                android:textAlignment="center"
-                android:text="PENGADUAN LAIN"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <TextView-->
+<!--                android:textAlignment="center"-->
+<!--                android:text="PENGADUAN LAIN"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="10sp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </RelativeLayout>

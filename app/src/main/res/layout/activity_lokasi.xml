@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LokasiActivity">
+    tools:context=".lokasi.LokasiActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLokasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal"
+        android:clickable="true"
+        android:elevation="24dp"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:title="Lokasi"
+        app:titleTextColor="#ffffff" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvLokasi"
+        android:layout_below="@+id/toolbarLokasi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_teal">
@@ -94,4 +107,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

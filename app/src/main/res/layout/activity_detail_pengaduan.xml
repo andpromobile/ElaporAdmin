@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pengaduan.DetailPengaduanActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDetailPengaduan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal"
+        android:clickable="true"
+        android:elevation="24dp"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:title="Detail Pengaduan"
+        app:titleTextColor="#ffffff"
+        android:focusable="true" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarDetailPengaduan"
+        android:background="@color/light_teal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv"
+                tools:src=""
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:importantForAccessibility="no" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/status"
+                android:text="STATUS"
+                android:textSize="12sp"
+                android:background="@drawable/bg_rounded"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/iv"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:background="@drawable/bg_rounded_bottom"
+                android:layout_below="@+id/iv"
+                android:padding="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/id"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/nama"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Nomor Telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/telp"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Judul Pengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/judulpengaduan"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Isi Pengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/isipengaduan"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Lokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/lokasi_id"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/kecamatan_id"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Kelurahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/kelurahan_id"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <TextView
+                    android:text="Bidang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/bidang_id"
+                    android:text="Nama Pelapor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#445069"/>
+
+                <LinearLayout
+                    android:layout_below="@id/bidang_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnVerifikasiPengaduanPegawai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#5AA469"
+                        android:text="VERIFIKASI"
+                        android:textColor="#3E2723" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnTolakPengaduanPegawai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FF8787"
+                        android:text="Tolak"
+                        android:textColor="#4E342E" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -12,7 +12,13 @@ import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.enums.Align
 import com.anychart.enums.LegendLayout
+import com.example.elaporadmin.bidang.BidangActivity
 import com.example.elaporadmin.databinding.ActivityDashboardBinding
+import com.example.elaporadmin.kecamatan.KecamatanActivity
+import com.example.elaporadmin.kelurahan.KelurahanActivity
+import com.example.elaporadmin.lokasi.LokasiActivity
+import com.example.elaporadmin.pegawai.PegawaiActivity
+import com.example.elaporadmin.perangkatdesa.PerangkatDesaActivity
 
 
 class DashboardActivity : AppCompatActivity() {
@@ -159,10 +165,10 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        SweetAlertDialog(applicationContext, SweetAlertDialog.WARNING_TYPE)
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setContentText("Apakah Anda Ingin Keluar Dari Aplikasi?")
             .setConfirmButton("IYA") {
-
+                finish()
             }
             .show()
 

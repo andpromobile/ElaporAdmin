@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/report"
+        android:id="@+id/nav1"
+        android:icon="@drawable/baseline_assignment_24"
         android:title="Pengaduan"  />
     <item
-        android:id="@+id/message"
-        android:icon="@drawable/piechart"
+        android:id="@+id/nav2"
+        android:icon="@drawable/baseline_analytics_24"
         android:title="Statistik" />
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/seoreport"
+        android:id="@+id/nav3"
+        android:icon="@drawable/baseline_assignment_24"
         android:title="Pengaduan Lain" />
 </menu>

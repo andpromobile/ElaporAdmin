@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_teal"
-    tools:context=".PegawaiFormActivity">
+    tools:context=".pegawai.PegawaiFormActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarPegawai"
@@ -140,12 +140,12 @@
         <AutoCompleteTextView
             android:id="@+id/frmBidangIdPegawai"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Bidang ID"
+            android:hint="Bidang"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:padding="16dp"
             android:textColorHint="@color/medium_teal"
             android:textSize="20sp"
@@ -191,16 +191,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
+        app:boxBackgroundColor="#FFFFFF"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/teal"
-        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/btnFormPegawai"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutEmailPegawai">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmailPegawai"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/frmPasswordPegawai"
@@ -209,11 +209,11 @@
             android:ems="10"
             android:hint="Password"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:padding="10dp"
+            android:textColor="@color/teal"
             android:textColorHint="@color/medium_teal"
             android:textSize="20sp"
-            android:textColor="@color/teal"
             tools:ignore="HardcodedText" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -251,5 +251,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutPasswordPegawai"
         tools:ignore="HardcodedText" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

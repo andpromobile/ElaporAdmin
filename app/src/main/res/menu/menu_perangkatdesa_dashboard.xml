@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navpd1"
+        android:icon="@drawable/baseline_assignment_24"
+        android:title="Pengaduan"  />
+    <item
+        android:id="@+id/navpd2"
+        android:icon="@drawable/baseline_people_24"
+        android:title="Profile" />
+
+</menu>

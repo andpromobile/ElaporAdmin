@@ -2,13 +2,13 @@ package com.example.elaporadmin.retrofit
 
 import com.example.elaporadmin.ViewModel.SubmitModel
 import com.example.elaporadmin.dao.Login
-import com.example.elaporadmin.dao.ResponseBidang
-import com.example.elaporadmin.dao.ResponseKecamatan
-import com.example.elaporadmin.dao.ResponseKelurahan
-import com.example.elaporadmin.dao.ResponseLokasi
-import com.example.elaporadmin.dao.ResponsePegawai
-import com.example.elaporadmin.dao.ResponsePengaduan
-import com.example.elaporadmin.dao.ResponsePerangkatdesa
+import com.example.elaporadmin.bidang.ResponseBidang
+import com.example.elaporadmin.kecamatan.ResponseKecamatan
+import com.example.elaporadmin.kelurahan.ResponseKelurahan
+import com.example.elaporadmin.lokasi.ResponseLokasi
+import com.example.elaporadmin.pegawai.ResponsePegawai
+import com.example.elaporadmin.pengaduan.ResponsePengaduan
+import com.example.elaporadmin.perangkatdesa.ResponsePerangkatdesa
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -93,9 +93,15 @@ interface ApiEndPoint {
     suspend fun getLokasi(): Response<ResponseLokasi>
 
     @GET("dtxlokasi/page/{id}")
-    fun getLokasiPage(
+    suspend fun getLokasiPage(
         @Path("id") id:Int
-    ): Call<ResponseLokasi>
+    ): Response<ResponseLokasi>
+
+    @GET("dtxlokasi/show/{id}")
+    suspend fun getLokasiById(
+        @Path("id") id:Int
+    ): Response<ResponseLokasi>
+
 
     @FormUrlEncoded
     @POST("dtxlokasi/store")
@@ -137,14 +143,14 @@ interface ApiEndPoint {
 
     @FormUrlEncoded
     @POST("dtxpegawai/update/{NIP}")
-    fun updatePegawai(
+    suspend fun updatePegawai(
         @Path("NIP") nip:String,
         @Field("namapegawai") namapegawai:String,
         @Field("jabatan") jabatan:String,
         @Field("bidang_id") bidang_id:Int,
         @Field("email") email:String,
         @Field("password") password:String,
-    ): Call<SubmitModel>
+    ): Response<SubmitModel>
 
     @DELETE("dtxpegawai/delete/{NIP}")
     fun deletePegawai(
@@ -152,7 +158,12 @@ interface ApiEndPoint {
     ): Call<SubmitModel>
 
     @GET("dtxpengaduan")
-    fun getPengaduan(): Call<ResponsePengaduan>
+    suspend fun getPengaduan(): Response<ResponsePengaduan>
+
+    @GET("dtxpengaduan/kecamatan/{id}")
+    suspend fun getPengaduanByKecamatanId(
+        @Path("id") id: Int
+    ):Response<ResponsePengaduan>
 
     @GET("dtxperangkatdesa")
     fun getPerangkatDesa(): Call<ResponsePerangkatdesa>

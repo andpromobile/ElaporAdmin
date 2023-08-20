@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elaporadmin.R
-import com.example.elaporadmin.dao.Lokasi
+import com.example.elaporadmin.lokasi.Lokasi
 
 class ListLokasiAdapterv1:
     RecyclerView.Adapter<ListLokasiAdapterv1.ListLokasiHolder>(){

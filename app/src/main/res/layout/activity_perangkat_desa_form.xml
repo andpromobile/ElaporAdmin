@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_teal"
-    tools:context=".PerangkatDesaFormActivity">
+    tools:context=".perangkatdesa.PerangkatDesaFormActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarPD"
@@ -134,6 +134,7 @@
         android:id="@+id/layoutPasswordPd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
@@ -153,7 +154,7 @@
             android:ems="10"
             android:hint="Password"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textColorHint="@color/medium_teal"
             android:textSize="20sp"

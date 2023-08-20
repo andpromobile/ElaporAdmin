@@ -11,21 +11,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.example.elaporadmin.ViewModel.LokasiViewModel
-import com.example.elaporadmin.adapter.ListLokasiAdapter
-import com.example.elaporadmin.adapter.ListLokasiAdapter.OnAdapterListener
-import com.example.elaporadmin.dao.Lokasi
-import com.example.elaporadmin.dao.ResponseLokasi
+import com.example.elaporadmin.lokasi.LokasiViewModel
+import com.example.elaporadmin.lokasi.ListLokasiAdapter
+import com.example.elaporadmin.lokasi.Lokasi
+import com.example.elaporadmin.lokasi.ResponseLokasi
 import com.example.elaporadmin.databinding.ActivityLokasiBinding
+import com.example.elaporadmin.lokasi.LokasiFormActivity
 import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,8 +50,8 @@ class LokasiActivityv1 : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListen
 
         tvNoLokasi = binding.noLokasi
 
-        swipeRefresh = binding.swipeRefresh
-        swipeRefresh.setOnRefreshListener(this)
+//        swipeRefresh = binding.swipeRefresh
+//        swipeRefresh.setOnRefreshListener(this)
 
         rvLokasi = binding.listLokasi
         layoutManager = LinearLayoutManager(this)
@@ -110,59 +107,59 @@ class LokasiActivityv1 : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListen
 //            parameters["page"] = page.toString()
 //            Log.d("PAGE", "$page")
 
-            ApiService.api.getLokasiPage(page).enqueue(object: Callback<ResponseLokasi>{
-                override fun onResponse(
-                    call: Call<ResponseLokasi>,
-                    response: Response<ResponseLokasi>
-                ) {
-                    totalPage = response.body()?.total_pages!!
-                    Log.d("PAGE", "totalPage: $totalPage")
-                    val listResponse = response.body()?.data
-                    if (listResponse != null){
-                        Log.d("PAGE", "listResponse != null")
-//                        listLokasiAdapter = ListLokasiAdapter()
-                        listLokasiAdapter.addList(listResponse)
-
-                        rvLokasi.adapter = listLokasiAdapter
-//                        listLokasiAdapter = ListLokasiAdapter(
-//                            listResponse,
-//                            object: OnAdapterListener {
-//                                override fun onUpdate(lokasi: Lokasi) {
+//            ApiService.api.getLokasiPage(page).enqueue(object: Callback<ResponseLokasi>{
+//                override fun onResponse(
+//                    call: Call<ResponseLokasi>,
+//                    response: Response<ResponseLokasi>
+//                ) {
+//                    totalPage = response.body()?.total_pages!!
+//                    Log.d("PAGE", "totalPage: $totalPage")
+//                    val listResponse = response.body()?.data
+//                    if (listResponse != null){
+//                        Log.d("PAGE", "listResponse != null")
+////                        listLokasiAdapter = ListLokasiAdapter()
+//                        listLokasiAdapter.addList(listResponse)
 //
-//                                    updateData(lokasi)
-//                                }
+//                        rvLokasi.adapter = listLokasiAdapter
+////                        listLokasiAdapter = ListLokasiAdapter(
+////                            listResponse,
+////                            object: OnAdapterListener {
+////                                override fun onUpdate(lokasi: Lokasi) {
+////
+////                                    updateData(lokasi)
+////                                }
+////
+////                                override fun onDelete(lokasi: Lokasi) {
+////                                    hapusData(lokasi)
+////                                }
+////                            },
+////                        )
+//                    }
+//                    if (page == totalPage){
+//                        progressBar.visibility = View.GONE
+//                    }else{
+//                        progressBar.visibility = View.INVISIBLE
+//                    }
 //
-//                                override fun onDelete(lokasi: Lokasi) {
-//                                    hapusData(lokasi)
-//                                }
-//                            },
-//                        )
-                    }
-                    if (page == totalPage){
-                        progressBar.visibility = View.GONE
-                    }else{
-                        progressBar.visibility = View.INVISIBLE
-                    }
-
+////
 //
-
-                    isLoading = false
-                    swipeRefresh.isRefreshing = false
-
-
-
-
-
-                }
-
-                override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {
-                    Toast.makeText(this@LokasiActivityv1, "${t.message}", Toast.LENGTH_SHORT).show()
-                    progressBar.visibility = View.GONE
-                    isLoading = false
-                    swipeRefresh.isRefreshing = false
-                }
-
-            })
+//                    isLoading = false
+//                    swipeRefresh.isRefreshing = false
+//
+//
+//
+//
+//
+//                }
+//
+//                override fun onFailure(call: Call<ResponseLokasi>, t: Throwable) {
+//                    Toast.makeText(this@LokasiActivityv1, "${t.message}", Toast.LENGTH_SHORT).show()
+//                    progressBar.visibility = View.GONE
+//                    isLoading = false
+//                    swipeRefresh.isRefreshing = false
+//                }
+//
+//            })
 
 
 //            RetrofitClient.instance.getUsers(parameters).enqueue(object : Callback<UsersResponse>{

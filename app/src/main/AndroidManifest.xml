@@ -20,15 +20,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PegawaiDashboardActivity"
+            android:name=".pengaduan.DetailPengaduanActivity"
             android:exported="false" />
         <activity
-            android:name=".KecamatanFormActivity"
+            android:name=".pegawai.PegawaiDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".perangkatdesa.PerangkatDesaDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kecamatan.KecamatanFormActivity"
             android:exported="false"
-            android:parentActivityName=".KecamatanActivity" />
+            android:parentActivityName=".kecamatan.KecamatanActivity" />
         <activity
-            android:name=".KecamatanActivity"
-            android:exported="false" />
+            android:name=".kecamatan.KecamatanActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
@@ -36,47 +43,52 @@
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".PengaduanFormActivity"
+            android:name=".pengaduan.PengaduanFormActivity"
             android:exported="false"
-            android:parentActivityName=".PengaduanActivity" />
+            android:parentActivityName=".pengaduan.PengaduanActivity" />
         <activity
-            android:name=".PengaduanActivity"
+            android:name=".pengaduan.PengaduanActivity"
             android:exported="false" />
         <activity
-            android:name=".PerangkatDesaFormActivity"
+            android:name=".perangkatdesa.PerangkatDesaFormActivity"
             android:exported="false"
-            android:parentActivityName=".PerangkatDesaActivity" />
+            android:parentActivityName=".perangkatdesa.PerangkatDesaActivity" />
         <activity
-            android:name=".PerangkatDesaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PegawaiFormActivity"
+            android:name=".perangkatdesa.PerangkatDesaActivity"
             android:exported="false"
-            android:parentActivityName=".PegawaiActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".PegawaiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LokasiFormActivity"
+            android:name=".pegawai.PegawaiFormActivity"
             android:exported="false"
-            android:parentActivityName=".LokasiActivity" />
+            android:parentActivityName=".pegawai.PegawaiActivity" />
         <activity
-            android:name=".LokasiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".KelurahanFormActivity"
+            android:name=".pegawai.PegawaiActivity"
             android:exported="false"
-            android:parentActivityName=".KelurahanActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".KelurahanActivity"
-            android:exported="false" />
+            android:name=".lokasi.LokasiFormActivity"
+            android:exported="false"
+            android:parentActivityName=".lokasi.LokasiActivity" />
         <activity
-            android:name=".BidangFormActivity"
+            android:name=".lokasi.LokasiActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".kelurahan.KelurahanFormActivity"
+            android:exported="false"
+            android:parentActivityName=".kelurahan.KelurahanActivity" />
+        <activity
+            android:name=".kelurahan.KelurahanActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".bidang.BidangFormActivity"
             android:exported="true"
-            android:parentActivityName=".BidangActivity" />
+            android:parentActivityName=".bidang.BidangActivity" />
         <activity
-            android:name=".BidangActivity"
-            android:exported="true" />
+            android:name=".bidang.BidangActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

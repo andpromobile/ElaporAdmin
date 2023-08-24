@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.pegawai.PegawaiDashboardActivity
 import com.example.elaporadmin.retrofit.ApiService
@@ -40,7 +41,7 @@ class LoginFragment : BottomSheetDialogFragment() {
                 var status: Int
 
                 try{
-                    GlobalScope.launch(Dispatchers.IO){
+                    lifecycleScope.launch{
 
                         val response = ApiService.api.login(txtUsername.text.toString(), txtPassword.text.toString())
 
@@ -77,7 +78,7 @@ class LoginFragment : BottomSheetDialogFragment() {
                                                     val intent = Intent(context, PegawaiDashboardActivity::class.java)
                                                     intent.putExtra("NAMA",nama)
                                                     intent.putExtra("NIK",nik.toString())
-//                                                intent.putExtra("BIDANGID",bidang_id.toString())
+                                                    intent.putExtra("BIDANGID",response.body()!!.bidang_id)
                                                     startActivity(intent)
                                                 }
                                                 "perangkatdesa" ->{

@@ -8,8 +8,8 @@
         android:id="@+id/nav2"
         android:icon="@drawable/baseline_analytics_24"
         android:title="Statistik" />
-    <item
-        android:id="@+id/nav3"
-        android:icon="@drawable/baseline_assignment_24"
-        android:title="Pengaduan Lain" />
+<!--    <item-->
+<!--        android:id="@+id/nav3"-->
+<!--        android:icon="@drawable/baseline_assignment_24"-->
+<!--        android:title="Pengaduan Lain" />-->
 </menu>

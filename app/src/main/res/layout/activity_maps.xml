@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame_layout"
-        app:layout_constraintBottom_toTopOf="@+id/view">
+        app:layout_constraintBottom_toTopOf="@+id/viewBg">
 
         <org.osmdroid.views.MapView
             android:id="@+id/map"
@@ -20,7 +20,7 @@
     </FrameLayout>
 
     <RelativeLayout
-        android:id="@+id/view"
+        android:id="@+id/viewBg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

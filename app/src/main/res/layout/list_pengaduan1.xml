@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
-    android:id="@+id/cvPengaduanPegawai"
+    android:id="@+id/cvPengaduanLain"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_marginStart="16dp"
@@ -18,75 +17,90 @@
     android:background="@color/cardview_light_background">
 
     <ImageView
-        android:background="@color/light_teal"
-        android:id="@+id/ivPengaduanPegawai"
+        android:id="@+id/ivPengaduanLain"
         android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_height="190dp"
+        android:background="@color/light_teal"
+        tools:ignore="ImageContrastCheck"
+        android:importantForAccessibility="no" />
     <TextView
-        android:id="@+id/judulPengaduanPegawai"
+        android:id="@+id/judulPengaduanLain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Judul"
-        android:layout_toEndOf="@id/ivPengaduanPegawai"
-        android:padding="10dp"
-        android:textColorHint="#78909C"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/lokasiPengaduanPegawai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Lokasi"
-        android:layout_toEndOf="@id/ivPengaduanPegawai"
-        android:layout_below="@id/judulPengaduanPegawai"
+        android:layout_toEndOf="@id/ivPengaduanLain"
         android:padding="10dp"
         android:textColorHint="#78909C"
         android:textSize="14sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/statusPengaduanLain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Status"
+        android:background="@color/white"
+        android:layout_toEndOf="@id/ivPengaduanLain"
+        android:layout_below="@id/lokasiPengaduanLain"
+        android:padding="10dp"
+        android:textColorHint="#78909C"
+        android:textSize="11sp"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/tanggalPengaduanPegawai"
+        android:id="@+id/lokasiPengaduanLain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Tanggal Pengaduan"
-        android:layout_toEndOf="@id/ivPengaduanPegawai"
-        android:layout_below="@id/lokasiPengaduanPegawai"
+        tools:text="Lokasi"
+        android:layout_toEndOf="@id/ivPengaduanLain"
+        android:layout_below="@id/judulPengaduanLain"
         android:padding="10dp"
         android:textColorHint="#78909C"
         android:textSize="12sp"
         tools:ignore="HardcodedText" />
 
-    <LinearLayout
-        android:layout_below="@id/tanggalPengaduanPegawai"
+    <TextView
+        android:id="@+id/tanggalPengaduanLain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:text="Tanggal Pengaduan"
+        android:layout_toEndOf="@id/ivPengaduanLain"
+        android:layout_below="@id/statusPengaduanLain"
+        android:padding="10dp"
+        android:textColorHint="#78909C"
+        android:textSize="11sp"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_below="@id/tanggalPengaduanLain"
+        android:layout_width="match_parent"
+        android:layout_marginStart="100dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVerifikasiPengaduanPegawai"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="#5AA469"
             android:text="VERIFIKASI"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textColor="#3E2723"
+            tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnTolakPengaduanPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="#FF8787"
             android:text="Tolak"
-            android:layout_weight="1"
-           android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textColor="#4E342E"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
-
-
-
-
 </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+</com.google.android.material.card.MaterialCardView>

@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.elaporadmin.R
 
-class ListPengaduanAdapter(
-    val listPengaduan:ArrayList<Pengaduan>,
+class ListPengaduanLainAdapter(
+    val listPengaduan:ArrayList<PengaduanLain>,
     val listener: OnAdapterListener
 ):
-RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
+RecyclerView.Adapter<ListPengaduanLainAdapter.ListPengaduanLainHolder>(){
     companion object{
         private val url ="https://pupr.hstkab.go.id/elapor/elapor/public/foto/"
     }
-    inner class ListPengaduanHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        var btnVerifikasi: Button = itemView.findViewById(R.id.btnVerifikasiPengaduanPegawai)
-        var btnTolak: Button = itemView.findViewById(R.id.btnTolakPengaduanPegawai)
+    inner class ListPengaduanLainHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+//        var btnVerifikasi: Button = itemView.findViewById(R.id.btnVerifikasiPengaduanPegawai)
+//        var btnTolak: Button = itemView.findViewById(R.id.btnTolakPengaduanPegawai)
         var btnDetail:CardView = itemView.findViewById(R.id.cvPengaduanLain)
         var lokasiPengaduan:TextView = itemView.findViewById(R.id.lokasiPengaduanLain)
         var judulPengaduan:TextView = itemView.findViewById(R.id.judulPengaduanLain)
@@ -31,28 +31,28 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
         var imageView: ImageView = itemView.findViewById(R.id.ivPengaduanLain)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPengaduanHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPengaduanLainHolder {
         val view:View = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.list_pengaduan1,
+                R.layout.list_pengaduan2,
                 parent,
                 false
             )
 
-        return ListPengaduanHolder(view)
+        return ListPengaduanLainHolder(view)
     }
 
     override fun getItemCount(): Int = listPengaduan.size
 
     override fun onBindViewHolder(
-        holder: ListPengaduanHolder,
+        holder: ListPengaduanLainHolder,
         position: Int
     ) {
         val pengaduan = listPengaduan[position]
 
         holder.judulPengaduan.text = pengaduan.judulpengaduan
-        holder.lokasiPengaduan.text = pengaduan.datalokasi
+        holder.lokasiPengaduan.text = pengaduan.namalokasi
         holder.tanggalPengaduan.text = pengaduan.tanggalpengaduan
 
         when(pengaduan.status){
@@ -64,26 +64,23 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
                 holder.statusPengaduan.text = "Telah Diverifikasi Perangkat Desa"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#F94C10"))
 
-                holder.btnVerifikasi.visibility = View.VISIBLE
-                holder.btnVerifikasi.text = "Verifikasi"
+//                holder.btnVerifikasi.visibility = View.VISIBLE
+//                holder.btnVerifikasi.text = "Verifikasi"
             }
             "2"-> {
                 holder.statusPengaduan.text = "Diverifikasi"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#1A5D1A"))
 
-                holder.btnVerifikasi.visibility = View.VISIBLE
-                holder.btnVerifikasi.text = "Selesai"
+//                holder.btnVerifikasi.visibility = View.VISIBLE
+//                holder.btnVerifikasi.text = "Selesai"
             }
             "3"-> {
                 holder.statusPengaduan.text = "Telah Selesai"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#1A5D1A"))
-
-                holder.btnTolak.visibility = View.GONE
             }
             "4"-> {
                 holder.statusPengaduan.text ="Ditolak oleh Perangkat Desa"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#FF0000"))
-                holder.btnTolak.visibility = View.GONE
             }
         }
 
@@ -99,21 +96,21 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
             listener.onDetail(pengaduan)
         }
 
-        holder.btnTolak.setOnClickListener{
-            listener.onDeny(pengaduan)
-        }
-
-        holder.btnVerifikasi.setOnClickListener {
-            listener.onVerifikasi(pengaduan)
-        }
+//        holder.btnTolak.setOnClickListener{
+//            listener.onDeny(pengaduan)
+//        }
+//
+//        holder.btnVerifikasi.setOnClickListener {
+//            listener.onVerifikasi(pengaduan)
+//        }
     }
 
     interface OnAdapterListener{
-        fun onClick(pengaduan: Pengaduan)
+        fun onClick(pengaduan: PengaduanLain)
 
-        fun onDetail(pengaduan: Pengaduan)
-        fun onVerifikasi(pengaduan: Pengaduan)
+        fun onDetail(pengaduan: PengaduanLain)
+        fun onVerifikasi(pengaduan: PengaduanLain)
 
-        fun onDeny(pengaduan: Pengaduan)
+        fun onDeny(pengaduan: PengaduanLain)
     }
 }

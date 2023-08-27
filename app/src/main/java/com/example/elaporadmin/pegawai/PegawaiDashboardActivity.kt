@@ -1,6 +1,7 @@
 package com.example.elaporadmin.pegawai
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -13,7 +14,8 @@ class PegawaiDashboardActivity : AppCompatActivity() {
     private lateinit var navbar_bottom: BottomNavigationView
     private var nik:String = ""
     private var nama:String = ""
-    private var bidang_id:String = ""
+    private var bidang_id:Int = 0
+    private var mBundle = Bundle()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +29,13 @@ class PegawaiDashboardActivity : AppCompatActivity() {
 
             nik = intent.getStringExtra("NIK")!!.toString()
             nama = intent.getStringExtra("NAMA").toString()
-//            bidang_id = intent.getStringExtra("BIDANG_ID")!!.toString()
+            bidang_id = intent.getIntExtra("BIDANGID",0)
 
             binding.tv2.setText(nama)
         }
-
-        loadFragment(PegawaiDashboardFragment1())
+        Log.d("Dari Dashboard", bidang_id.toString())
+        mBundle.putInt("BIDANGID", bidang_id)
+        loadFragment(PegawaiDashboardFragment1(), mBundle)
 
         setListener()
     }
@@ -45,17 +48,17 @@ class PegawaiDashboardActivity : AppCompatActivity() {
         navbar_bottom.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.nav1 -> {
-                    loadFragment(PegawaiDashboardFragment1())
+                    loadFragment(PegawaiDashboardFragment1(),mBundle)
                     true
                 }
                 R.id.nav2 -> {
                     loadFragment(PegawaiDashboardFragment2())
                     true
                 }
-                R.id.nav3 -> {
-                    loadFragment(PegawaiDashboardFragment3())
-                    true
-                }
+//                R.id.nav3 -> {
+//                    loadFragment(PegawaiDashboardFragment3())
+//                    true
+//                }
 
                 else -> {
                     false
@@ -64,8 +67,9 @@ class PegawaiDashboardActivity : AppCompatActivity() {
         }
     }
 
-    private  fun loadFragment(fragment: Fragment){
+    private  fun loadFragment(fragment: Fragment, bundle: Bundle = Bundle()){
         val transaction = supportFragmentManager.beginTransaction()
+        if (!bundle.isEmpty) fragment.arguments = bundle
         transaction.replace(R.id.frameLayout,fragment)
         transaction.commit()
     }

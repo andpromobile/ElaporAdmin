@@ -19,6 +19,7 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
     private var bidang_id:Int = 0
     private var kecamatan_id:Int = 0
     private val mBundle = Bundle()
+    private val mBundleProfile = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,10 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
             bidang_id = intent.getIntExtra("BIDANGID", 0)
             kecamatan_id = intent.getIntExtra("KECAMATANID", 0)
 
+            mBundleProfile.putString("NIK",nik)
+
             binding.tv2.setText(nama)
         }
-
 
         mBundle.putInt("KECAMATANID",kecamatan_id)
 
@@ -58,7 +60,7 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navpd2 -> {
-                    loadFragment(PerangkatDesaFragment2())
+                    loadFragment(PerangkatDesaFragment2(), mBundleProfile)
                     true
                 }
                 else -> {

@@ -1,23 +1,28 @@
 package com.example.elaporadmin.pengaduan
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.elaporadmin.retrofit.ApiService
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class PengaduanViewModel:ViewModel() {
-    private var pengaduanLiveData = MutableLiveData<List<Pengaduan>>()
+class PengaduanLainViewModel:ViewModel() {
+    private var pengaduanLiveData = MutableLiveData<List<PengaduanLain>>()
 
-    fun getPengaduan(){
+    fun getPengaduanLain(){
 
         viewModelScope.launch{
-            val response = ApiService.api.getPengaduan()
+            val response = ApiService.api.getPengaduanLain()
+            if (response.isSuccessful){
+                pengaduanLiveData.value = response.body()!!.data
+            }
+        }
+    }
+    fun getPengaduanLainByKelurahanId(id:Int){
+
+        viewModelScope.launch{
+            val response = ApiService.api.getPengaduanLainByKelurahanId(id)
             if (response.isSuccessful){
                 pengaduanLiveData.value = response.body()!!.data
             }
@@ -39,19 +44,9 @@ class PengaduanViewModel:ViewModel() {
 //            })
     }
 
-    fun getPengaduanByKecamatanId(id:Int){
+    fun pengaduanLainDeny(id:Int){
         viewModelScope.launch {
-            val response = ApiService.api.getPengaduanByKecamatanId(id)
-            if (response.isSuccessful){
-                pengaduanLiveData.value = response.body()!!.data
-            }
-
-        }
-    }
-
-    fun pengaduanDeny(id:Int){
-        viewModelScope.launch {
-            val response = ApiService.api.pengaduanDeny(id)
+            val response = ApiService.api.pengaduanLainDeny(id)
         }
     }
 
@@ -61,29 +56,13 @@ class PengaduanViewModel:ViewModel() {
         }
     }
 
-    fun pengaduanVerifikasiPd(id:Int){
-        viewModelScope.launch {
-            val response = ApiService.api.pengaduanVerifikasiPd(id)
-        }
-    }
-
     fun pengaduanVerifikasi1(id:Int){
         viewModelScope.launch {
             val response = ApiService.api.pengaduanVerifikasi1(id)
         }
     }
 
-    fun getPengaduanByBidangId(id:Int){
-        viewModelScope.launch {
-            val response = ApiService.api.getPengaduanByBidangId(id)
-            if (response.isSuccessful){
-                pengaduanLiveData.value = response.body()!!.data
-            }
-
-        }
-    }
-
-    fun observePengaduanLiveData():LiveData<List<Pengaduan>>{
+    fun observePengaduanLiveData():LiveData<List<PengaduanLain>>{
         return pengaduanLiveData
     }
 

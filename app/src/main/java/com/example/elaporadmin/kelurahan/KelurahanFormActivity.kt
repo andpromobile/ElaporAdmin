@@ -1,21 +1,27 @@
 package com.example.elaporadmin.kelurahan
 
+import android.R
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.databinding.ActivityKelurahanFormBinding
+import com.example.elaporadmin.kecamatan.KecamatanViewModel
 
 class KelurahanFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityKelurahanFormBinding
     private lateinit var tvNamaKelurahan:EditText
-    private lateinit var tvNamaKecamatan:EditText
     private lateinit var btnFormBinding:Button
+    private lateinit var kecamatan: AutoCompleteTextView
     private lateinit var toolbarKelurahan:androidx.appcompat.widget.Toolbar
     private val kelurahanViewModel: KelurahanViewModel by viewModels()
     private var id:Int = 0
+    private var kecamatanId:Int = 0
     private var mode:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +39,7 @@ class KelurahanFormActivity : AppCompatActivity() {
             kelurahanViewModel.updateKelurahan(
                 this.id,
                 tvNamaKelurahan.text.toString(),
-                tvNamaKecamatan.text.toString())
+                kecamatanId)
 
             kelurahanViewModel.observePesanLiveData().observe(
                 this,
@@ -41,11 +47,11 @@ class KelurahanFormActivity : AppCompatActivity() {
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText("Sukses")
                     .setContentText("DATA BERHASIL DIUBAH")
-                    .setConfirmButton("Iya", {
+                    .setConfirmButton("Iya") {
                         it.dismissWithAnimation()
 
                         finish()
-                    })
+                    }
                     .show()
             }
         }else{
@@ -60,18 +66,18 @@ class KelurahanFormActivity : AppCompatActivity() {
 
             kelurahanViewModel.insertKelurahan(
                 tvNamaKelurahan.text.toString(),
-                tvNamaKecamatan.text.toString())
+                kecamatanId)
 
             kelurahanViewModel.observePesanLiveData().observe(this
             ) {
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText("Sukses")
                     .setContentText("DATA BERHASIL DISIMPAN")
-                    .setConfirmButton("Iya", {
+                    .setConfirmButton("Iya") {
                         it.dismissWithAnimation()
 
                         finish()
-                    })
+                    }
                     .show()
             }
         }else{
@@ -84,8 +90,7 @@ class KelurahanFormActivity : AppCompatActivity() {
     private fun cekInput():Boolean {
         var cek = false
         if (
-            (tvNamaKelurahan.text.toString() != "") &&
-            (tvNamaKecamatan.text.toString() != "")
+            (tvNamaKelurahan.text.toString() != "")
         ) cek = true
 
         return cek
@@ -98,8 +103,33 @@ class KelurahanFormActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         tvNamaKelurahan = binding.frmNamaKelurahan
-        tvNamaKecamatan = binding.frmNamaKecamatan
         btnFormBinding = binding.btnFormKelurahan
+        kecamatan = binding.frmNamaKecamatan
+
+        val kecamatanViewModel = ViewModelProvider(this)[KecamatanViewModel::class.java]
+        kecamatanViewModel.getKecamatan()
+
+        kecamatanViewModel.observeKecamatanLiveData().observe(
+            this@KelurahanFormActivity
+        ){
+            val fp:MutableList<String?> = ArrayList()
+            val listId:MutableList<String?> = ArrayList()
+
+            for (i in it){
+                fp.add(i.namakecamatan)
+                listId.add(i.id.toString())
+            }
+
+            val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, R.layout.simple_list_item_1, fp)
+            arrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+
+            kecamatan.setAdapter(arrayAdapter)
+
+            kecamatan.setOnItemClickListener { _, _, position, _ ->
+                kecamatanId = listId[position]!!.toInt()
+
+            }
+        }
 
         if (!intent.extras?.isEmpty!!){
 
@@ -108,7 +138,6 @@ class KelurahanFormActivity : AppCompatActivity() {
             if (mode == "EDIT"){
                 this.id = intent.getIntExtra("ID",0)
                 tvNamaKelurahan.setText(intent.getStringExtra("NAMAKELURAHAN"))
-                tvNamaKecamatan.setText(intent.getStringExtra("NAMAKECAMATAN"))
             }
         }
 

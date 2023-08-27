@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.elaporadmin.R
 
-class ListPengaduanAdapter(
+class ListPengaduanPdAdapter(
     val listPengaduan:ArrayList<Pengaduan>,
     val listener: OnAdapterListener
 ):
-RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
+RecyclerView.Adapter<ListPengaduanPdAdapter.ListPengaduanHolder>(){
     companion object{
         private val url ="https://pupr.hstkab.go.id/elapor/elapor/public/foto/"
     }
@@ -57,31 +57,26 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
 
         when(pengaduan.status){
             "0" -> {
-                holder.statusPengaduan.text = "Menunggu Verifikasi Perangkat Desa"
+                holder.statusPengaduan.text = "Pending"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#900C3F"))
-            }
-            "1"-> {
-                holder.statusPengaduan.text = "Telah Diverifikasi Perangkat Desa"
-                holder.statusPengaduan.setTextColor(Color.parseColor("#F94C10"))
-
                 holder.btnVerifikasi.visibility = View.VISIBLE
                 holder.btnVerifikasi.text = "Verifikasi"
             }
+            "1"-> {
+                holder.statusPengaduan.text = "Terverifikasi"
+                holder.statusPengaduan.setTextColor(Color.parseColor("#F94C10"))
+            }
             "2"-> {
-                holder.statusPengaduan.text = "Diverifikasi"
+                holder.statusPengaduan.text = "Diverifikasi Kepala Bidang"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#1A5D1A"))
-
-                holder.btnVerifikasi.visibility = View.VISIBLE
-                holder.btnVerifikasi.text = "Selesai"
             }
             "3"-> {
                 holder.statusPengaduan.text = "Telah Selesai"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#1A5D1A"))
-
                 holder.btnTolak.visibility = View.GONE
             }
             "4"-> {
-                holder.statusPengaduan.text ="Ditolak oleh Perangkat Desa"
+                holder.statusPengaduan.text ="Ditolak"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#FF0000"))
                 holder.btnTolak.visibility = View.GONE
             }

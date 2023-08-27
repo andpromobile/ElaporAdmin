@@ -8,6 +8,7 @@ import com.example.elaporadmin.kelurahan.ResponseKelurahan
 import com.example.elaporadmin.lokasi.ResponseLokasi
 import com.example.elaporadmin.pegawai.ResponsePegawai
 import com.example.elaporadmin.pengaduan.ResponsePengaduan
+import com.example.elaporadmin.pengaduan.ResponsePengaduanLain
 import com.example.elaporadmin.perangkatdesa.ResponsePerangkatdesa
 import retrofit2.Call
 import retrofit2.Response
@@ -56,7 +57,7 @@ interface ApiEndPoint {
 
     @FormUrlEncoded
     @POST("dtxkecamatan/update/{id}")
-    fun updateKecamatan(
+    suspend fun updateKecamatan(
         @Path("id") id:Int,
         @Field("namakecamatan") namakecamatan:String,
     ): Response<SubmitModel>
@@ -73,7 +74,7 @@ interface ApiEndPoint {
     @POST("dtxkelurahan/store")
     fun insertKelurahan(
         @Field("namakelurahan") namakelurahan:String,
-        @Field("namakecamatan") namakecamatan:String,
+        @Field("kecamatan_id") kecamatanid:Int,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
@@ -81,7 +82,7 @@ interface ApiEndPoint {
     fun updateKelurahan(
         @Path("id") id:Int,
         @Field("namakelurahan") namakelurahan:String,
-        @Field("namakecamatan") namakecamatan:String,
+        @Field("kecamatan_id") kecamatanid:Int,
     ): Call<SubmitModel>
 
     @DELETE("dtxkelurahan/delete/{id}")
@@ -130,13 +131,26 @@ interface ApiEndPoint {
     @GET("dtxpegawai")
     fun getPegawai(): Call<ResponsePegawai>
 
+    @GET("dtxpegawai/show/{nik}")
+    suspend fun getPegawaiByNik(
+        @Path("nik") nik: String?,
+    ): Response<ResponsePegawai>
+
+    @FormUrlEncoded
+    @POST("dtxpegawai/updateProfile/{nik}")
+    suspend fun updateProfilPegawai(
+        @Path("nik") nik: String,
+        @Field("email") email:String,
+        @Field("password") password:String,
+    ): Response<SubmitModel>
+
     @FormUrlEncoded
     @POST("dtxpegawai/store")
     fun insertPegawai(
         @Field("NIP") nip:String,
         @Field("namapegawai") namapegawai:String,
         @Field("jabatan") jabatan:String,
-        @Field("bidang_id") bidang_id:Int,
+        @Field("bidang_id") bidangid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Call<SubmitModel>
@@ -147,7 +161,7 @@ interface ApiEndPoint {
         @Path("NIP") nip:String,
         @Field("namapegawai") namapegawai:String,
         @Field("jabatan") jabatan:String,
-        @Field("bidang_id") bidang_id:Int,
+        @Field("bidang_id") bidangid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Response<SubmitModel>
@@ -160,6 +174,44 @@ interface ApiEndPoint {
     @GET("dtxpengaduan")
     suspend fun getPengaduan(): Response<ResponsePengaduan>
 
+    @GET("dtxpengaduanlain")
+    suspend fun getPengaduanLain(): Response<ResponsePengaduanLain>
+
+    @GET("dtxpengaduan/bidang/{id}")
+    suspend fun getPengaduanByBidangId(
+        @Path("id") id:Int
+    ): Response<ResponsePengaduan>
+
+    @GET("dtxpengaduanlain/kelurahan/{id}")
+    suspend fun getPengaduanLainByKelurahanId(
+        @Path("id") id:Int
+    ): Response<ResponsePengaduanLain>
+
+    @GET("dtxpengaduan/deny/{id}")
+    suspend fun pengaduanDeny(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
+    @GET("dtxpengaduanlain/deny/{id}")
+    suspend fun pengaduanLainDeny(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
+    @GET("dtxpengaduan/verifikasi/{id}")
+    suspend fun pengaduanVerifikasi(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
+    @GET("dtxpengaduan/verifikasi1/{id}")
+    suspend fun pengaduanVerifikasi1(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
+    @GET("dtxpengaduan/verifikasiPd/{id}")
+    suspend fun pengaduanVerifikasiPd(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
     @GET("dtxpengaduan/kecamatan/{id}")
     suspend fun getPengaduanByKecamatanId(
         @Path("id") id: Int
@@ -168,12 +220,18 @@ interface ApiEndPoint {
     @GET("dtxperangkatdesa")
     fun getPerangkatDesa(): Call<ResponsePerangkatdesa>
 
+    @GET("dtxperangkatdesa/show/{nik}")
+    suspend fun getPerangkatDesaByNik(
+        @Path("nik") nik: String?,
+    ): Response<ResponsePerangkatdesa>
+
+
     @FormUrlEncoded
     @POST("dtxperangkatdesa/store")
     fun insertPerangkatDesa(
         @Field("nik") nik:String,
         @Field("namapd") namapd:String,
-        @Field("kelurahan_id") kelurahan_id:Int,
+        @Field("kelurahan_id") kelurahanid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Call<SubmitModel>
@@ -183,10 +241,18 @@ interface ApiEndPoint {
     fun updatePerangkatDesa(
         @Path("nik") nik: String,
         @Field("namapd") namapd:String,
-        @Field("kelurahan_id") kelurahan_id:Int,
+        @Field("kelurahan_id") kelurahanid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("dtxperangkatdesa/updateProfile/{nik}")
+    suspend fun updateProfilPerangkatDesa(
+        @Path("nik") nik: String,
+        @Field("email") email:String,
+        @Field("password") password:String,
+    ): Response<SubmitModel>
 
 
     @DELETE("dtxperangkatdesa/delete/{nik}")

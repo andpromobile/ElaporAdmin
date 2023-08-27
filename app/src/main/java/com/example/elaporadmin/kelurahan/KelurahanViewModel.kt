@@ -34,9 +34,9 @@ class KelurahanViewModel:ViewModel() {
             })
     }
 
-    fun insertKelurahan(namakelurahan:String, namakecamatan:String){
+    fun insertKelurahan(namakelurahan:String, kecamatan_id:Int){
         ApiService.api.insertKelurahan(
-            namakelurahan, namakecamatan
+            namakelurahan, kecamatan_id
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(
@@ -57,9 +57,9 @@ class KelurahanViewModel:ViewModel() {
             })
     }
 
-    fun updateKelurahan(id:Int, namakelurahan:String, namakecamatan: String){
+    fun updateKelurahan(id:Int, namakelurahan:String, kecamatan_id: Int){
         ApiService.api.updateKelurahan(
-            id, namakelurahan, namakecamatan
+            id, namakelurahan, kecamatan_id
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(

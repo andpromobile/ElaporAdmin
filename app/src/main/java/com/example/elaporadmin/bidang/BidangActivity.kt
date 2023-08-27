@@ -35,16 +35,6 @@ class BidangActivity : AppCompatActivity() {
         initLayout()
         toFormBidang()
 
-//        binding.nestedScrollView.setOnScrollChangeListener {
-//                v:NestedScrollView, _:Int, scrollY:Int, _:Int, _:Int ->
-//
-//            if (scrollY == v?.getChildAt(0)!!.measuredHeight - v.measuredHeight) {
-////                if (viewModel.page <= viewModel.total && viewModel.loadMore.value == false) viewModel.fetch()
-//                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-//                    .setContentText("Data Berhasil Dihapus")
-//                    .show()
-//            }
-//        }
     }
 
     private fun initLayout() {

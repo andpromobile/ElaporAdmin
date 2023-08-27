@@ -12,7 +12,7 @@
         android:id="@+id/viewBg"
         android:background="@drawable/button_background"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="150dp"/>
 
     <TextView
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         android:textSize="24sp"
         android:textStyle="bold|italic"
         android:textColor="@color/white"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -30,15 +30,15 @@
         android:layout_height="150dp"
         android:layout="@+id/viewBg"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="75dp"
         android:src="@drawable/personperson" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
         android:layout_below="@+id/iv"
-        android:layout_margin="10dp"
         app:cardCornerRadius="20dp"
         android:elevation="200dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bg_rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -58,6 +58,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/nama"
                 android:text="Nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/level"
                 android:text="Level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +91,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_below="@+id/cv1"
-        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
         android:elevation="200dp"
         app:cardCornerRadius="20dp"
         android:background="@drawable/bg_rounded"
@@ -186,6 +188,6 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

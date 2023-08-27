@@ -134,6 +134,8 @@ class KelurahanActivity : AppCompatActivity() {
             .show()
     }
 
+
+
     private fun showLoading(loading:Boolean){
         when(loading){
             true -> progressBar.visibility = View.VISIBLE

@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.elaporadmin.ViewModel.SubmitModel
 import com.example.elaporadmin.retrofit.ApiService
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +16,14 @@ class PerangkatDesaViewModel:ViewModel() {
     private var perangkatDesaLiveData = MutableLiveData<List<Perangkatdesa>>()
     private val pesanLiveData = MutableLiveData<String>()
 
+    fun getPerangkatDesaByNik(nik: String?){
+        viewModelScope.launch {
+            val response = ApiService.api.getPerangkatDesaByNik(nik)
+            if (response.isSuccessful){
+                perangkatDesaLiveData.value = response.body()!!.data
+            }
+        }
+    }
     fun getPerangkatDesa(){
         ApiService.api.getPerangkatDesa()
             .enqueue(object:Callback<ResponsePerangkatdesa>{
@@ -52,6 +62,15 @@ class PerangkatDesaViewModel:ViewModel() {
                     pesanLiveData.value = t.toString()
                 }
             })
+    }
+
+    fun updateProfilPerangkatDesa(nik: String, email: String, password: String){
+        viewModelScope.launch {
+            val response = ApiService.api.updateProfilPerangkatDesa(nik, email, password)
+            if (response.isSuccessful){
+                pesanLiveData.value = response.body()!!.message
+            }
+        }
     }
 
     fun updatePerangkatDesa(nik:String, namapd:String, kelurahan_id:Int,email: String, password: String){

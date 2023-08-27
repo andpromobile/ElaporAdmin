@@ -99,6 +99,10 @@ class PegawaiDashboardFragment3 : Fragment() {
                             .show()
                     }
 
+                    override fun onDeny(pengaduan: Pengaduan) {
+                        val v=""
+                    }
+
                 }
             )
 

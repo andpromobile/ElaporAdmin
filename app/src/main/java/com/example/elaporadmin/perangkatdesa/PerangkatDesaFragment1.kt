@@ -17,6 +17,7 @@ import com.example.elaporadmin.R
 import com.example.elaporadmin.databinding.FragmentPerangkatDesa1Binding
 import com.example.elaporadmin.pengaduan.DetailPengaduanActivity
 import com.example.elaporadmin.pengaduan.ListPengaduanAdapter
+import com.example.elaporadmin.pengaduan.ListPengaduanPdAdapter
 import com.example.elaporadmin.pengaduan.Pengaduan
 import com.example.elaporadmin.pengaduan.PengaduanViewModel
 
@@ -27,7 +28,7 @@ class PerangkatDesaFragment1 : Fragment() {
     private lateinit var tvNoPengaduan: TextView
     private lateinit var listPengaduan: RecyclerView
     private lateinit var pengaduanViewModel: PengaduanViewModel
-    private lateinit var listPengaduanAdapter: ListPengaduanAdapter
+    private lateinit var listPengaduanPdAdapter: ListPengaduanPdAdapter
     private lateinit var binding:FragmentPerangkatDesa1Binding
 
     override fun onCreateView(
@@ -61,9 +62,9 @@ class PerangkatDesaFragment1 : Fragment() {
         pengaduanViewModel.observePengaduanLiveData().observe(
             viewLifecycleOwner
         ){ pengaduanList->
-            listPengaduanAdapter = ListPengaduanAdapter(
+            listPengaduanPdAdapter = ListPengaduanPdAdapter(
                 pengaduanList as ArrayList<Pengaduan>,
-                object : ListPengaduanAdapter.OnAdapterListener {
+                object : ListPengaduanPdAdapter.OnAdapterListener {
                     override fun onClick(pengaduan: Pengaduan) {
                         val v: String
                     }
@@ -100,17 +101,23 @@ class PerangkatDesaFragment1 : Fragment() {
                         SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setContentText("Apakah Anda Yakin?")
                             .setConfirmButton("Iya", {
-
+                                if(pengaduan.status == "0"){
+                                    pengaduan.id?.let { it1 -> pengaduanViewModel.pengaduanVerifikasiPd(it1) }
+                                }
                             })
                             .show()
+                    }
+
+                    override fun onDeny(pengaduan: Pengaduan) {
+                        val v = ""
                     }
 
                 }
             )
 
-            listPengaduan.adapter = listPengaduanAdapter
+            listPengaduan.adapter = listPengaduanPdAdapter
 
-            if (listPengaduanAdapter.itemCount <= 0) {
+            if (listPengaduanPdAdapter.itemCount <= 0) {
                 listPengaduan.visibility = View.GONE
                 tvNoPengaduan.visibility = View.VISIBLE
             }else{

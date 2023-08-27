@@ -14,6 +14,10 @@ class DetailPengaduanActivity : AppCompatActivity() {
         binding = ActivityDetailPengaduanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarDetailPengaduan)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         dataPengaduan = Pengaduan()
 
         if (!intent.extras?.isEmpty!!){

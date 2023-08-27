@@ -16,12 +16,10 @@ class KecamatanViewModel: ViewModel() {
     private val pesanLiveData = MutableLiveData<String>()
 
     fun getKecamatan() {
-        GlobalScope.launch(Dispatchers.IO){
+        viewModelScope.launch{
             val response = ApiService.api.getKecamatan()
             if (response.isSuccessful){
-                withContext(Dispatchers.Main){
-                    kecamatanLiveData.value = response.body()!!.data
-                }
+                kecamatanLiveData.value = response.body()!!.data
             }
         }
         

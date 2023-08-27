@@ -12,6 +12,7 @@ import com.example.elaporadmin.pegawai.PegawaiDashboardActivity
 import com.example.elaporadmin.perangkatdesa.PerangkatDesaDashboardActivity
 import com.example.elaporadmin.retrofit.ApiService
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 showLoading(true)
 
                 try{
-                    GlobalScope.launch(Dispatchers.IO){
+                    CoroutineScope(Dispatchers.IO).launch{
 
                         val response = ApiService.api.login(txtUsername.text.toString(), txtPassword.text.toString())
 
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                                                 "admin" ->{
                                                     val intent = Intent(this@MainActivity, DashboardActivity::class.java)
                                                     intent.putExtra("NAMA",nama)
-                                                    intent.putExtra("NIK",nik.toString())
+                                                    intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
                                                     startActivity(intent)
@@ -90,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                                                 "pegawai" ->{
                                                     val intent = Intent(this@MainActivity, PegawaiDashboardActivity::class.java)
                                                     intent.putExtra("NAMA",nama)
-                                                    intent.putExtra("NIK",nik.toString())
+                                                    intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
                                                     startActivity(intent)
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                                                 "perangkatdesa" ->{
                                                     val intent = Intent(this@MainActivity, PerangkatDesaDashboardActivity::class.java)
                                                     intent.putExtra("NAMA", nama)
-                                                    intent.putExtra("NIK",nik.toString())
+                                                    intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
                                                     startActivity(intent)

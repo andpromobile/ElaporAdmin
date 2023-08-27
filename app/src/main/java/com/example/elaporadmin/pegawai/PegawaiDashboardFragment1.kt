@@ -2,6 +2,7 @@ package com.example.elaporadmin.pegawai
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,13 +33,14 @@ class PegawaiDashboardFragment1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_pegawai_dashboard1, container, false)
-
-        initLayout(v)
+        val b = requireArguments().getInt("BIDANGID")
+        Log.d("Dari Fragment", b.toString())
+        initLayout(v, b)
 
         return v
     }
 
-    private fun initLayout(v: View){
+    private fun initLayout(v: View, b:Int){
         progressBar = v.findViewById(R.id.progressBarPengaduanPegawai)
         tvNoPengaduan = v.findViewById(R.id.noPengaduanPegawai)
         listPengaduan = v.findViewById(R.id.listPengaduan1)
@@ -50,7 +52,7 @@ class PegawaiDashboardFragment1 : Fragment() {
 
         pengaduanViewModel = ViewModelProvider(this)[PengaduanViewModel::class.java]
 
-        pengaduanViewModel.getPengaduan()
+        pengaduanViewModel.getPengaduanByBidangId(b)
 
         pengaduanViewModel.observePengaduanLiveData().observe(
             viewLifecycleOwner
@@ -93,9 +95,22 @@ class PegawaiDashboardFragment1 : Fragment() {
                     override fun onVerifikasi(pengaduan: Pengaduan) {
                         SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setContentText("Apakah Anda Yakin?")
-                            .setConfirmButton("Iya", {
+                            .setConfirmButton("Iya") {
+                                if(pengaduan.status == "1"){
+                                    pengaduan.id?.let { it1 -> pengaduanViewModel.pengaduanVerifikasi(it1) }
+                                }else if(pengaduan.status == "2"){
+                                    pengaduan.id?.let { it1 -> pengaduanViewModel.pengaduanVerifikasi1(it1) }
+                                }
+                            }
+                            .show()
+                    }
 
-                            })
+                    override fun onDeny(pengaduan: Pengaduan) {
+                        SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setContentText("Apakah Anda Yakin?")
+                            .setConfirmButton("Iya") {
+                                pengaduan.id?.let { it1 -> pengaduanViewModel.pengaduanDeny(it1) }
+                            }
                             .show()
                     }
 

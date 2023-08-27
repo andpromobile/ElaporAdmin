@@ -121,11 +121,12 @@ class KecamatanActivity : AppCompatActivity() {
 
                 onStart()
             }
-            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak") {
-                it.dismissWithAnimation()
-            }
             .show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initLayout()
     }
 
     private fun showLoading(loading:Boolean){

@@ -2,27 +2,36 @@ package com.example.elaporadmin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.anychart.AnyChart
-import com.anychart.AnyChartView
-import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.enums.Align
-import com.anychart.enums.LegendLayout
+import com.example.elaporadmin.bidang.Bidang
 import com.example.elaporadmin.bidang.BidangActivity
+import com.example.elaporadmin.bidang.BidangViewModel
+import com.example.elaporadmin.bidang.ListBidangAdapter
 import com.example.elaporadmin.databinding.ActivityDashboardBinding
 import com.example.elaporadmin.kecamatan.KecamatanActivity
 import com.example.elaporadmin.kelurahan.KelurahanActivity
 import com.example.elaporadmin.lokasi.LokasiActivity
 import com.example.elaporadmin.pegawai.PegawaiActivity
+import com.example.elaporadmin.pengaduan.ListPengaduanLainAdapter
+import com.example.elaporadmin.pengaduan.PengaduanLain
+import com.example.elaporadmin.pengaduan.PengaduanLainViewModel
 import com.example.elaporadmin.perangkatdesa.PerangkatDesaActivity
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
+    private lateinit var listPengaduanLainAdapter: ListPengaduanLainAdapter
     private lateinit var btnBidang: CardView
     private lateinit var btnLokasi: CardView
     private lateinit var btnKelurahan: CardView
@@ -30,7 +39,9 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnPerangkatDesa: CardView
     private lateinit var btnPegawai: CardView
     private lateinit var btnLogOut:ImageButton
-    private lateinit var anyChartView: AnyChartView
+    private lateinit var chart:AAChartView
+    private lateinit var rvPengaduanLain: RecyclerView
+    private lateinit var pengaduanLainViewModel: PengaduanLainViewModel
 //    private lateinit var btnPengaduan: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +57,60 @@ class DashboardActivity : AppCompatActivity() {
         loadChart()
         loadLokasi()
         loadKecamatan()
+        loadPengaduanLainList()
 //        loadPengaduan()
+    }
+
+    private fun loadPengaduanLainList() {
+        rvPengaduanLain = binding.listPengaduanLainDashboard
+
+        rvPengaduanLain.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(applicationContext)
+        }
+
+        pengaduanLainViewModel = ViewModelProvider(this)[PengaduanLainViewModel::class.java]
+        pengaduanLainViewModel.getPengaduanLain()
+
+        pengaduanLainViewModel.observePengaduanLiveData().observe(
+            this
+        ) {
+            listPengaduanLainAdapter = ListPengaduanLainAdapter(
+                it as ArrayList<PengaduanLain>,
+                object : ListPengaduanLainAdapter.OnAdapterListener {
+                    override fun onClick(pengaduan: PengaduanLain) {
+                        val v = ""
+                    }
+
+                    override fun onDetail(pengaduan: PengaduanLain) {
+                        val v = ""
+                    }
+
+                    override fun onVerifikasi(pengaduan: PengaduanLain) {
+                        val v = ""
+                    }
+
+                    override fun onDeny(pengaduan: PengaduanLain) {
+                        val v = ""
+                    }
+
+                },
+            )
+
+            rvPengaduanLain.adapter = listPengaduanLainAdapter
+
+//            if (listBidangAdapter.itemCount <= 0) {
+//
+//                rvBidang.visibility = View.GONE
+//                tvNoBidang.visibility = View.VISIBLE
+//            }else{
+//                rvBidang.visibility = View.VISIBLE
+//                tvNoBidang.visibility = View.GONE
+//            }
+//            showLoading(false)
+
+        }
+
     }
 
     private fun logout() {
@@ -72,34 +136,59 @@ class DashboardActivity : AppCompatActivity() {
 //    }
 
     private fun loadChart(){
-        anyChartView = binding.anyChartView
+        chart = binding.aaChartView
 
-        val pie = AnyChart.pie()
+        val aaChartModel : AAChartModel = AAChartModel()
+            .chartType(AAChartType.Bar)
+            .title("Pengaduan")
+            .subtitle("Status Pengaduan")
+            .backgroundColor("#ffffff")
+            .dataLabelsEnabled(true)
+            .series(arrayOf(
+                AASeriesElement()
+                    .name("Pending")
+                    .data(arrayOf(7)),
+                AASeriesElement()
+                    .name("Diteruskan ")
+                    .data(arrayOf(8)),
+                AASeriesElement()
+                    .name("Diverifikasi")
+                    .data(arrayOf(4)),
+                AASeriesElement()
+                    .name("Ditolak")
+                    .data(arrayOf(6))
+            )
+            )
 
-
-
-        val data: MutableList<DataEntry> = ArrayList()
-        data.add(ValueDataEntry("Disetujui", 6371664))
-        data.add(ValueDataEntry("Ditunda", 789622))
-        data.add(ValueDataEntry("Ditolak", 7216301))
-
-        pie.data(data)
-
-//        pie.title("Fruits imported in 2015 (in kg)")
-
-        pie.labels().position("outside")
-
-        pie.legend().title().enabled(true)
-        pie.legend().title()
-            .text("Pengaduan")
-            .padding(0.0, 0.0, 10.0, 0.0)
-
-        pie.legend()
-            .position("center-bottom")
-            .itemsLayout(LegendLayout.HORIZONTAL)
-            .align(Align.CENTER)
-
-        anyChartView.setChart(pie)
+        chart.aa_drawChartWithChartModel(aaChartModel)
+//        anyChartView = binding.anyChartView
+//
+//        val pie = AnyChart.pie()
+//
+//
+//
+//        val data: MutableList<DataEntry> = ArrayList()
+//        data.add(ValueDataEntry("Disetujui", 6371664))
+//        data.add(ValueDataEntry("Ditunda", 789622))
+//        data.add(ValueDataEntry("Ditolak", 7216301))
+//
+//        pie.data(data)
+//
+////        pie.title("Fruits imported in 2015 (in kg)")
+//
+//        pie.labels().position("outside")
+//
+//        pie.legend().title().enabled(true)
+//        pie.legend().title()
+//            .text("Pengaduan")
+//            .padding(0.0, 0.0, 10.0, 0.0)
+//
+//        pie.legend()
+//            .position("center-bottom")
+//            .itemsLayout(LegendLayout.HORIZONTAL)
+//            .align(Align.CENTER)
+//
+//        anyChartView.setChart(pie)
     }
 
     private fun loadPegawai() {

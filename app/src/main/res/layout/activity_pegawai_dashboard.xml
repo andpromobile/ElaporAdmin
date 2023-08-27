@@ -57,6 +57,7 @@
         android:layout_below="@+id/section1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/navbar_bottom"
         android:background="@color/light_teal">
         <FrameLayout
             android:id="@+id/frameLayout"

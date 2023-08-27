@@ -60,6 +60,10 @@ class PengaduanActivity : AppCompatActivity() {
                         val kata = ""
                     }
 
+                    override fun onDeny(pengaduan: Pengaduan) {
+                        val kata = ""
+                    }
+
                 }
             )
 

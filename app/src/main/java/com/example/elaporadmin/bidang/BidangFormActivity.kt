@@ -26,6 +26,10 @@ class BidangFormActivity : AppCompatActivity() {
         binding = ActivityBidangFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarBidang)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         setKomponen()
         cekInput()
     }

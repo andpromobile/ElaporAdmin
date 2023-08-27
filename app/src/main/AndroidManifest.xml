@@ -21,7 +21,8 @@
         tools:targetApi="31">
         <activity
             android:name=".pengaduan.DetailPengaduanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".pegawai.PegawaiDashboardActivity"/>
         <activity
             android:name=".pegawai.PegawaiDashboardActivity"
             android:exported="false" />
@@ -56,7 +57,7 @@
         <activity
             android:name=".perangkatdesa.PerangkatDesaActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".pegawai.PegawaiFormActivity"
             android:exported="false"
@@ -64,7 +65,7 @@
         <activity
             android:name=".pegawai.PegawaiActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".lokasi.LokasiFormActivity"
             android:exported="false"
@@ -72,7 +73,7 @@
         <activity
             android:name=".lokasi.LokasiActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".kelurahan.KelurahanFormActivity"
             android:exported="false"
@@ -80,7 +81,7 @@
         <activity
             android:name=".kelurahan.KelurahanActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".bidang.BidangFormActivity"
             android:exported="true"
@@ -88,7 +89,7 @@
         <activity
             android:name=".bidang.BidangActivity"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -13,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.elaporadmin.R
 
 class ListPengaduanLainAdapter(
-    val listPengaduan:ArrayList<PengaduanLain>,
+    val listPengaduan:ArrayList<Pengaduanlain>,
     val listener: OnAdapterListener
 ):
 RecyclerView.Adapter<ListPengaduanLainAdapter.ListPengaduanLainHolder>(){
@@ -57,11 +56,11 @@ RecyclerView.Adapter<ListPengaduanLainAdapter.ListPengaduanLainHolder>(){
 
         when(pengaduan.status){
             "0" -> {
-                holder.statusPengaduan.text = "Menunggu Verifikasi Perangkat Desa"
+                holder.statusPengaduan.text = "Pending"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#900C3F"))
             }
             "1"-> {
-                holder.statusPengaduan.text = "Telah Diverifikasi Perangkat Desa"
+                holder.statusPengaduan.text = "Diteruskan Ke Pihak Berwenang"
                 holder.statusPengaduan.setTextColor(Color.parseColor("#F94C10"))
 
 //                holder.btnVerifikasi.visibility = View.VISIBLE
@@ -106,11 +105,11 @@ RecyclerView.Adapter<ListPengaduanLainAdapter.ListPengaduanLainHolder>(){
     }
 
     interface OnAdapterListener{
-        fun onClick(pengaduan: PengaduanLain)
+        fun onClick(pengaduan: Pengaduanlain)
 
-        fun onDetail(pengaduan: PengaduanLain)
-        fun onVerifikasi(pengaduan: PengaduanLain)
+        fun onDetail(pengaduan: Pengaduanlain)
+        fun onVerifikasi(pengaduan: Pengaduanlain)
 
-        fun onDeny(pengaduan: PengaduanLain)
+        fun onDeny(pengaduan: Pengaduanlain)
     }
 }

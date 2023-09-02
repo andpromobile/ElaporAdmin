@@ -16,6 +16,7 @@ class PegawaiDashboardActivity : AppCompatActivity() {
     private var nama:String = ""
     private var bidang_id:Int = 0
     private var mBundle = Bundle()
+    private var mBundleProfile = Bundle()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,7 @@ class PegawaiDashboardActivity : AppCompatActivity() {
             nama = intent.getStringExtra("NAMA").toString()
             bidang_id = intent.getIntExtra("BIDANGID",0)
 
+            mBundleProfile.putString("NIK",nik)
             binding.tv2.setText(nama)
         }
         Log.d("Dari Dashboard", bidang_id.toString())
@@ -52,7 +54,7 @@ class PegawaiDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav2 -> {
-                    loadFragment(PegawaiDashboardFragment2())
+                    loadFragment(PegawaiDashboardFragment2(),mBundleProfile)
                     true
                 }
 //                R.id.nav3 -> {

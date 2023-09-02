@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv"
+            android:id="@+id/ivLain"
             android:src="@drawable/logo"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:layout_toEndOf="@+id/iv"
+            android:layout_toEndOf="@+id/ivLain"
             android:text="Selamat Datang,"
             tools:ignore="HardcodedText" />
 
@@ -41,7 +41,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:layout_toEndOf="@+id/iv"
+            android:layout_toEndOf="@+id/ivLain"
             android:text="ADMIN"
             tools:ignore="HardcodedText" />
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +46,7 @@ class PegawaiDashboardFragment1 : Fragment() {
         tvNoPengaduan = v.findViewById(R.id.noPengaduanPegawai)
         listPengaduan = v.findViewById(R.id.listPengaduan1)
 
+
         listPengaduan.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -53,6 +55,8 @@ class PegawaiDashboardFragment1 : Fragment() {
         pengaduanViewModel = ViewModelProvider(this)[PengaduanViewModel::class.java]
 
         pengaduanViewModel.getPengaduanByBidangId(b)
+
+        Log.d("Bidang", b.toString())
 
         pengaduanViewModel.observePengaduanLiveData().observe(
             viewLifecycleOwner
@@ -84,6 +88,7 @@ class PegawaiDashboardFragment1 : Fragment() {
                             putExtra("TANGGAL", pengaduan.tanggalpengaduan)
                             putExtra("STATUS", pengaduan.status)
                             putExtra("FOTO", pengaduan.foto)
+                            putExtra("SUMBER","2")
                         }
 
                         startActivity(intent)

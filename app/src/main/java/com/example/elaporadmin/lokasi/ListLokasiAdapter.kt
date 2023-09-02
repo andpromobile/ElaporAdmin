@@ -33,7 +33,7 @@ class ListLokasiAdapter(val listLokasi:ArrayList<Lokasi>,
         position: Int) {
         val lokasi = listLokasi[position]
 
-        holder.bidang_id.text = lokasi.id.toString()
+        holder.bidang_id.text = lokasi.namabidang
         holder.lokasi.text = lokasi.datalokasi
 
         holder.editLokasi.setOnClickListener{

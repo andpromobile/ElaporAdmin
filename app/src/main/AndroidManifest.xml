@@ -20,9 +20,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".seksi.SeksiFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".seksi.SeksiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pengaduan.DetailPengaduanLainActivity"
+            android:exported="false"
+            android:parentActivityName=".DashboardActivity" />
+        <activity
             android:name=".pengaduan.DetailPengaduanActivity"
             android:exported="false"
-            android:parentActivityName=".pegawai.PegawaiDashboardActivity"/>
+            android:parentActivityName=".pegawai.PegawaiDashboardActivity" />
         <activity
             android:name=".pegawai.PegawaiDashboardActivity"
             android:exported="false" />
@@ -36,7 +46,7 @@
         <activity
             android:name=".kecamatan.KecamatanActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />

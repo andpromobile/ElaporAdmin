@@ -1,9 +1,10 @@
-package com.example.elaporadmin.pengaduan
+package com.example.elaporadmin.seksi
 
+import com.example.elaporadmin.bidang.Bidang
 import com.google.gson.annotations.SerializedName
 
-class ResponsePengaduanLain (
+class ResponseSeksi (
 //    @SerializedName("status") var status  : Boolean?        = null,
 //    @SerializedName("message") var message : String?         = null,
-    @SerializedName("data") var data    : ArrayList<Pengaduanlain> = arrayListOf()
+    @SerializedName("data") var data    : ArrayList<Seksi> = arrayListOf()
 )

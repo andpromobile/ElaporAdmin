@@ -89,6 +89,7 @@ class PerangkatDesaFragment1 : Fragment() {
                             putExtra("TANGGAL", pengaduan.tanggalpengaduan)
                             putExtra("STATUS", pengaduan.status)
                             putExtra("FOTO", pengaduan.foto)
+                            putExtra("SUMBER","1")
                         }
 
                         startActivity(intent)

@@ -13,6 +13,7 @@ import retrofit2.Response
 
 class PengaduanViewModel:ViewModel() {
     private var pengaduanLiveData = MutableLiveData<List<Pengaduan>>()
+    private val pesanLiveData = MutableLiveData<String>()
 
     fun getPengaduan(){
 
@@ -52,24 +53,36 @@ class PengaduanViewModel:ViewModel() {
     fun pengaduanDeny(id:Int){
         viewModelScope.launch {
             val response = ApiService.api.pengaduanDeny(id)
+            if (response.isSuccessful){
+                pesanLiveData.value = response.body()!!.message
+            }
         }
     }
 
     fun pengaduanVerifikasi(id:Int){
         viewModelScope.launch {
             val response = ApiService.api.pengaduanVerifikasi(id)
+            if (response.isSuccessful){
+                pesanLiveData.value = response.body()!!.message
+            }
         }
     }
 
     fun pengaduanVerifikasiPd(id:Int){
         viewModelScope.launch {
             val response = ApiService.api.pengaduanVerifikasiPd(id)
+            if (response.isSuccessful){
+                pesanLiveData.value = response.body()!!.message
+            }
         }
     }
 
     fun pengaduanVerifikasi1(id:Int){
         viewModelScope.launch {
             val response = ApiService.api.pengaduanVerifikasi1(id)
+            if (response.isSuccessful){
+                pesanLiveData.value = response.body()!!.message
+            }
         }
     }
 
@@ -85,6 +98,10 @@ class PengaduanViewModel:ViewModel() {
 
     fun observePengaduanLiveData():LiveData<List<Pengaduan>>{
         return pengaduanLiveData
+    }
+
+    fun observePesanLiveData(): LiveData<String> {
+        return pesanLiveData
     }
 
 }

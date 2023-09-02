@@ -107,7 +107,9 @@ class PerangkatDesaActivity : AppCompatActivity() {
         with(intent) {
             putExtra("ID",perangkatdesa.nik)
             putExtra("NAMAPD",perangkatdesa.namapd)
-            putExtra("KELURAHAN_ID", perangkatdesa.kelurahan_id)
+            putExtra("KECAMATANID", perangkatdesa.kecamatan_id)
+            putExtra("EMAIL", perangkatdesa.email)
+            putExtra("PASSWORD", perangkatdesa.password)
             putExtra("MODE","EDIT")
         }
 

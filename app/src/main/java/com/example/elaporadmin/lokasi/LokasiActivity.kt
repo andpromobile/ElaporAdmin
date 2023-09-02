@@ -65,6 +65,10 @@ class LokasiActivity : AppCompatActivity() {
         tvNoLokasi = binding.noLokasi
         rvLokasi = binding.listLokasi
 
+        setSupportActionBar(binding.toolbarLokasi)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         rvLokasi.apply {
             this.setHasFixedSize(true)
             this.layoutManager = LinearLayoutManager(applicationContext)

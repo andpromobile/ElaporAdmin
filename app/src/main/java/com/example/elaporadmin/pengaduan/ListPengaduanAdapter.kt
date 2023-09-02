@@ -35,7 +35,7 @@ RecyclerView.Adapter<ListPengaduanAdapter.ListPengaduanHolder>(){
         val view:View = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.list_pengaduan1,
+                R.layout.list_pengaduan_pegawai,
                 parent,
                 false
             )

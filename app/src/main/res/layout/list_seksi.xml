@@ -12,10 +12,10 @@
     android:background="@drawable/bg_rounded">
 
     <TextView
-        android:id="@+id/namaBidang"
+        android:id="@+id/namaSeksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/editBidang"
+        android:layout_toStartOf="@+id/editSeksi"
         android:hint="Nama Bidang"
         android:padding="10dp"
         android:textColorHint="#78909C"
@@ -23,21 +23,21 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/seksi"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignWithParentIfMissing="false"-->
-<!--        android:layout_below="@id/namaBidang"-->
-<!--        android:layout_toStartOf="@+id/editBidang"-->
-<!--        android:hint="Seksi"-->
-<!--        android:padding="10dp"-->
-<!--        android:textColorHint="#757575"-->
-<!--        android:textSize="16sp"-->
-<!--        tools:ignore="HardcodedText" />-->
+    <TextView
+        android:id="@+id/bidangId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_below="@id/namaSeksi"
+        android:layout_toStartOf="@+id/editSeksi"
+        android:hint="Seksi"
+        android:padding="10dp"
+        android:textColorHint="#757575"
+        android:textSize="16sp"
+        tools:ignore="HardcodedText" />
 
     <ImageButton
-        android:id="@+id/editBidang"
+        android:id="@+id/editSeksi"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
@@ -47,10 +47,10 @@
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/hapusBidang"
+        android:id="@+id/hapusSeksi"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_below="@+id/editBidang"
+        android:layout_below="@+id/editSeksi"
         android:layout_alignParentEnd="true"
         android:background="@color/white"
         app:srcCompat="@drawable/baseline_delete_24"

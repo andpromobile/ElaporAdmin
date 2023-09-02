@@ -2,7 +2,6 @@ package com.example.elaporadmin
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -10,17 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.example.elaporadmin.bidang.Bidang
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.elaporadmin.bidang.BidangActivity
-import com.example.elaporadmin.bidang.BidangViewModel
-import com.example.elaporadmin.bidang.ListBidangAdapter
 import com.example.elaporadmin.databinding.ActivityDashboardBinding
 import com.example.elaporadmin.kecamatan.KecamatanActivity
 import com.example.elaporadmin.kelurahan.KelurahanActivity
 import com.example.elaporadmin.lokasi.LokasiActivity
 import com.example.elaporadmin.pegawai.PegawaiActivity
+import com.example.elaporadmin.pengaduan.DetailPengaduanLainActivity
 import com.example.elaporadmin.pengaduan.ListPengaduanLainAdapter
-import com.example.elaporadmin.pengaduan.PengaduanLain
+import com.example.elaporadmin.pengaduan.Pengaduanlain
 import com.example.elaporadmin.pengaduan.PengaduanLainViewModel
 import com.example.elaporadmin.perangkatdesa.PerangkatDesaActivity
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
@@ -61,6 +59,11 @@ class DashboardActivity : AppCompatActivity() {
 //        loadPengaduan()
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadPengaduanLainList()
+    }
+
     private fun loadPengaduanLainList() {
         rvPengaduanLain = binding.listPengaduanLainDashboard
 
@@ -76,21 +79,42 @@ class DashboardActivity : AppCompatActivity() {
             this
         ) {
             listPengaduanLainAdapter = ListPengaduanLainAdapter(
-                it as ArrayList<PengaduanLain>,
+                it as ArrayList<Pengaduanlain>,
                 object : ListPengaduanLainAdapter.OnAdapterListener {
-                    override fun onClick(pengaduan: PengaduanLain) {
+                    override fun onClick(pengaduan: Pengaduanlain) {
                         val v = ""
                     }
 
-                    override fun onDetail(pengaduan: PengaduanLain) {
+                    override fun onDetail(pengaduan: Pengaduanlain) {
+                        val intent = Intent(
+                            this@DashboardActivity,
+                            DetailPengaduanLainActivity::class.java,
+                        )
+
+                        with(intent) {
+                            putExtra("ID", pengaduan.id)
+                            putExtra("NAMA", pengaduan.nama)
+                            putExtra("TELP", pengaduan.telp)
+                            putExtra("JUDUL", pengaduan.judulpengaduan)
+                            putExtra("ISI", pengaduan.isipengaduan)
+                            putExtra("LOKASI", pengaduan.namalokasi)
+                            putExtra("KELURAHAN", pengaduan.namakelurahan)
+                            putExtra("TANGGAL", pengaduan.tanggalpengaduan)
+                            putExtra("STATUS", pengaduan.status)
+                            putExtra("FOTO", pengaduan.foto)
+                            putExtra("LATITUDE", pengaduan.latitude)
+                            putExtra("LONGITUDE", pengaduan.longitude)
+                        }
+
+                        startActivity(intent)
+                        Animatoo.animateZoom(this@DashboardActivity) //fire the zoom animation
+                    }
+
+                    override fun onVerifikasi(pengaduan: Pengaduanlain) {
                         val v = ""
                     }
 
-                    override fun onVerifikasi(pengaduan: PengaduanLain) {
-                        val v = ""
-                    }
-
-                    override fun onDeny(pengaduan: PengaduanLain) {
+                    override fun onDeny(pengaduan: Pengaduanlain) {
                         val v = ""
                     }
 

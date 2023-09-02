@@ -6,6 +6,7 @@ class Perangkatdesa (
     var nik:String = "",
     var namapd: String? = null,
     var kelurahan_id:Int? = 0,
+    var kecamatan_id:Int? = 0,
     var namakecamatan:String? = null,
     var level:String? = null,
     var email:String? = null,

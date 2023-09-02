@@ -10,6 +10,7 @@ import com.example.elaporadmin.pegawai.ResponsePegawai
 import com.example.elaporadmin.pengaduan.ResponsePengaduan
 import com.example.elaporadmin.pengaduan.ResponsePengaduanLain
 import com.example.elaporadmin.perangkatdesa.ResponsePerangkatdesa
+import com.example.elaporadmin.seksi.ResponseSeksi
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -21,6 +22,30 @@ import retrofit2.http.Path
 
 interface ApiEndPoint {
 
+    @GET("dtxseksi")
+    suspend fun getSeksi(): Response<ResponseSeksi>
+
+    @FormUrlEncoded
+    @POST("dtxseksi/store")
+    fun insertSeksi(
+        @Field("namaseksi") namaseksi:String,
+        @Field("bidang_id") bidang_id:Int,
+    ): Call<SubmitModel>
+
+    @FormUrlEncoded
+    @POST("dtxseksi/update/{id}")
+    fun updateSeksi(
+        @Path("id") id:Int,
+        @Field("namaseksi") namaseksi:String,
+        @Field("bidang_id") bidang_id:Int,
+    ): Call<SubmitModel>
+
+
+    @DELETE("dtxseksi/delete/{id}")
+    fun deleteSeksi(
+        @Path("id") id:Int,
+    ): Call<SubmitModel>
+
     @GET("dtxbidang")
     suspend fun getBidang(): Response<ResponseBidang>
 
@@ -28,7 +53,7 @@ interface ApiEndPoint {
     @POST("dtxbidang/store")
     fun insertBidang(
         @Field("namabidang") namabidang:String,
-        @Field("seksi") seksi:String,
+//        @Field("seksi") seksi:String,
     ): Call<SubmitModel>
 
     @FormUrlEncoded
@@ -36,7 +61,7 @@ interface ApiEndPoint {
     fun updateBidang(
         @Path("id") id:Int,
         @Field("namabidang") namabidang:String,
-        @Field("seksi") seksi:String,
+//        @Field("seksi") seksi:String,
     ): Call<SubmitModel>
 
 
@@ -96,6 +121,11 @@ interface ApiEndPoint {
     @GET("dtxlokasi/page/{id}")
     suspend fun getLokasiPage(
         @Path("id") id:Int
+    ): Response<ResponseLokasi>
+
+    @GET("dtxlokasi/cari/{keyword}")
+    suspend fun cari(
+        @Path("keyword") keyword:String
     ): Response<ResponseLokasi>
 
     @GET("dtxlokasi/show/{id}")
@@ -177,6 +207,11 @@ interface ApiEndPoint {
     @GET("dtxpengaduanlain")
     suspend fun getPengaduanLain(): Response<ResponsePengaduanLain>
 
+    @GET("dtxpengaduanlain/verifikasi/{id}")
+    suspend fun verifikasi(
+        @Path("id") id:Int
+    ): Response<SubmitModel>
+
     @GET("dtxpengaduan/bidang/{id}")
     suspend fun getPengaduanByBidangId(
         @Path("id") id:Int
@@ -231,7 +266,7 @@ interface ApiEndPoint {
     fun insertPerangkatDesa(
         @Field("nik") nik:String,
         @Field("namapd") namapd:String,
-        @Field("kelurahan_id") kelurahanid:Int,
+        @Field("kecamatan_id") kelurahanid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Call<SubmitModel>

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
-        android:id="@+id/iv"
+        android:id="@+id/ivLain"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout="@+id/viewBg"
@@ -35,7 +35,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
-        android:layout_below="@+id/iv"
+        android:layout_below="@+id/ivLain"
         app:cardCornerRadius="20dp"
         android:elevation="200dp"
         android:layout_marginTop="20dp"

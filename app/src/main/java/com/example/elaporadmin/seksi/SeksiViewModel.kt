@@ -1,4 +1,4 @@
-package com.example.elaporadmin.bidang
+package com.example.elaporadmin.seksi
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,22 +12,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BidangViewModel: ViewModel() {
-    private val bidangLiveData by lazy { MutableLiveData<List<Bidang>>() }
+class SeksiViewModel: ViewModel() {
+    private val seksiLiveData by lazy { MutableLiveData<List<Seksi>>() }
     private val pesanLiveData by lazy { MutableLiveData<String>() }
 
-    fun getBidang() {
+    fun getSeksi() {
        viewModelScope.launch{
-            val response = ApiService.api.getBidang()
+            val response = ApiService.api.getSeksi()
             if (response.isSuccessful){
-                    bidangLiveData.value = response.body()!!.data
+                    seksiLiveData.value = response.body()!!.data
             }
         }
     }
 
-    fun insertBidang(namabidang:String){
-        ApiService.api.insertBidang(
-            namabidang
+    fun insertSeksi(namaseksi:String, bidangid:Int){
+        ApiService.api.insertSeksi(
+            namaseksi, bidangid
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(
@@ -48,9 +48,9 @@ class BidangViewModel: ViewModel() {
             })
     }
 
-    fun updateBidang(id:Int, namabidang:String){
-        ApiService.api.updateBidang(
-            id, namabidang
+    fun updateSeksi(id:Int, namaseksi:String, bidangid:Int){
+        ApiService.api.updateSeksi(
+            id, namaseksi, bidangid
         )
             .enqueue(object: Callback<SubmitModel>{
                 override fun onResponse(
@@ -71,9 +71,9 @@ class BidangViewModel: ViewModel() {
             })
     }
 
-    fun deleteBidang(id:Int){
+    fun deleteSeksi(id:Int){
 
-        ApiService.api.deleteBidang(
+        ApiService.api.deleteSeksi(
             id
         ).enqueue(object:Callback<SubmitModel>{
             override fun onResponse(
@@ -95,8 +95,8 @@ class BidangViewModel: ViewModel() {
         })
     }
 
-    fun observeBidangLiveData() : LiveData<List<Bidang>> {
-        return bidangLiveData
+    fun observeSeksiLiveData() : LiveData<List<Seksi>> {
+        return seksiLiveData
     }
 
     fun observePesanLiveData():LiveData<String>{

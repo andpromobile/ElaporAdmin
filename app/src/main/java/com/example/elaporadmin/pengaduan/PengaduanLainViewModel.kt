@@ -1,5 +1,6 @@
 package com.example.elaporadmin.pengaduan
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,16 @@ import com.example.elaporadmin.retrofit.ApiService
 import kotlinx.coroutines.launch
 
 class PengaduanLainViewModel:ViewModel() {
-    private var pengaduanLiveData = MutableLiveData<List<PengaduanLain>>()
+    private var pengaduanLiveData = MutableLiveData<List<Pengaduanlain>>()
 
+    fun verifikasi(id:Int){
+        viewModelScope.launch {
+            val response = ApiService.api.verifikasi(id)
+            if (response.isSuccessful){
+                Log.d("Berhasil", "Berhasil")
+            }
+        }
+    }
     fun getPengaduanLain(){
 
         viewModelScope.launch{
@@ -62,7 +71,7 @@ class PengaduanLainViewModel:ViewModel() {
         }
     }
 
-    fun observePengaduanLiveData():LiveData<List<PengaduanLain>>{
+    fun observePengaduanLiveData():LiveData<List<Pengaduanlain>>{
         return pengaduanLiveData
     }
 

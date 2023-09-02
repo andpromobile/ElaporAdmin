@@ -82,7 +82,7 @@ class PegawaiFormActivity : AppCompatActivity() {
             val listId:MutableList<String?> = ArrayList()
 
             for (i in bidangList){
-                fp.add(i.namabidang+" - "+i.seksi)
+                fp.add(i.namabidang)
                 listId.add(i.id.toString())
             }
 

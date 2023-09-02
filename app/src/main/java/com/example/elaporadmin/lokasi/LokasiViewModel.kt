@@ -28,6 +28,15 @@ class LokasiViewModel: ViewModel() {
         }
     }
 
+    fun cari(keyword:String){
+        viewModelScope.launch{
+            val response = ApiService.api.cari(keyword)
+            if (response.isSuccessful){
+                lokasiLiveData.value = response.body()!!.data
+            }
+        }
+    }
+
     fun getLokasiByPage(){
         viewModelScope.launch {
             try {

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.kelurahan.KelurahanViewModel
 import com.example.elaporadmin.databinding.ActivityPerangkatDesaFormBinding
+import com.example.elaporadmin.kecamatan.KecamatanViewModel
 
 class PerangkatDesaFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerangkatDesaFormBinding
@@ -25,6 +26,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
     private var id:Int = 0
     private var mode:String = ""
     private var kelurahanIdPd:Int = 0
+    private var kecamatanId:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,16 +63,16 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         passwordPd = binding.passwordPd
         btnFormBinding = binding.btnFormPd
 
-        val kelurahanViewModel = ViewModelProvider(this)[KelurahanViewModel::class.java]
+        val kecamatanViewModel = ViewModelProvider(this)[KecamatanViewModel::class.java]
 
-        kelurahanViewModel.getKelurahan()
-        kelurahanViewModel.observeKelurahanLiveData().observe(
+        kecamatanViewModel.getKecamatan()
+        kecamatanViewModel.observeKecamatanLiveData().observe(
         this@PerangkatDesaFormActivity
-        ){ kelurahanList ->
+        ){ kecamatanList ->
                 val fp:MutableList<String?> = ArrayList()
                 val listId:MutableList<String?> = ArrayList()
-                for (i in kelurahanList){
-                    fp.add(i.namakelurahan)
+                for (i in kecamatanList){
+                    fp.add(i.namakecamatan)
                     listId.add(i.id.toString())
                 }
 
@@ -80,7 +82,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
                 tvKelurahanIdPd.setAdapter(arrayAdapter)
 
                 tvKelurahanIdPd.setOnItemClickListener { _, _, position, _ ->
-                    kelurahanIdPd = listId.get(position)!!.toInt()
+                    kecamatanId = listId.get(position)!!.toInt()
                 }
 
         }
@@ -92,6 +94,8 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             if (mode == "EDIT"){
                 nik.setText(intent.getStringExtra("ID"))
                 tvNamaPd.setText(intent.getStringExtra("NAMAPD"))
+                emailPd.setText(intent.getStringExtra("EMAIL"))
+                passwordPd.setText(intent.getStringExtra("PASSWORD"))
 //                tvKelurahanIdPd.setText(intent.getStringExtra("KELURAHAN_ID"))
             }
         }
@@ -110,7 +114,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             perangkatDesaViewModel.insertPerangkatDesa(
                 nik.text.toString(),
                 tvNamaPd.text.toString(),
-                this.kelurahanIdPd,
+                this.kecamatanId,
                 emailPd.text.toString(),
                 passwordPd.text.toString()
             )

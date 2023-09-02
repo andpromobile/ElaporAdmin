@@ -44,7 +44,8 @@
                 app:cardElevation="10dp"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true"
-                app:contentPadding="10dp">
+                app:contentPadding="10dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/light_teal"
-                            android:drawableLeft="@drawable/baseline_person_24"
+                            android:drawableStart="@drawable/baseline_person_24"
                             android:drawableTint="@color/teal"
                             android:hint="Nama" />
                     </com.google.android.material.textfield.TextInputLayout>

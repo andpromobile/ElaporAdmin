@@ -41,7 +41,8 @@ class BidangFormActivity : AppCompatActivity() {
             bidangViewModel.updateBidang(
                 this.id,
                 tvNamaBidang.text.toString(),
-                tvSeksi.text.toString())
+//                tvSeksi.text.toString()
+            )
 
             bidangViewModel.observePesanLiveData().observe(
                 this,
@@ -71,7 +72,8 @@ class BidangFormActivity : AppCompatActivity() {
             showLoading(true)
             bidangViewModel.insertBidang(
                 tvNamaBidang.text.toString(),
-                tvSeksi.text.toString())
+//                tvSeksi.text.toString()
+            )
 
             bidangViewModel.observePesanLiveData().observe(this
             ) {
@@ -111,7 +113,7 @@ class BidangFormActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         tvNamaBidang = binding.frmNamaBidang
-        tvSeksi = binding.frmSeksi
+//        tvSeksi = binding.frmSeksi
         btnFormBinding = binding.btnFormBidang
 
         if (!intent.extras?.isEmpty!!){
@@ -121,7 +123,7 @@ class BidangFormActivity : AppCompatActivity() {
             if (mode == "EDIT"){
                 this.id = intent.getIntExtra("ID",0)
                 tvNamaBidang.setText(intent.getStringExtra("NAMABIDANG"))
-                tvSeksi.setText(intent.getStringExtra("SEKSI"))
+//                tvSeksi.setText(intent.getStringExtra("SEKSI"))
             }
         }
 

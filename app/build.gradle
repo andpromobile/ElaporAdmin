@@ -80,5 +80,8 @@ dependencies {
 //    Animatoo
     implementation 'com.github.AtifSayings:Animatoo:1.0.1'
 
+    // ImageCompressor
+    implementation 'id.zelory:compressor:3.0.1'
+
 
 }

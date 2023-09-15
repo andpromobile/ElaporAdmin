@@ -43,7 +43,7 @@ class ListSeksiAdapter(
 
         holder.id = seksi.id
         holder.namaseksi.text = seksi.namaseksi
-        holder.bidangid.text = seksi.bidang_id.toString()
+        holder.bidangid.text = seksi.namabidang
 
         holder.editSeksi.setOnClickListener{
             listener.onUpdate(seksi)

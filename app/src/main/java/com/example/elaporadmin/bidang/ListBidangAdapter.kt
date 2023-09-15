@@ -18,7 +18,7 @@ class ListBidangAdapter(
 
         var id = 0
         var namaBidang: TextView = itemView.findViewById(R.id.namaBidang)
-        var seksi:TextView = itemView.findViewById(R.id.seksi)
+//        var seksi:TextView = itemView.findViewById(R.id.seksi)
         var editBidang:ImageButton = itemView.findViewById(R.id.editBidang)
         var hapusBidang:ImageButton = itemView.findViewById(R.id.hapusBidang)
     }
@@ -43,7 +43,7 @@ class ListBidangAdapter(
 
         holder.id = bidang.id
         holder.namaBidang.text = bidang.namabidang
-        holder.seksi.text = bidang.seksi
+//        holder.seksi.text = bidang.seksi
 
         holder.editBidang.setOnClickListener{
             listener.onUpdate(bidang)

@@ -97,8 +97,7 @@ class BidangFormActivity : AppCompatActivity() {
     private fun cekInput():Boolean {
         var cek = false
         if (
-            (tvNamaBidang.text.toString() != "") &&
-            (tvSeksi.text.toString() != "")
+            (tvNamaBidang.text.toString() != "")
         ) cek = true
 
         return cek

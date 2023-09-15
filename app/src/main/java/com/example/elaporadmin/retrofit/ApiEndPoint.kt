@@ -11,13 +11,16 @@ import com.example.elaporadmin.pengaduan.ResponsePengaduan
 import com.example.elaporadmin.pengaduan.ResponsePengaduanLain
 import com.example.elaporadmin.perangkatdesa.ResponsePerangkatdesa
 import com.example.elaporadmin.seksi.ResponseSeksi
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiEndPoint {
@@ -217,6 +220,11 @@ interface ApiEndPoint {
         @Path("id") id:Int
     ): Response<ResponsePengaduan>
 
+    @GET("dtxpengaduan/seksi/{id}")
+    suspend fun getPengaduanBySeksiId(
+        @Path("id") id:Int
+    ): Response<ResponsePengaduan>
+
     @GET("dtxpengaduanlain/kelurahan/{id}")
     suspend fun getPengaduanLainByKelurahanId(
         @Path("id") id:Int
@@ -266,7 +274,7 @@ interface ApiEndPoint {
     fun insertPerangkatDesa(
         @Field("nik") nik:String,
         @Field("namapd") namapd:String,
-        @Field("kecamatan_id") kelurahanid:Int,
+        @Field("kelurahan_id") kelurahanid:Int,
         @Field("email") email:String,
         @Field("password") password:String,
     ): Call<SubmitModel>
@@ -301,4 +309,10 @@ interface ApiEndPoint {
         @Field("email") email:String,
         @Field("password") password:String
     ):Response<Login>
+
+    @Multipart
+    @POST("dtxpengaduan/upload")
+    fun uploadImage(
+        @Part foto: MultipartBody.Part
+    ):Call<SubmitModel>
 }

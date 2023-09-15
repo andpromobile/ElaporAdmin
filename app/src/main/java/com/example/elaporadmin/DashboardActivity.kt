@@ -21,6 +21,7 @@ import com.example.elaporadmin.pengaduan.ListPengaduanLainAdapter
 import com.example.elaporadmin.pengaduan.Pengaduanlain
 import com.example.elaporadmin.pengaduan.PengaduanLainViewModel
 import com.example.elaporadmin.perangkatdesa.PerangkatDesaActivity
+import com.example.elaporadmin.seksi.SeksiActivity
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
@@ -56,7 +57,15 @@ class DashboardActivity : AppCompatActivity() {
         loadLokasi()
         loadKecamatan()
         loadPengaduanLainList()
+        loadSeksi()
 //        loadPengaduan()
+    }
+
+    private fun loadSeksi() {
+        binding.toSeksi.setOnClickListener{
+            val intent = Intent(this@DashboardActivity, SeksiActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {

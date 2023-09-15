@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.databinding.ActivityMainBinding
 import com.example.elaporadmin.pegawai.PegawaiDashboardActivity
@@ -50,11 +51,10 @@ class MainActivity : AppCompatActivity() {
                 showLoading(true)
 
                 try{
-                    CoroutineScope(Dispatchers.IO).launch{
+                    lifecycleScope.launch{
 
                         val response = ApiService.api.login(txtUsername.text.toString(), txtPassword.text.toString())
 
-                        withContext(Dispatchers.Main){
 
                             if (response.isSuccessful){
                                 level = response.body()!!.level
@@ -69,8 +69,10 @@ class MainActivity : AppCompatActivity() {
                                 }else if(status == 200){
                                     val nama = response.body()!!.nama
                                     val nik = response.body()!!.nik
+                                    val seksi_id = response.body()!!.seksi_id
                                     val bidang_id = response.body()!!.bidang_id
                                     val kecamatan_id = response.body()!!.kecamatan_id
+                                    val kelurahan_id = response.body()!!.kelurahan_id
 //                                var bidang_id = response.body()!!.bidang_id
 
                                     showLoading(false)
@@ -85,7 +87,9 @@ class MainActivity : AppCompatActivity() {
                                                     intent.putExtra("NAMA",nama)
                                                     intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
+                                                    intent.putExtra("SEKSIID",seksi_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
+                                                    intent.putExtra("KELURAHANID",kelurahan_id)
                                                     startActivity(intent)
                                                 }
                                                 "pegawai" ->{
@@ -93,7 +97,9 @@ class MainActivity : AppCompatActivity() {
                                                     intent.putExtra("NAMA",nama)
                                                     intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
+                                                    intent.putExtra("SEKSIID",seksi_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
+                                                    intent.putExtra("KELURAHANID",kelurahan_id)
                                                     startActivity(intent)
                                                 }
                                                 "perangkatdesa" ->{
@@ -101,7 +107,9 @@ class MainActivity : AppCompatActivity() {
                                                     intent.putExtra("NAMA", nama)
                                                     intent.putExtra("NIK",nik)
                                                     intent.putExtra("BIDANGID",bidang_id)
+                                                    intent.putExtra("SEKSIID",seksi_id)
                                                     intent.putExtra("KECAMATANID",kecamatan_id)
+                                                    intent.putExtra("KELURAHANID",kelurahan_id)
                                                     startActivity(intent)
                                                 }
                                             }
@@ -112,7 +120,6 @@ class MainActivity : AppCompatActivity() {
 
 
                             }
-                        }
                     }
                 }catch (E: Exception){
                     SweetAlertDialog(this@MainActivity, SweetAlertDialog.WARNING_TYPE)

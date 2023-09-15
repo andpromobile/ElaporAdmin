@@ -7,6 +7,7 @@ class Pegawai (
     var namapegawai: String? = null,
     var jabatan: String? = null,
     var bidang_id:Int? = 0,
+    var seksi_id:Int? = 0,
     var user_id:Int? = 0,
     var level:String? = null,
     var email:String? = null,

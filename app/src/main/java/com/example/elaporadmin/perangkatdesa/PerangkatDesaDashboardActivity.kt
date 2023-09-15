@@ -2,6 +2,7 @@ package com.example.elaporadmin.perangkatdesa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.elaporadmin.R
@@ -18,6 +19,7 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
     private var nama:String = ""
     private var bidang_id:Int = 0
     private var kecamatan_id:Int = 0
+    private var kelurahan_id:Int = 0
     private val mBundle = Bundle()
     private val mBundleProfile = Bundle()
 
@@ -34,6 +36,7 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
             nama = intent.getStringExtra("NAMA").toString()
             bidang_id = intent.getIntExtra("BIDANGID", 0)
             kecamatan_id = intent.getIntExtra("KECAMATANID", 0)
+            kelurahan_id = intent.getIntExtra("KELURAHANID", 0)
 
             mBundleProfile.putString("NIK",nik)
 
@@ -41,6 +44,7 @@ class PerangkatDesaDashboardActivity : AppCompatActivity() {
         }
 
         mBundle.putInt("KECAMATANID",kecamatan_id)
+        mBundle.putInt("KELURAHANID",kelurahan_id)
 
         loadFragment(PerangkatDesaFragment1(), mBundle)
 

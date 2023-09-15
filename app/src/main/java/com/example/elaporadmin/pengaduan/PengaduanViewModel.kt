@@ -96,6 +96,16 @@ class PengaduanViewModel:ViewModel() {
         }
     }
 
+    fun getPengaduanBySeksiId(id:Int){
+        viewModelScope.launch {
+            val response = ApiService.api.getPengaduanBySeksiId(id)
+            if (response.isSuccessful){
+                pengaduanLiveData.value = response.body()!!.data
+            }
+
+        }
+    }
+
     fun observePengaduanLiveData():LiveData<List<Pengaduan>>{
         return pengaduanLiveData
     }

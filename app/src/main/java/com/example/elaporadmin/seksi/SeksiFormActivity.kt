@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -66,7 +67,7 @@ class SeksiFormActivity : AppCompatActivity() {
 
     private fun inisialisasi() {
         val bidangViewModel = ViewModelProvider(this)[BidangViewModel::class.java]
-
+        val frmNamaBidang:AutoCompleteTextView = binding.frmNamaBidang
         bidangViewModel.getBidang()
         bidangViewModel.observeBidangLiveData().observe(
             this@SeksiFormActivity
@@ -83,9 +84,9 @@ class SeksiFormActivity : AppCompatActivity() {
                 ArrayAdapter<String?>(this, android.R.layout.simple_list_item_1, fp)
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-            binding.frmNamaBidang.setAdapter(arrayAdapter)
+            frmNamaBidang.setAdapter(arrayAdapter)
 
-            binding.frmNamaBidang.setOnItemClickListener { _, _, position, _ ->
+            frmNamaBidang.setOnItemClickListener { _, _, position, _ ->
                 bidangId = listId.get(position)!!.toInt()
 
             }

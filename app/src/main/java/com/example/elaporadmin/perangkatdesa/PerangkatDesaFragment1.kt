@@ -2,6 +2,7 @@ package com.example.elaporadmin.perangkatdesa
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,9 @@ class PerangkatDesaFragment1 : Fragment() {
 
         val bundle = arguments
         val kecamatanid = bundle!!.getInt("KECAMATANID")
+        val kelurahanid = bundle!!.getInt("KELURAHANID")
+
+        Log.d("KELURAHAN ID", kelurahanid.toString())
 
         listPengaduan.apply {
             setHasFixedSize(true)
@@ -57,7 +61,7 @@ class PerangkatDesaFragment1 : Fragment() {
 
         pengaduanViewModel = ViewModelProvider(this)[PengaduanViewModel::class.java]
 
-        pengaduanViewModel.getPengaduanByKecamatanId(kecamatanid)
+        pengaduanViewModel.getPengaduanByKecamatanId(kelurahanid)
 
         pengaduanViewModel.observePengaduanLiveData().observe(
             viewLifecycleOwner

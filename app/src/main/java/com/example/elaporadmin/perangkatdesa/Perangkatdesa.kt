@@ -11,6 +11,7 @@ class Perangkatdesa (
     var level:String? = null,
     var email:String? = null,
     var password:String? = null,
+    var namakelurahan:String? = null,
     var created_at: Timestamp? = null,
     var updated_at: Timestamp? = null,
 )

@@ -108,6 +108,7 @@ class PegawaiActivity : AppCompatActivity() {
             putExtra("NAMAPEGAWAI",pegawai.namapegawai)
             putExtra("JABATAN", pegawai.jabatan)
             putExtra("BIDANG_ID", pegawai.bidang_id)
+            putExtra("SEKSI_ID", pegawai.seksi_id)
             putExtra("EMAIL", pegawai.email)
             putExtra("MODE","EDIT")
         }
@@ -127,10 +128,6 @@ class PegawaiActivity : AppCompatActivity() {
                     .setContentText("Data Berhasil Dihapus")
                     .show()
                 onStart()
-            })
-            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak", {
-                it.dismissWithAnimation()
             })
             .show()
     }

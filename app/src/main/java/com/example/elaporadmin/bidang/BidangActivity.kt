@@ -111,7 +111,7 @@ class BidangActivity : AppCompatActivity() {
         with(intent) {
             putExtra("ID",bidang.id)
             putExtra("NAMABIDANG",bidang.namabidang)
-            putExtra("SEKSI", bidang.seksi)
+//            putExtra("SEKSI", bidang.seksi)
             putExtra("MODE","EDIT")
         }
         startActivity(intent)
@@ -128,18 +128,11 @@ class BidangActivity : AppCompatActivity() {
                 bidangViewModel.deleteBidang(bidang.id)
                 it.dismissWithAnimation()
 
-                listBidangAdapter.notifyDataSetChanged()
-
                 SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setContentText("Data Berhasil Dihapus")
                     .show()
 
-                onStart()
-            }
-            .setCancelButton("red", null)
-            .setCancelButtonBackgroundColor(Color.RED)
-            .setCancelButton("Tidak") {
-                it.dismissWithAnimation()
+                initLayout()
             }
             .show()
 

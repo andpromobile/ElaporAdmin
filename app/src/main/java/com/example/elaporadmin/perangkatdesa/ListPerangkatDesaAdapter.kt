@@ -35,7 +35,7 @@ class ListPerangkatDesaAdapter(
 
         holder.nikPd.text = perangkatDesa.nik
         holder.namaPerangkatDesa.text = perangkatDesa.namapd
-        holder.perangkatDesaKelurahanId.text = perangkatDesa.namakecamatan
+        holder.perangkatDesaKelurahanId.text = perangkatDesa.namakelurahan
 
         holder.editPerangkatDesa.setOnClickListener {
             listener.onUpdate(perangkatDesa)

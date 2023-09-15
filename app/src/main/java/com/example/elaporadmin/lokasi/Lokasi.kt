@@ -8,7 +8,7 @@ class Lokasi (
     val foto: String = "",
     val bidang_id:Int = 0,
     val alamat:String = "",
-    val namabidang:String = ""
+    val namaseksi:String = ""
         )
 
 //"id": 1,

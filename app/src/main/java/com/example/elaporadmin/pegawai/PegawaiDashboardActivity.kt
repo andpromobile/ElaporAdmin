@@ -15,6 +15,7 @@ class PegawaiDashboardActivity : AppCompatActivity() {
     private var nik:String = ""
     private var nama:String = ""
     private var bidang_id:Int = 0
+    private var seksi_id:Int = 0
     private var mBundle = Bundle()
     private var mBundleProfile = Bundle()
 
@@ -31,12 +32,14 @@ class PegawaiDashboardActivity : AppCompatActivity() {
             nik = intent.getStringExtra("NIK")!!.toString()
             nama = intent.getStringExtra("NAMA").toString()
             bidang_id = intent.getIntExtra("BIDANGID",0)
+            seksi_id = intent.getIntExtra("SEKSIID",0)
 
             mBundleProfile.putString("NIK",nik)
             binding.tv2.setText(nama)
         }
         Log.d("Dari Dashboard", bidang_id.toString())
         mBundle.putInt("BIDANGID", bidang_id)
+        mBundle.putInt("SEKSIID", seksi_id)
         loadFragment(PegawaiDashboardFragment1(), mBundle)
 
         setListener()

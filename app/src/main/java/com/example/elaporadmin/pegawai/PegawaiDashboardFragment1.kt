@@ -34,7 +34,7 @@ class PegawaiDashboardFragment1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_pegawai_dashboard1, container, false)
-        val b = requireArguments().getInt("BIDANGID")
+        val b = requireArguments().getInt("SEKSIID")
         Log.d("Dari Fragment", b.toString())
         initLayout(v, b)
 
@@ -54,9 +54,8 @@ class PegawaiDashboardFragment1 : Fragment() {
 
         pengaduanViewModel = ViewModelProvider(this)[PengaduanViewModel::class.java]
 
-        pengaduanViewModel.getPengaduanByBidangId(b)
+        pengaduanViewModel.getPengaduanBySeksiId(b)
 
-        Log.d("Bidang", b.toString())
 
         pengaduanViewModel.observePengaduanLiveData().observe(
             viewLifecycleOwner

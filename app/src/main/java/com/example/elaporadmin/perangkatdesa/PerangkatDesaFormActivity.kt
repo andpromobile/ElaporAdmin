@@ -63,16 +63,16 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
         passwordPd = binding.passwordPd
         btnFormBinding = binding.btnFormPd
 
-        val kecamatanViewModel = ViewModelProvider(this)[KecamatanViewModel::class.java]
+        val kelurahanVM = ViewModelProvider(this)[KelurahanViewModel::class.java]
 
-        kecamatanViewModel.getKecamatan()
-        kecamatanViewModel.observeKecamatanLiveData().observe(
+        kelurahanVM.getKelurahan()
+        kelurahanVM.observeKelurahanLiveData().observe(
         this@PerangkatDesaFormActivity
-        ){ kecamatanList ->
+        ){ kelurahanList ->
                 val fp:MutableList<String?> = ArrayList()
                 val listId:MutableList<String?> = ArrayList()
-                for (i in kecamatanList){
-                    fp.add(i.namakecamatan)
+                for (i in kelurahanList){
+                    fp.add(i.namakelurahan)
                     listId.add(i.id.toString())
                 }
 
@@ -82,7 +82,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
                 tvKelurahanIdPd.setAdapter(arrayAdapter)
 
                 tvKelurahanIdPd.setOnItemClickListener { _, _, position, _ ->
-                    kecamatanId = listId.get(position)!!.toInt()
+                    kelurahanIdPd = listId.get(position)!!.toInt()
                 }
 
         }
@@ -114,7 +114,7 @@ class PerangkatDesaFormActivity : AppCompatActivity() {
             perangkatDesaViewModel.insertPerangkatDesa(
                 nik.text.toString(),
                 tvNamaPd.text.toString(),
-                this.kecamatanId,
+                this.kelurahanIdPd,
                 emailPd.text.toString(),
                 passwordPd.text.toString()
             )

@@ -28,7 +28,7 @@ class SeksiActivity : AppCompatActivity() {
         binding.fabBidang.setOnClickListener {
             val intent = Intent(
                 this@SeksiActivity,
-                PegawaiFormActivity::class.java)
+                SeksiFormActivity::class.java)
 
             intent.putExtra("MODE","INSERT")
             startActivity(intent)
@@ -105,10 +105,6 @@ class SeksiActivity : AppCompatActivity() {
                     .setContentText("Data Berhasil Dihapus")
                     .show()
                 onStart()
-            }
-            .setCancelButtonBackgroundColor(Color.parseColor("#A5DC86"))
-            .setCancelButton("Tidak") {
-                it.dismissWithAnimation()
             }
             .show()
     }
